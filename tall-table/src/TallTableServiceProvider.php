@@ -21,7 +21,8 @@ class TallTableServiceProvider extends ServiceProvider
         $this->publishConfigs();
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', "tall-table");
 
-        
+                
+        include_once __DIR__."/../helpers.php";
         include_once __DIR__."/functions.php";
 
         Livewire::component( 'tall-table-edit-component', \Tall\Table\Livewire\EditColumn::class);
