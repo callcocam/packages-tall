@@ -1,0 +1,17 @@
+<x-button 
+type="submit"
+label="{{ $field->label }}"
+icon="{{ $field->icon }}"
+secondary="{{ $field->secondary }}"
+positive="{{ $field->positive }}"
+negative="{{ $field->negative }}"
+warning="{{ $field->warning }}"
+right-icon="{{ $field->right_icon }}"
+info="{{ $field->info }}"
+dark="{{ $field->dark }}"
+primary="{{ $field->primary }}"
+flat="{{ $field->flat }}"
+outline="{{ $field->outline }}"
+squared="{{ $field->squared }}"
+rounded="{{ $field->rounded }}"
+  />

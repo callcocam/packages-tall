@@ -1,0 +1,1 @@
+{{ \Arr::get($model, $column->name) }}
