@@ -23,7 +23,6 @@ class TallTableServiceProvider extends ServiceProvider
 
                 
         include_once __DIR__."/../helpers.php";
-        include_once __DIR__."/functions.php";
 
         Livewire::component( 'tall-table-edit-component', \Tall\Table\Livewire\EditColumn::class);
     }
@@ -38,6 +37,7 @@ class TallTableServiceProvider extends ServiceProvider
     private function publishViews(): void
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tall-table');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tall-theme');
 
         $this->publishes([
             __DIR__ . '/../resources/views' => resource_path('views/vendor/tall-table'),

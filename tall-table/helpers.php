@@ -41,12 +41,37 @@ if (!function_exists('lista_estados')) {
     }
 }
 
+if(!function_exists("include_table")){
+
+    function include_table($view)
+    {
+        if (function_exists('theme_include_table')) {    
+            return theme_include_table($view);
+        }
+       return "tall-table::includes.{$view}";
+    }
+}
+
 if (!function_exists('lv_includes')) {
     
     function lv_includes($component){
+        if (function_exists('theme_lv_includes')) {    
+            return theme_lv_includes($component);
+        }
         return sprintf("includes.%s-component", $component);
     }
 }
+
+if (!function_exists('_validateInputTextOptions')) {
+    function _validateInputTextOptions(array $filter, string $field): bool
+    {
+        return in_array(
+            strtolower(\Arr::get($filter, sprintf('input_text.%s.key', $field))),
+            ['is', 'is_not', 'contains', 'contains_not', 'starts_with', 'ends_with', 'is_empty', 'is_not_empty', 'is_null', 'is_not_null', 'is_blank', 'is_not_blank']
+        );
+    }
+}
+
 
 if (!function_exists('clients')) {
     

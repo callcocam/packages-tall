@@ -51,6 +51,7 @@ class FormServiceProvider extends ServiceProvider
     protected function bootViews()
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tall-forms');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tall-theme');
     }
 
     protected function bootAliases()

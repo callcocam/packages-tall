@@ -18,12 +18,13 @@ use Tall\Table\Traits\WithExport;
 use Illuminate\Support\{Collection as BaseCollection, Str};
 use WireUi\Traits\Actions;
 use Tall\Form\Traits\Message;
+use App\ThemeTrait;
 
 use Illuminate\Support\Facades\Cache;
 
 abstract class TableComponent extends Component
 {
-    use Message, WithExport, Actions, WithKill, WithSearch, WithFilter, WithCheckbox, WithToggleColumns, WithModal, WithSorting, WithPagination;
+    use ThemeTrait,  Message, WithExport, Actions, WithKill, WithSearch, WithFilter, WithCheckbox, WithToggleColumns, WithModal, WithSorting, WithPagination;
 
     protected $columns;
 
@@ -34,19 +35,17 @@ abstract class TableComponent extends Component
 
 
     abstract protected function query();
-    
-    // public function paginationView()
-    // {
-    //     return 'tall-table::custom-pagination-links-view';
-    // }
-
+ 
     protected function view(){
+        if(method_exists($this, "tableView")){
+            return $this->tableView();
+        }
         return "tall-table::datatable";
     }
 
     protected function layout(){
-        if(\Str::contains(\Route::currentRouteName(),'kwd')){
-            return "tall-kwd::layouts.app";
+        if(method_exists($this, "theme_layout")){
+           return $this->theme_layout();
         }
       return config('tall-table.layout');
   

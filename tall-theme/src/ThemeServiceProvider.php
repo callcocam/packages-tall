@@ -14,7 +14,7 @@ class ThemeServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->commands([\Tall\Theme\Commands\CreateCommand::class]);
+            //$this->commands([\Tall\Theme\Commands\CreateCommand::class]);
         }
 
         $this->publishViews();
