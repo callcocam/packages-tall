@@ -11,8 +11,20 @@
     },
     "autoload": {
         "psr-4": {
-            "Tall\\Form\\": "callcocam/packages-tall/tall-form/src/",
-            "Tall\\Table\\": "callcocam/packages-tall/tall-table/src/"
+            "Tall\\Form\\": "tall-form/src/",
+            "Tall\\Table\\": "tall-table/src/",            
+            "Tall\\Database\\Factories\\": "tall-table/src/database/factories/",
+            "Tall\\Database\\Seeders\\": "tall-table/src/database/seeders/"
+        }
+    },
+    
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Tall\\Form\\TallTableServiceProvider",
+                "Tall\\Table\\TallTableServiceProvider",
+                "Tall\\Form\\Cep\\Providers\\CepServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
