@@ -18,11 +18,10 @@ use Livewire\WithFileUploads;
 use Illuminate\Http\UploadedFile;
 use Tall\Form\Fields\Submit;
 use Illuminate\Support\Facades\Route;
-use App\ThemeTrait;
 
 abstract class FormComponent extends Component
 {
-    use ThemeTrait, FollowsRules,Actions, Message, Uploads, Galleries, Relationship, WithFileUploads;
+    use FollowsRules,Actions, Message, Uploads, Galleries, Relationship, WithFileUploads;
 
     public $files = [];
     public $data = [];
@@ -30,16 +29,16 @@ abstract class FormComponent extends Component
     public $model;
 
    protected function view(){
-        if(method_exists($this, "formView")){
-            return $this->formView();
+        if(function_exists("formView")){
+            return formView();
         }
        return "tall-forms::form";
    }
    
 
    protected function layout(){
-    if(method_exists($this, "theme_layout")){
-        return $this->theme_layout();
+    if(function_exists("theme_layout")){
+        return theme_layout();
      }
      return config('tall-forms.layout');
    }
