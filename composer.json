@@ -10,9 +10,6 @@
         "wireui/wireui": "^0.15.0"
     },
     "autoload": {
-        "files": [
-            "helpers.php"
-        ],
         "psr-4": {
             "Tall\\Form\\": "packages/tall-form/src/",
             "Tall\\Table\\": "packages/tall-table/src/"
