@@ -21,6 +21,7 @@
     "extra": {
         "laravel": {
             "providers": [
+                "Tall\\Theme\\ThemeServiceProvider",
                 "Tall\\Form\\FormServiceProvider",
                 "Tall\\Table\\TallTableServiceProvider",
                 "Tall\\Form\\Cep\\Providers\\CepServiceProvider"
