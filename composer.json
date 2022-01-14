@@ -11,6 +11,7 @@
     },
     "autoload": {
         "psr-4": {
+            "Tall\\Theme\\": "tall-theme/src",
             "Tall\\Form\\": "tall-form/src",
             "Tall\\Table\\": "tall-table/src",            
             "Tall\\Database\\Factories\\": "tall-table/src/database/factories/",
