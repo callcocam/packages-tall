@@ -11,8 +11,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Tall\\Form\\": "packages/tall-form/src/",
-            "Tall\\Table\\": "packages/tall-table/src/"
+            "Tall\\Form\\": "callcocam/packages-tall/tall-form/src/",
+            "Tall\\Table\\": "callcocam/packages-tall/tall-table/src/"
         }
     },
     "minimum-stability": "dev",
