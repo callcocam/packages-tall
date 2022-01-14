@@ -13,9 +13,17 @@ use Tall\Table\Fields\Action;
 use Tall\Table\Fields\Link;
 use Tall\Table\Fields\Delete;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 final class ListComponent extends TableComponent
 {
+    use AuthorizesRequests;
+    
+    public function mount()
+    {
+        $this->authorize(Route::currentRouteName());
+    }
+
      /*
     |--------------------------------------------------------------------------
     |  Features route

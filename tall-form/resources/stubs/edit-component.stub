@@ -11,10 +11,12 @@ use Tall\Form\FormComponent;
 use Illuminate\Support\Facades\Route;
 use Tall\Form\Fields\Input;
 use Tall\Form\Fields\Radio;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 
 class EditComponent extends FormComponent
 {
+    use AuthorizesRequests;
 
     /*
     |--------------------------------------------------------------------------
@@ -36,7 +38,8 @@ class EditComponent extends FormComponent
     */
     public function mount(?{{ modelLastName }} $model)
     {
-        //Gate::authorize()
+        $this->authorize(Route::currentRouteName());
+        
         $this->setFormProperties($model); // ${{ modelKebabCase }} from hereon, called $this->model
     }
 
