@@ -2,9 +2,9 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
     content: [           
         // Tall-forms
-        './tall-theme/resources/**/*.blade.php',
-        './tall-table/resources/**/*.blade.php',
-        './tall-forms/resources/**/*.blade.php',
+        './tall-theme/resources/views/**/*.blade.php',
+        './tall-table/resources/views/**/*.blade.php',
+        './tall-forms/resources/views/**/*.blade.php',
     ],
     theme: {
         extend: {},

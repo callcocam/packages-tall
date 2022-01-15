@@ -18,7 +18,7 @@
         <!-- Page Heading -->
         <div class="flex-1 h-screen p-5">
             <div class="flex flex-col">
-                <div class="recent-activity">
+                <div class="recent-activity block">
                     @if (isset($header))
                         <div class="w-full py-4">
                             <h5 class="text-3xl py-3"> {{ $header }}</h5>

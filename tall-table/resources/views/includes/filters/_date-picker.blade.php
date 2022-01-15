@@ -23,7 +23,7 @@
             <input id="input_{{ $column->inputDatePickerFilter }}" x-ref="rangeInput"
                 data-field="{{ $column->inputDatePickerFilter }}" style="{{ $column->headerStyle }}"
                 class="{{ $theme->filterDatePicker->inputClass }} {{ $column->headerClass }}" type="text"
-                placeholder="{{ trans('tall-theme::datatable.placeholders.select') }}"
+                placeholder="00/00/00 até 00/00/0000"
                 wire:model="filters.input_date_picker.{{ $column->inputDatePickerFilter }}">
         </div>
     </div>
