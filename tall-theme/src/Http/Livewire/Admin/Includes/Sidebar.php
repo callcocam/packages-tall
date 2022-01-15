@@ -10,8 +10,16 @@ use Livewire\Component;
 
 class Sidebar extends Component
 {
+
+     protected function menus(){
+         if(class_exists('App\Helpers\LoadMenuHelper')){
+              return app('App\Helpers\LoadMenuHelper')->menus();
+         }
+        return [];
+     }
+
     public function render()
     {
-        return view('tall-theme::livewire.admin.includes.sidebar');
+        return view('tall-theme::livewire.admin.includes.sidebar')->with('menus', $this->menus());
     }
 }
