@@ -19,32 +19,34 @@
                         @can('dashboard')
                             <x-tall-nav-link icon="home" href="{{ route('dashboard') }}"
                                 :active="request()->routeIs('dashboard')">
-                                {{ __('Painel') }}
+                                {{ __('PAINEL') }}
                             </x-tall-nav-link>
                         @endcan
                     @endif
                     @if ($menus)
                         @foreach ($menus as $menu)
                             @if ($submenus = \Arr::get($menu, 'submenus'))
-                                <x-tall-dropdown-link icon="{{ \Arr::get($menu, 'icon', 'plus') }}"
-                                    label="{{ __(\Arr::get($menu, 'label')) }}"
-                                    :active="request()->routeIs(\Arr::get($menu, 'active', []))">
-                                    @foreach ($submenus as $submenu)
-                                        @if (\Route::has(\Arr::get($submenu, 'route')))
-                                            @can(\Arr::get($submenu, 'route'))
-                                                <x-tall-nav-link-dropdown
-                                                    href="{{ route(\Arr::get($submenu, 'route'), \Arr::get($submenu, 'params', [])) }}"
-                                                    :active="request()->routeIs(\Arr::get($submenu, 'route'))">
-                                                    {{ __(\Arr::get($submenu, 'label')) }}
-                                                </x-tall-nav-link-dropdown>
-                                            @endcan
-                                        @endif
-                                    @endforeach
-                                </x-tall-dropdown-link>
+                                @canany(\Arr::get($menu, 'active', []))
+                                    <x-tall-dropdown-link icon="{{ \Arr::get($menu, 'icon', 'plus') }}"
+                                        label="{{ __(\Arr::get($menu, 'label')) }}"
+                                        :active="request()->routeIs(\Arr::get($menu, 'active', []))">
+                                        @foreach ($submenus as $submenu)
+                                            @if (\Route::has(\Arr::get($submenu, 'route')))
+                                                @can(\Arr::get($submenu, 'route'))
+                                                    <x-tall-nav-link-dropdown
+                                                        href="{{ route(\Arr::get($submenu, 'route'), \Arr::get($submenu, 'params', [])) }}"
+                                                        :active="request()->routeIs(\Arr::get($submenu, 'route'))">
+                                                        {{ __(\Arr::get($submenu, 'label')) }}
+                                                    </x-tall-nav-link-dropdown>
+                                                @endcan
+                                            @endif
+                                        @endforeach
+                                    </x-tall-dropdown-link>
+                                @endcanany
                             @else
                                 @if (\Route::has(\Arr::get($menu, 'route')))
                                     @can(\Arr::get($menu, 'route'))
-                                        <x-tall-nav-link
+                                        <x-tall-nav-link icon="{{ \Arr::get($menu, 'icon', 'plus') }}"
                                             href="{{ route(\Arr::get($menu, 'route'), \Arr::get($menu, 'params', [])) }}"
                                             :active="request()->routeIs(\Arr::get($menu, 'route'))">
                                             {{ __(\Arr::get($menu, 'label')) }}
