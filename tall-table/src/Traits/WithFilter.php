@@ -27,19 +27,30 @@ trait WithFilter {
               $isFilters = null;
              
               foreach ($columns as $column){
-                     if ($column->inputDatePickerFilter){
+                     // if ($column->inputDatePickerFilter){
+                     //        if(!isset($this->filters[$column->inputDatePickerFilter])){
+                     //               $this->filters[$column->inputDatePickerFilter] = [
+                     //                      'start'=>null,
+                     //                      'end'=>null,
+                     //               ] ;
+                     //        }
+                     //        $this->makeDataFilters['date_picker'][$column->inputDatePickerFilter]['value']['start'] = \Arr::get($this->filters,sprintf('%s.start', $column->inputDatePickerFilter), null);
+                     //        if(!$isFilters)
+                     //        $isFilters = \Arr::get($this->filters,sprintf('%s.start', $column->inputDatePickerFilter), null);
+                     //        $this->makeDataFilters['date_picker'][$column->inputDatePickerFilter]['value']['end'] = \Arr::get($this->filters,sprintf('%s.end', $column->inputDatePickerFilter), null);
+                     //        if(!$isFilters)
+                     //        $isFilters  = \Arr::get($this->filters,sprintf('%s.end', $column->inputDatePickerFilter));
+                     // }
+                      if ($column->inputDatePickerFilter){
+                            
                             if(!isset($this->filters[$column->inputDatePickerFilter])){
-                                   $this->filters[$column->inputDatePickerFilter] = [
-                                          'start'=>null,
-                                          'end'=>null,
-                                   ] ;
+                                   $this->filters[$column->inputDatePickerFilter] = null;
                             }
-                            $this->makeDataFilters['date_picker'][$column->inputDatePickerFilter]['value']['start'] = \Arr::get($this->filters,sprintf('%s.start', $column->inputDatePickerFilter), null);
-                            if(!$isFilters)
-                            $isFilters = \Arr::get($this->filters,sprintf('%s.start', $column->inputDatePickerFilter), null);
-                            $this->makeDataFilters['date_picker'][$column->inputDatePickerFilter]['value']['end'] = \Arr::get($this->filters,sprintf('%s.end', $column->inputDatePickerFilter), null);
-                            if(!$isFilters)
-                            $isFilters  = \Arr::get($this->filters,sprintf('%s.end', $column->inputDatePickerFilter));
+                            $this->makeDataFilters['date_picker'][$column->inputDatePickerFilter]['value']= \Arr::get($this->filters,  $column->inputDatePickerFilter, null);
+                            if(!$isFilters){
+                                   $isFilters = \Arr::get($this->filters, $column->inputDatePickerFilter, null);
+                            }
+                           
                      }
                      if ($column->inputDateTextFilter){
                             if(!isset($this->filters[$column->inputDateTextFilter]['key'])){

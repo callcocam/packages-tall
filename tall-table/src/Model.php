@@ -93,12 +93,13 @@ class Model
 
     public function filter(): Builder
     {
+        
         foreach ($this->filters as $key => $type) {
           
             $this->query->where(function ($query) use ($key, $type) {
                 foreach ($type as $field => $value) {
                     switch ($key) {
-                        case 'date_picker':
+                        case 'date_picker':                           
                             $this->filterDatePicker($query, $field, $value);
 
                             break;

@@ -24,7 +24,7 @@
                 data-field="{{ $column->inputDatePickerFilter }}" style="{{ $column->headerStyle }}"
                 class="{{ $theme->filterDatePicker->inputClass }} {{ $column->headerClass }}" type="text"
                 placeholder="00/00/00 até 00/00/0000"
-                wire:model="filters.input_date_picker.{{ $column->inputDatePickerFilter }}">
+                wire:model="filters.{{ $column->inputDatePickerFilter }}">
         </div>
     </div>
 @endif
