@@ -55,9 +55,9 @@ if(!function_exists("include_table")){
 if (!function_exists('lv_includes')) {
     
     function lv_includes($component){
-        if (function_exists('theme_lv_includes')) {    
-            return theme_lv_includes($component);
-        }
+        // if (function_exists('theme_lv_includes')) {    
+        //     return theme_lv_includes($component);
+        // }
         return sprintf("includes.%s-component", $component);
     }
 }
