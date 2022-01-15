@@ -32,6 +32,7 @@ abstract class TableComponent extends Component
     public bool $isCollection = false;
     public  $status = [];
 
+    protected $layout = "app";
 
     abstract protected function query();
  
@@ -44,7 +45,7 @@ abstract class TableComponent extends Component
 
     protected function layout(){
         if(function_exists('theme_layout')){
-           return theme_layout();
+           return theme_layout($this->layout);
         }
       return config('tall-table.layout');
   

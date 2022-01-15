@@ -11,10 +11,17 @@ return [
     "plugins"=>[
             'app_js'        => '/js/app.js',
             'app_css'        => '/css/app.css',
-            'tall'        => '/js/assets/tall.js',
-            'scroll'        => '/js/assets/scroll.js',
-            'fontawesome'        => '/css/fontawesome/css/all.css',
-            'universalsmoothscroll'       => 'https://raw.githack.com/CristianDavideConte/universalSmoothScroll/master/js/universalsmoothscroll-min.js',
+            'fonts'=>[
+                'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap',
+                'https://cdn.linearicons.com/free/1.0.0/icon-font.min.css',
+                '/css/fontawesome/css/all.css'
+             ],
+             'styles'=>[],
+             'scripts'=>[
+                 'https://raw.githack.com/CristianDavideConte/universalSmoothScroll/master/js/universalsmoothscroll-min.js',
+                 '/js/assets/tall.js',
+                 '/js/assets/scroll.js'
+             ],
             /*
             * https://flatpickr.js.org
             */
@@ -25,8 +32,8 @@ return [
                 'locales'   => [
                     'pt_BR' => [
                         'locale'     => 'pt',
-                        'dateFormat' => 'd/m/Y H:i',
-                        'enableTime' => true,
+                        'dateFormat' => 'd/m/Y',
+                        'enableTime' => false,
                         'time_24hr'  => true,
                     ],
                 ],

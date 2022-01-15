@@ -27,6 +27,7 @@ abstract class FormComponent extends Component
     public $data = [];
     public $checkboxSearch = [];
     public $model;
+    protected $layout = "app";
 
    protected function view(){
         if(function_exists("formView")){
@@ -38,7 +39,7 @@ abstract class FormComponent extends Component
 
    protected function layout(){
     if(function_exists("theme_layout")){
-        return theme_layout();
+        return theme_layout($this->layout);
      }
      return config('tall-forms.layout');
    }

@@ -27,9 +27,12 @@ if (!function_exists('formView')) {
 
 if (!function_exists('theme_layout')) {
 
-    function theme_layout(){
+    function theme_layout($layout=null){
         if(\Str::contains(\Route::currentRouteName(),'dev')){
             return "tall-theme::layouts.app";
+        }
+        if(!is_null($layout)){
+            return "tall-theme::layouts.{$layout}";
         }
         return config('livewire.layout');
     }
