@@ -4,16 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    @livewireStyles
-    @wireUiScripts
-    @tallStyles
-    <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    <title>{{ config('app.name', 'Laravel') }}</title>  
+    @tallStyles        
+    @tallScripts
 </head>
 <body class="h-screen">
     <x-dialog z-index="z-50" blur="md" align="center" />
@@ -36,8 +29,6 @@
             </div>
     </main>
     @stack('modals')
-    @livewireScripts    
-    @tallScripts
     @include('tall-theme::layouts.includes.scripts')
 </body>
 </html>
