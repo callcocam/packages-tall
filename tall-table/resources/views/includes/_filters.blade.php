@@ -9,9 +9,10 @@
     @if ($columns)
         @foreach ($columns as $column)
             <th>
-                @include(include_table('filters._date-renge'))
-                @include(include_table('filters._input-text'))
-                @include(include_table('filters._input-select'))
+                @include(include_table('filters._date-picker'), compact('column','theme'))
+                @include(include_table('filters._date-renge'), compact('column','theme'))
+                @include(include_table('filters._input-text'), compact('column','theme'))
+                @include(include_table('filters._input-select'), compact('column','theme'))
             </th>
         @endforeach
     @endif

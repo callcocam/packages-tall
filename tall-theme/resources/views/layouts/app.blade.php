@@ -8,11 +8,12 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('_dist/css/_admin/app.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     @livewireStyles
     @wireUiScripts
+    @tallStyles
     <!-- Scripts -->
-    <script src="{{ mix('_dist/js/_admin/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 <body class="h-screen">
     <x-dialog z-index="z-50" blur="md" align="center" />
@@ -35,7 +36,8 @@
             </div>
     </main>
     @stack('modals')
-    @livewireScripts
+    @livewireScripts    
+    @tallScripts
     @include('tall-theme::layouts.includes.scripts')
 </body>
 </html>

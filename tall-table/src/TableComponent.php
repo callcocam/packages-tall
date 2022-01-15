@@ -73,6 +73,9 @@ abstract class TableComponent extends Component
 
     public function render(){
 
+        $themeBase = tallTheme()->apply();
+
+
         $this->columns  = $this->makeColumns();
 
         return view($this->view())
@@ -83,6 +86,7 @@ abstract class TableComponent extends Component
             'tableAttr'=>$this->tableAttr(),
             'hasFilter'=>$this->isFilters,
             'columns'=> $this->columns,
+            'theme' => $themeBase,
         ])
         ->layout($this->layout());
     }

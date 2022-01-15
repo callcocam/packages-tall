@@ -5,13 +5,19 @@
 * https://www.sigasmart.com.br
 */
 
+if (!function_exists('tallTheme')) {
+
+    function tallTheme(){
+        return app(\Tall\Theme\Tailwind::class);
+    }
+}
+
 if (!function_exists('tableView')) {
 
     function tableView(){
         return "tall-theme::datatable";
     }
 }
-
 if (!function_exists('formView')) {
 
     function formView(){

@@ -10,9 +10,23 @@ trait WithDatePicker
 {
     protected $inputDatePickerFilter;
 
+    protected $inputMultDatePickerFilter;
+    protected $inline = false;
+    protected $headerStyle  = '';
+    protected $inputClass   = '';
+    protected $headerClass    = '';
+
+
     public function makeInputDatePicker($inputDatePickerFilter)
     {
         $this->inputDatePickerFilter = $inputDatePickerFilter;
+        
+        return $this;
+    }
+
+    public function makeInputMultDatePicker($inputMultDatePickerFilter)
+    {
+        $this->inputMultDatePickerFilter = $inputMultDatePickerFilter;
         
         return $this;
     }
