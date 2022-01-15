@@ -56,6 +56,14 @@
                             @endif
                         @endforeach
                     @endif
+                    <!-- Authentication -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <x-tall-nav-link icon="logout" href="{{ route('logout') }}" onclick="event.preventDefault();
+                               this.closest('form').submit();">
+                            {{ __('SAIR') }}
+                        </x-tall-nav-link>
+                    </form>
                     <li class="w-full h-20">
 
                     </li>
