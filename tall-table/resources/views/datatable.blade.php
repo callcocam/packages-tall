@@ -29,7 +29,7 @@
 <div class="flex flex-col">
     <div class="-my-2 overflow-x-auto">
         <div class="py-2 min-w-full sm:px-6 lg:px-8">
-            <div class="shadow h-screen  overflow-x-hidden border-b border-gray-200 sm:rounded-lg">
+            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg min-h-[400px]">
                 @include(include_table('filters._show-filters'))
                 <table class="min-w-full divide-y divide-gray-200">
                     @include(include_table("_thed"))

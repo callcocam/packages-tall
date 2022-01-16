@@ -28,11 +28,15 @@ if (!function_exists('formView')) {
 if (!function_exists('theme_layout')) {
 
     function theme_layout($layout=null){
-        if(\Str::contains(\Route::currentRouteName(),'dev')){
-            return "tall-theme::layouts.app";
-        }
+        
         if(!is_null($layout)){
+            if($layoutConfig = config('tall-theme.layouts.admin')){
+                return $layoutConfig;
+            }
             return "tall-theme::layouts.{$layout}";
+        }
+        if($layoutConfig = config('tall-theme.layouts.app')){
+            return $layoutConfig;
         }
         return config('livewire.layout');
     }

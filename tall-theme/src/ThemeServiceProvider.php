@@ -83,5 +83,10 @@ class ThemeServiceProvider extends ServiceProvider
         Blade::directive('tallScripts', function () {
             return "<?php echo view('tall-theme::assets.scripts')->render(); ?>";
         });
+
+        
+        Blade::directive('tallLoader', function () {
+            return "<?php echo view('tall-theme::assets.loader')->render(); ?>";
+        });
     }
 }

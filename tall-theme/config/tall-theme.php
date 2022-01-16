@@ -5,6 +5,10 @@
 * https://www.sigasmart.com.br
 */
 return [
+    "layouts"=>[
+        "app"=>env('TALL_LAYOUT_APP',"layouts.app"),
+        "admin"=>env('TALL_LAYOUT_ADMIN',"tall-theme::layouts..app"),
+    ],
     "date_picker"=>[
         "enableTime"=>false
     ],
