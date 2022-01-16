@@ -3,7 +3,7 @@
         $files = \Arr::get($model, $field->name);
     @endphp
     <div class="relative px-6 mt-4">
-        @if ($files->count())
+        @if ($files && $files->count())
             @foreach ($files as $file)
                 <span class="my-2 flex w-full justify-start text-blue-500">
                     <a class=" mr-12" href="{{ \Storage::url(\Arr::get($file, $field->attribute)) }}"
