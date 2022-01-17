@@ -13,8 +13,8 @@ return [
         "enableTime"=>false
     ],
     "plugins"=>[
-            'app_js'        => '/js/app.js',
-            'app_css'        => '/css/app.css',
+            'app_js'        => '/js/assets/app.js',
+            'app_css'        => '/css/assets/app.css',
             'fonts'=>[
                 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap',
                 'https://cdn.linearicons.com/free/1.0.0/icon-font.min.css',
@@ -23,7 +23,6 @@ return [
              'styles'=>[],
              'scripts'=>[
                  'https://raw.githack.com/CristianDavideConte/universalSmoothScroll/master/js/universalsmoothscroll-min.js',
-                 '/js/assets/tall.js',
                  '/js/assets/scroll.js'
              ],
             /*
