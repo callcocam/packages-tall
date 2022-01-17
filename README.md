@@ -22,3 +22,19 @@ if (mix.inProduction()) {
 }
 
 ```
+
+#PUBLICAR AS CONFIG
+
+```
+
+sail artisan vendor:publish --tag=tall-theme-config --force
+
+```
+
+#PUBLICAR AS VIEWS
+
+```
+
+sail artisan vendor:publish --tag=tall-theme-views --force
+
+```
