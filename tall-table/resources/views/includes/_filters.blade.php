@@ -16,9 +16,15 @@
             </th>
         @endforeach
     @endif
-    @if ($this->isSearch())
-        <th class="p-2">
+    <th class="p-2 flex items-center justify-between">
+        @if ($this->isSearch())
             <x-input wire:model.debounce.500ms="search" right-icon="search" placeholder="{{ __('Search..') }}" />
-        </th>
-    @endif
+        @endif
+        @if (\Route::has($this->create))
+            <a href="{{ route($this->create) }}"
+                class="bg-green-500 text-white w-8 h-8 items-center justify-center flex">
+                <x-icon name="plus" class="h-5 w-5" />
+            </a>
+        @endif
+    </th>
 </tr>
