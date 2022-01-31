@@ -16,7 +16,7 @@
             </th>
         @endforeach
     @endif
-    <th class="p-2 flex items-center justify-between">
+    <th class="px-2 py-3 flex items-center justify-between space-x-2">
         @if ($this->isSearch())
             <x-input wire:model.debounce.500ms="search" right-icon="search" placeholder="{{ __('Search..') }}" />
         @endif
