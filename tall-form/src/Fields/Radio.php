@@ -30,8 +30,13 @@ class Radio extends Field
         $this->lg = true;
         return $this;
     }
-    
+
     public function options($options){
+        $this->options = $options;
+        return $this;
+    }
+    
+    public function options_combine($options){
         if (\Arr::isAssoc($options)) {
             $this->options = $options;
         } else {
