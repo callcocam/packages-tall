@@ -31,6 +31,13 @@ class Radio extends Field
         return $this;
     }
 
+    
+    public function basic(){
+
+        $this->options(['0'=>'Desabilitado','1'=>'Habilitado']);
+         return $this;
+     }
+
     public function options($options){
         $this->options = $options;
         return $this;
