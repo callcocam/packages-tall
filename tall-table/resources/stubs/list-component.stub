@@ -40,6 +40,18 @@ final class ListComponent extends TableComponent
     |--------------------------------------------------------------------------
     |  Features query
     |--------------------------------------------------------------------------
+    | Rota para criar novo registro
+    |
+    */
+    public function getCreateProperty()
+    {
+        return 'admin.{{ modelKebabCase }}.create';
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Features query
+    |--------------------------------------------------------------------------
     | Inicia a consulta ao banco de dados
     |
     */
