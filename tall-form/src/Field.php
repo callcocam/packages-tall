@@ -163,9 +163,9 @@ abstract class Field
         return $this;
     }
 
-    public function status(){
-        $this->options(Cache::remember($this->expiration, "statuses_", function(){
-            return \App\Models\Status::query()->pluck('name','id')->toArray();
+    public function status( $type = 'general'){
+        $this->options(Cache::remember($this->expiration, "statuses_", function() use($type){
+            return \App\Models\Status::query()->where('type', $type)->pluck('name','id')->toArray();
         }));
         return $this;
     }

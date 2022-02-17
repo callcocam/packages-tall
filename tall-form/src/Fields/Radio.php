@@ -38,7 +38,16 @@ class Radio extends Field
          return $this;
      }
 
-    public function options($options){
+     public function options($options, $label="name", $id="id"){
+
+        if(is_string($options)){
+            if(class_exists($options)){
+                $options = app($options)->pluck( $label, $id)->toArray();
+            }
+        }
+        if($options instanceof \Illuminate\Database\Eloquent\Builder){
+            $options = $options->pluck( $label, $id)->toArray();
+        }
         $this->options = $options;
         return $this;
     }

@@ -107,8 +107,10 @@ final class ListComponent extends TableComponent
             // Column::make('Status','status.name')->format(function($model, $column){
             //     return view(include_table("_status"), compact('model','column'));
             // })->makeInputStatus(),
-            Column::make('Status','status.name')->field('status_id')
-            ->makeInputStatus()
+            //Column::make('Status','status.name')->field('status_id')
+            Column::make('Status','status')
+            ->makeInputStatusBasic()
+           // ->makeInputStatus()
             ->status(),
             Column::make('Created At')->format(function($model, $column){
                 return $model->created_at->format('d/m/Y');

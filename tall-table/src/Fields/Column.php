@@ -103,15 +103,24 @@ class Column extends Field
         return $this;
     }
 
-    public function makeInputStatus($mult=false, $options=null)
+    
+    public function makeInputStatusBasic(){
+
+        $this->makeInputStatus(false, ['0'=>'Desabilitado','1'=>'Habilitado']);
+
+        return $this;
+        
+    }
+
+    public function makeInputStatus($mult=false,$type='general', $options=null)
     {
 
         if($options){
             $this->options = $options;
         }
         else{
-            $this->options(Cache::remember($this->expiration, "statuses_", function(){
-                return \App\Models\Status::query()->pluck('name','id')->toArray();
+            $this->options(Cache::remember($this->expiration, "statuses_", function() use( $type){
+                return \App\Models\Status::query()->where('type', $type)->pluck('name','id')->toArray();
             }));
         }
         if($mult){
