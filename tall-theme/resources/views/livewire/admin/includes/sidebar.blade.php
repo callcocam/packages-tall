@@ -55,6 +55,11 @@
                                 @endif
                             @endif
                         @endforeach
+                    @endif                    
+                    @if (\Route::has('home'))
+                        <x-tall-nav-link icon="home" href="{{ route('home') }}" target="_blank">
+                            {{ __('IR PARA O SITE') }}
+                        </x-tall-nav-link>
                     @endif
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">

@@ -1,6 +1,6 @@
 @if ($columns)
     @foreach ($columns as $column)
-        <td class="px-6 py-4 whitespace-nowrap">
+        <td class="px-6 py-4 whitespace-wrap">
             @if ($column->isFormatted())
                 {!! $column->formatted($model, $column) !!}
             @elseif($column->isLivewire())
