@@ -12,6 +12,6 @@ class Header extends Component
 {
     public function render()
     {
-        return view('tall-theme::livewire.admin.includes.header');
+        return view('tall-theme::livewire.admin.includes.header')->with('tenant', app('currentTenant'));
     }
 }
