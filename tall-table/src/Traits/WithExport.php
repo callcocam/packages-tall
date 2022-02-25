@@ -25,21 +25,26 @@ trait WithExport {
         return ;
     }
 
+    // public function getExportsHeaders()
+    // {
+    //     return  Action::make('Export')
+    //     ->groups([               
+    //         Action::make('Export CSV')
+    //             ->dialog([
+    //                 'method'=>'ExportCsv',
+    //                 'params'=>'csv'
+    //             ])->icon('ms-excel'),
+    //         Action::make('Export XLSX')
+    //             ->dialog([
+    //                 'method'=>'ExportXlsx',
+    //                 'params'=>'xlsx'
+    //             ])->icon('ms-excel')
+    //     ])
+    //     ->icon('ms-excel');
+    // }
+
     public function getExportsHeaders()
     {
-        return  Action::make('Export')
-        ->groups([               
-            Action::make('Export CSV')
-                ->dialog([
-                    'method'=>'ExportCsv',
-                    'params'=>'csv'
-                ])->icon('ms-excel'),
-            Action::make('Export XLSX')
-                ->dialog([
-                    'method'=>'ExportXlsx',
-                    'params'=>'xlsx'
-                ])->icon('ms-excel')
-        ])
-        ->icon('ms-excel');
+        return  [];
     }
 }
