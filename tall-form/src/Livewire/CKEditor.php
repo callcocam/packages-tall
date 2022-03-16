@@ -18,6 +18,7 @@ class CKEditor extends Component
     public $hint;
     public $name;
     public $value;
+    public $label;
     public $field;
     public $placeholder;
     public $ckeditorId;
@@ -29,6 +30,7 @@ class CKEditor extends Component
         $this->placeholder = $field->placeholder;
         $this->hint = $field->hint;
         $this->name = $field->name;
+        $this->label = $field->label;
         $this->ckeditorId = 'ckeditor-' . uniqid();
     }
 

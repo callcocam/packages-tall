@@ -73,6 +73,14 @@ class Select extends Field
         return $this;
     }
     
+    public function value_options($options){
+        if (\Arr::isAssoc($options)) {
+            $this->options = $options;
+        } else {
+            $this->options = array_combine($options, $options);
+        }
+        return $this;
+    }
     public function optionComponent($optionComponent){
         $this->optionsoptionComponent = $optionComponent;
         return $this;

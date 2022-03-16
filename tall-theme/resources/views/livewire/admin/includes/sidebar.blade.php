@@ -22,6 +22,11 @@
                                 {{ __('PAINEL') }}
                             </x-tall-nav-link>
                         @endcan
+                    @endif                                        
+                    @if (\Route::has('admin.tenant.show'))
+                        <x-tall-nav-link icon="adjustments" href="{{ route('admin.tenant.show', app('currentTenant')) }}">
+                            {{ __('TENANT') }}
+                        </x-tall-nav-link>
                     @endif
                     @if ($menus)
                         @foreach ($menus as $menu)

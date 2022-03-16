@@ -2,7 +2,7 @@
     <x-errors title="We found {errors} validation error(s)" />
     <div class="shadow overflow-hidden sm:rounded-md">
         <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-            @if ($field = \Arr::get($fields, 'roles'))
+            @if ($field = \Arr::get($fields, 'access'))
                 <fieldset>
                     <legend class="text-base font-medium text-gray-900">{{ __("Selecione os papèis")}}</legend>
                     <div class="mt-4 space-y-4">

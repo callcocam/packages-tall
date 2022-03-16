@@ -1,4 +1,5 @@
 <div wire:ignore wire:key="{{ $name }}">
+    <label class="my-2" for="{{$name}}">{{ $label }}</label>
     <textarea id="{{ $name }}"> {{ $value }}</textarea>
 </div>
 <script src="{{ asset(config('tall-forms.ckeditor.editor-v2.js')) }}"></script>

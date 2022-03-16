@@ -71,7 +71,7 @@
                             @endif
                             @if ($field = \Arr::get($fields, 'birth_date'))
                                 <div class="col-span-4 sm:col-span-2">
-                                    @include(sprintf('tall-forms::fields.%s',$field->type))
+                                    @include(sprintf('tall-forms::fields.%s', $field->type))
                                 </div>
                             @endif
                         </div>
@@ -112,11 +112,18 @@
                             @endif
                         </div>
 
-                        @if ($field = \Arr::get($fields, 'office_id'))
-                            <div>
-                                @include(sprintf('tall-forms::fields.%s',$field->type))
-                            </div>
-                        @endif
+                        <div class="grid grid-cols-6 gap-4">
+                            @if ($field = \Arr::get($fields, 'instituicao_id'))
+                                <div class="col-span-6 sm:col-span-6">
+                                    @include(sprintf('tall-forms::fields.%s', $field->type))
+                                </div>
+                            @endif
+                            @if ($field = \Arr::get($fields, 'office_id'))
+                                <div class="col-span-4 sm:col-span-3">
+                                    @include(sprintf('tall-forms::fields.%s', $field->type))
+                                </div>
+                            @endif
+                        </div>
                         <div class="grid grid-cols-6 gap-4">
                             @if ($field = \Arr::get($fields, 'current_password'))
                                 <div class="col-span-4 sm:col-span-2">
