@@ -18,7 +18,7 @@ class Select extends Field
     protected $option_value;
     protected $option_key_cover;
     protected $option_key_value  = true;
-    protected $searchable  = false;
+    protected $searchable  = true;
     protected $option_key_label  = false;
     protected $multiselect  = false;
 
