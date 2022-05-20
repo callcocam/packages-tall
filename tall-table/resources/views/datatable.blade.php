@@ -35,7 +35,7 @@
                     @include(include_table("_thed"))
                     <tbody  wire:sortable="updateOrder" class="bg-white divide-y divide-gray-200 ">
                         @forelse ($models as $model)
-                            <tr wire:sortable.item="{{ $model->id }}" wire:key="task-{{ $model->id }}">
+                            <tr wire:sortable.item="{{ $model->id }}" wire:key="task-{{ $model->id }}"   wire:sortable.handle>
                                 @include(include_table("_checkbox"))
                                 @include(include_table("_tbody"))
                                 @if ($actions)
