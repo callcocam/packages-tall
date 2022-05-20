@@ -23,6 +23,14 @@ if (mix.inProduction()) {
 
 ```
 
+#INSTALL SORTABLE 
+
+```
+https://github.com/livewire/sortable
+
+npm install livewire-sortable --save-dev
+```
+
 #PUBLICAR AS CONFIG
 
 ```

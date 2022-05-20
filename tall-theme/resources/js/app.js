@@ -2,6 +2,8 @@ require('./bootstrap');
 
 import 'tw-elements';
 
+import 'livewire-sortable'
+
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;

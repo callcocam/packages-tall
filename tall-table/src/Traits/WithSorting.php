@@ -34,4 +34,11 @@ trait WithSorting {
        return $query->orderBy($this->sortField, $this->sortDirection);
     }
 
+
+    public function updateOrder($data=[]){
+        $this->notification()->success(
+            $title = __('Ordering'),
+            $description = "Você esta usando a função basica de ordenação, vc deve reescrever a função updateOrder($data){}	"
+        );
+    }
 }

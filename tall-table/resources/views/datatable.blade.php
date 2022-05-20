@@ -33,9 +33,9 @@
                 @include(include_table('filters._show-filters'))
                 <table class="min-w-full divide-y divide-gray-200">
                     @include(include_table("_thed"))
-                    <tbody class="bg-white divide-y divide-gray-200 ">
+                    <tbody  wire:sortable="updateOrder" class="bg-white divide-y divide-gray-200 ">
                         @forelse ($models as $model)
-                            <tr>
+                            <tr wire:sortable.item="{{ $model->id }}" wire:key="task-{{ $model->id }}">
                                 @include(include_table("_checkbox"))
                                 @include(include_table("_tbody"))
                                 @if ($actions)
