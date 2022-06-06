@@ -102,8 +102,8 @@ abstract class FormComponent extends Component
                         if ($this->data[$field->name] = $model->{$field->name}) {
                            if($files = \Arr::get($model, $field->name)){
                                 if(!is_string($files)){
-                                    foreach($files as $file){
-                                        $this->data[$field->name][] = $file;
+                                    foreach($files as $key => $file){
+                                        $this->data[$field->name][$key] = $file;
                                     }
                                 }else{
                                     $this->data[$field->name] = $files;
