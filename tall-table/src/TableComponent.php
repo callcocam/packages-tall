@@ -31,6 +31,7 @@ abstract class TableComponent extends Component
 
     public bool $isCollection = false;
     public  $status = [];
+    public $sortable = false;
 
     protected $layout = "app";
 
