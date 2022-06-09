@@ -8,16 +8,16 @@
                 </h1>
                 <section class="flex flex-col w-full">
                     <!-- BEGIN: breadcrums v1 -->
-
+                    <h1 class="text-4xl font-bold mb-4">
+                        {{ \Arr::get($tableAttr, 'tableTitle') }}
+                    </h1>
                     <x-tall-breadcrums>
-                        <li class="flex justify-items-start text-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                class="w-4 h-4 mr-2 stroke-current">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                                </path>
+                        <li class="flex justify-items-start items-center text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                             </svg>
-                            {{ __('Lista') }}
+                            {{ __('Listar') }}
                         </li>
                     </x-tall-breadcrums>
                     <!-- END: breadcrums v1 -->
@@ -33,13 +33,14 @@
                 @include(include_table('filters._show-filters'))
                 <table class="min-w-full divide-y divide-gray-200">
                     @include(include_table('_thed'))
-                    <tbody  @if ($sortable)  wire:sortable="updateOrder" @endif class="bg-white divide-y divide-gray-200 ">
+                    <tbody @if ($sortable) wire:sortable="updateOrder" @endif
+                        class="bg-white divide-y divide-gray-200 ">
                         @forelse ($models as $model)
                             <tr
                                 @if ($sortable) wire:sortable.item="{{ $model->id }}" 
                              wire:key="task-{{ $model->id }}" @endif>
-                             @include(include_table('_checkbox'))
-                              
+                                @include(include_table('_checkbox'))
+
                                 @include(include_table('_tbody'))
                                 @if ($actions)
                                     <td>
