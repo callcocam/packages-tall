@@ -3,7 +3,7 @@
         <!-- Section Hero -->
         <div class="mx-auto rounded-md flex items-center">
             <div class="flex flex-col text-gray-800 text-center sm:text-left w-full">
-                <section class="flex flex-col w-full">
+                <section class="flex  w-full">
                     <!-- BEGIN: breadcrums v1 -->
                     <h1 class="text-4xl font-bold mb-4">
                         {{ \Arr::get($tableAttr, 'tableTitle') }}
