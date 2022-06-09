@@ -18,12 +18,13 @@ use Tall\Table\Traits\WithExport;
 use Illuminate\Support\{Collection as BaseCollection, Str};
 use WireUi\Traits\Actions;
 use Tall\Form\Traits\Message;
+use Tall\Theme\Traits\WithMenus;
 
 use Illuminate\Support\Facades\Cache;
 
 abstract class TableComponent extends Component
 {
-    use  Message, WithExport, Actions, WithKill, WithSearch, WithFilter, WithCheckbox, WithToggleColumns, WithModal, WithSorting, WithPagination;
+    use WithMenus, Message, WithExport, Actions, WithKill, WithSearch, WithFilter, WithCheckbox, WithToggleColumns, WithModal, WithSorting, WithPagination;
 
     protected $columns;
 

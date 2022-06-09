@@ -18,10 +18,11 @@ use Livewire\WithFileUploads;
 use Illuminate\Http\UploadedFile;
 use Tall\Form\Fields\Submit;
 use Illuminate\Support\Facades\Route;
+use Tall\Theme\Traits\WithMenus;
 
 abstract class FormComponent extends Component
 {
-    use FollowsRules,Actions, Message, Uploads, Galleries, Relationship, WithFileUploads;
+    use WithMenus, FollowsRules,Actions, Message, Uploads, Galleries, Relationship, WithFileUploads;
 
     public $files = [];
     public $data = [];

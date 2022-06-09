@@ -29,6 +29,17 @@ class CreateComponent extends FormComponent
         Route::get('/{{ modelKebabCase }}/create', static::class)->name('admin.{{ modelKebabCase }}.create');
     }
     
+    /*
+    |--------------------------------------------------------------------------
+    |  Features format_view
+    |--------------------------------------------------------------------------
+    | Inicia as configurações basica do de nomes e rotas
+    |
+    */
+    public function format_view(){
+        return "admin.{{ modelKebabCase }}.create";
+     }
+     
    /*
     |--------------------------------------------------------------------------
     |  Features mount
