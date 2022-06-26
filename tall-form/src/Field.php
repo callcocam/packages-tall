@@ -16,6 +16,7 @@ abstract class Field
     protected $data_name = "data";
     protected $span = "12";
     protected $mt = "2";
+    protected $id;
     protected $hidden = true;
     protected $default;
     protected $label;
@@ -44,6 +45,7 @@ abstract class Field
         }
         $this->field = $name;
         $this->name = $name;
+        $this->id = $name;
         if(!is_null($label)){
             $this->label = __($label);
          }
@@ -77,6 +79,11 @@ abstract class Field
   
     public function field($field){
         $this->field = $field;
+        return $this;
+    }
+    
+    public function id($id){
+        $this->id = $id;
         return $this;
     }
   
