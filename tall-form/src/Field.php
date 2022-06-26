@@ -15,6 +15,7 @@ abstract class Field
     protected $wire_model = "defer";
     protected $data_name = "data";
     protected $span = "12";
+    protected $mt = "2";
     protected $hidden = true;
     protected $default;
     protected $label;
@@ -79,6 +80,11 @@ abstract class Field
         return $this;
     }
   
+    public function mt($mt){
+        $this->mt = $mt;
+        return $this;
+    }
+    
     public function key($key){
         $this->key = $key;
         return $this;
