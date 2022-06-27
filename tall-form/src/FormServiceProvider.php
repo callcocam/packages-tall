@@ -15,6 +15,13 @@ class FormServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        
+        $this->publishConfig();
+        $this->loadConfigs();
+        $this->publishMigrations();
+        $this->loadMigrations();
+        
+
         if ($this->app->runningInConsole()) {
             $this->commands([
                 CreateCommand::class,
@@ -44,7 +51,7 @@ class FormServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/tall-forms.php', 'tall-forms');
+        
         
     }
 
@@ -52,6 +59,55 @@ class FormServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tall-forms');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tall-theme');
+    }
+
+     /**
+     * Publish the config file.
+     *
+     * @return void
+     */
+    protected function publishConfig()
+    {
+        $this->publishes([
+            __DIR__.'/../config/tall-forms.php' => config_path('tall-forms.php'),
+        ], 'tall-form');
+    }
+
+    
+     /**
+     * Merge the config file.
+     *
+     * @return void
+     */
+    protected function loadConfigs()
+    {
+        $this->mergeConfigFrom(__DIR__.'/../config/tall-forms.php','tall-form');
+    }
+
+
+
+    /**
+     * Publish the migration files.
+     *
+     * @return void
+     */
+    protected function publishMigrations()
+    {
+        $this->publishes([
+            __DIR__.'/../database/migrations/' => database_path('migrations'),
+        ], 'tall-form-migrations');
+    }
+
+    /**
+     * Load our migration files.
+     *
+     * @return void
+     */
+    protected function loadMigrations()
+    {
+        if (config('report.migrate', true)) {
+            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        }
     }
 
     protected function bootAliases()
