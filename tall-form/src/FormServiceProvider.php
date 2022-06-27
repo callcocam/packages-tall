@@ -58,7 +58,6 @@ class FormServiceProvider extends ServiceProvider
     protected function bootViews()
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tall-forms');
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tall-theme');
     }
 
      /**
@@ -70,7 +69,7 @@ class FormServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/tall-forms.php' => config_path('tall-forms.php'),
-        ], 'tall-form');
+        ], 'tall-forms');
     }
 
     
@@ -95,7 +94,7 @@ class FormServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../database/migrations/' => database_path('migrations'),
-        ], 'tall-form-migrations');
+        ], 'tall-forms-migrations');
     }
 
     /**
