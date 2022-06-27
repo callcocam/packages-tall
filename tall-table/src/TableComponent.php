@@ -74,6 +74,24 @@ abstract class TableComponent extends Component
         }
         
     }
+    
+    /*
+    |--------------------------------------------------------------------------
+    |  Features reports
+    |--------------------------------------------------------------------------
+    | Realacionado as ações de cada registro, como editar deletar e visualizar
+    |
+    */
+    protected function reports(){
+
+        //$class_name =\Str::reaplace("\\","-", get_class($this->query()->getModel()));
+        $class_name =get_class($this->query()->getModel());
+       // dd($class_name);
+        if(class_exists(config("report.models.parent", \App\Models\Relatorio::class))){
+           return app(config("report.models.parent", \App\Models\Relatorio::class))->where('model', $class_name)->get();
+        }
+        return null;
+    }
 
     public function render(){
 
