@@ -108,6 +108,7 @@ abstract class TableComponent extends Component
             'models'=>$this->models($this->columns),
             'actions'=>$this->actions(),
             'headers'=>$this->headers(),
+            'reports'=>$this->reports(),
             'tableAttr'=>$this->tableAttr(),
             'hasFilter'=>$this->isFilters,
             'columns'=> $this->columns,
