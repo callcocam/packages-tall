@@ -6,8 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "laravel/jetstream": "^2.8",
-        "livewire/livewire": "^2.10",
+        "laravel/jetstream": "^2.9",
+        "livewire/livewire": "^2.5",
         "wireui/wireui": "^1.7"
     },
     "autoload": {
@@ -27,14 +27,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Tall\\Tenant\\TenantServiceProvider",
-                "Tall\\Theme\\ThemeServiceProvider",
-                "Tall\\Acl\\AclServiceProvider",
-                "Tall\\Schema\\SchemaServiceProvider",
-                "Tall\\Report\\ReportServiceProvider",
-                "Tall\\Form\\FormServiceProvider",
-                "Tall\\Table\\TallTableServiceProvider",
-                "Tall\\Form\\Cep\\Providers\\CepServiceProvider"
+                
             ]
         }
     },
