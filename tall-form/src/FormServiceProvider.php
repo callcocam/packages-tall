@@ -143,7 +143,6 @@ class FormServiceProvider extends ServiceProvider
         }
 
         $namespace = 'Tall\Form';
-        //$tests=[];
         foreach ((new Finder())->in($paths)->files() as $domain) {
             $component = $namespace.str_replace(
                 ['/', '.php'],
@@ -153,16 +152,12 @@ class FormServiceProvider extends ServiceProvider
             $componentName = Str::afterLast($component,'Livewire\\');
             $componentName = Str::beforeLast($componentName,'Component');
             $componentName = Str::replace("\\", ".", $componentName);
-            $componentName = Str::lower($componentName);
-            $componentName = Str::of($componentName)->append('-component');
-            $componentName = Str::of($componentName)->prepend('tall-form::');
-           // dd($componentName);
-           // $tests[] = $componentName->value();
+            $componentName = Str::lower($componentName);           
+            $componentName = sprintf("tall-form::%s-component",$componentName);
             if (is_subclass_of($component, LivewireComponent::class)) {
                 Livewire::component($componentName->value(), $component);
             }
         }
-        //dd($tests);
     }
 
 }

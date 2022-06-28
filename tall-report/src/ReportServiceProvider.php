@@ -91,7 +91,6 @@ class ReportServiceProvider extends ServiceProvider
         }
 
         $namespace = 'Tall\Report';
-        //$tests=[];
         foreach ((new Finder())->in($paths)->files() as $domain) {
             $component = $namespace.str_replace(
                 ['/', '.php'],
@@ -101,14 +100,11 @@ class ReportServiceProvider extends ServiceProvider
             $componentName = Str::afterLast($component,'Livewire\\');
             $componentName = Str::beforeLast($componentName,'Component');
             $componentName = Str::replace("\\", ".", $componentName);
-            $componentName = Str::lower($componentName);
-            $componentName = Str::of($componentName)->append('-component');
-            $componentName = Str::of($componentName)->prepend('tall-report::');
-           // $tests[] = $componentName->value();
+            $componentName = Str::lower($componentName);            
+            $componentName = sprintf("tall-report::%s-component",$componentName);
             if (is_subclass_of($component, LivewireComponent::class)) {
-                Livewire::component($componentName->value(), $component);
+                Livewire::component($componentName, $component);
             }
         }
-        //dd($tests);
     }
 }

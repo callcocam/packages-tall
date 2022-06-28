@@ -110,7 +110,6 @@ class ThemeServiceProvider extends ServiceProvider
         }
 
         $namespace = 'Tall\Theme';
-        //$tests=[];
         foreach ((new Finder())->in($paths)->files() as $domain) {
             $component = $namespace.str_replace(
                 ['/', '.php'],
@@ -120,15 +119,11 @@ class ThemeServiceProvider extends ServiceProvider
             $componentName = Str::afterLast($component,'Livewire\\');
             $componentName = Str::beforeLast($componentName,'Component');
             $componentName = Str::replace("\\", ".", $componentName);
-            $componentName = Str::lower($componentName);
-            $componentName = Str::of($componentName)->append('-component');
-            $componentName = Str::of($componentName)->prepend('tall-theme::');
-           // dd($componentName);
-           // $tests[] = $componentName->value();
+            $componentName = Str::lower($componentName);           
+            $componentName = sprintf("tall-theme::%s-component",$componentName);
             if (is_subclass_of($component, Livewire::class)) {
-                Livewire::component($componentName->value(), $component);
+                Livewire::component($componentName, $component);
             }
         }
-        //dd($tests);
     }
 }
