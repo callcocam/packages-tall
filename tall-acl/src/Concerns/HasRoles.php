@@ -22,6 +22,7 @@ trait HasRoles
      */
     public function roles(): BelongsToMany
     {
+       
         return $this->belongsToMany(config('acl.models.role'),'role_user','user_id')->withTimestamps();
     }
 

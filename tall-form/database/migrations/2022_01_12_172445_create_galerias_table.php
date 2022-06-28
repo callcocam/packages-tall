@@ -13,7 +13,7 @@ class CreateGaleriasTable extends Migration
      */
     public function up()
     {
-        Schema::create('galerias', function (Blueprint $table) {
+        Schema::create('galleries', function (Blueprint $table) {
             $table->uuid('id')->primary();        
             $table->string('name', 255)->nullable();   
             $table->string('slug', 255)->nullable();   
@@ -34,6 +34,6 @@ class CreateGaleriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('galerias');
+        Schema::dropIfExists('galleries');
     }
 }

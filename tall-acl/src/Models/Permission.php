@@ -26,11 +26,6 @@ class Permission extends AbstractModel implements Contracts\Permission
         'id'
     ];
 
-    public function isUser()
-    {
-        return false;
-    }
-
     /**
      * Permissions can belong to many roles.
      *

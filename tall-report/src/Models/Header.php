@@ -28,8 +28,16 @@ class Header  extends AbstractModel
 
     public function attribute(){
 
-      return $this->morphOne(Atributo::class, 'attributeable');
-
+      return $this->morphOne(Attribute::class, 'attributeable');
     }
     
+    protected function slugTo()
+    {
+        return false;
+    }
+    
+    public function isUser()
+    {
+        return false;
+    }
 }

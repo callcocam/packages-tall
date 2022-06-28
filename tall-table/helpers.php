@@ -91,7 +91,7 @@ if (!function_exists('published')) {
     
     function published($status="published"){
         if($published = Cache::remember("60", "{$status}_", function() use($status){
-            return \App\Models\Status::where('slug', $status)->first();
+            return \Tall\Form\Models\Status::where('slug', $status)->first();
         })){
             return ['status_id'=>$published->id];
            }
@@ -104,13 +104,28 @@ if (!function_exists('draft')) {
     
     function draft($status="draft"){
         if($draft = Cache::remember("60", "{$status}_", function() use($status){
-            return \App\Models\Status::where('slug', $status)->first();
+            return \Tall\Form\Models\Status::where('slug', $status)->first();
         })){
             return ['status_id'=>$draft->id];
            }
         return [];
     }
 }
+
+
+if (!function_exists('status')) {
+    
+    function status($status="published", $slug = null){
+      if($statuses = \Tall\Form\Models\Status::where('slug', $status)->first()){
+        if($slug)
+         return data_get($statuses, $slug);
+
+        return $statuses->id;
+      }
+      return data_get(draft(), 'status_id', null);
+    }
+}
+
 if(!function_exists('date_carbom_format')){
 
     function date_carbom_format($date, $format="d/m/Y H:i:s"){

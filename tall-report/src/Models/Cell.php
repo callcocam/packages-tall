@@ -39,7 +39,7 @@ class Cell extends AbstractModel
     }
 
     public function attribute(){
-      return $this->morphOne(Atributo::class, 'attributeable');
+      return $this->morphOne(Attribute::class, 'attributeable');
     }
     
 }

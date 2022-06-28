@@ -32,4 +32,8 @@ abstract class AbstractModel extends Model
         return $this->belongsTo(Status::class);
     }
 
+    public function isUser()
+    {
+        return false;
+    }
 }

@@ -13,7 +13,7 @@ class CreateGaleriaItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('galeria_items', function (Blueprint $table) {
+        Schema::create('gallery_items', function (Blueprint $table) {
             $table->uuid('id')->primary();        
             $table->string('name', 255)->nullable();   
             $table->string('slug', 255)->nullable();   
@@ -23,7 +23,7 @@ class CreateGaleriaItemsTable extends Migration
             $table->string('size', 50)->nullable();   
             $table->string('mime_type', 100)->nullable();   
             $table->integer('ordering')->nullable();   
-            $table->foreignUuid('galeria_id')->nullable()->constrained('galerias')->cascadeOnDelete();
+            $table->foreignUuid('gallery_id')->nullable()->constrained('galleries')->cascadeOnDelete();
             $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignUuid('status_id')->nullable()->constrained('statuses')->cascadeOnDelete();
             $table->timestamps();
@@ -38,6 +38,6 @@ class CreateGaleriaItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('galeria_items');
+        Schema::dropIfExists('gallery_items');
     }
 }

@@ -16,7 +16,7 @@ use App\Models\User;
 
 use Illuminate\Database\Eloquent\Model as AbstractModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Tall\Form\Scopes\UuidGenerate;
+use Tall\Tenant\Scopes\UuidGenerate;
 use Tall\Form\Sluggable\SlugOptions;
 use Tall\Form\Sluggable\HasSlug;
 
@@ -27,7 +27,7 @@ class Tenant extends AbstractModel
     
     protected $guarded = ['id'];
 
-    protected $with = ['address'];
+    //protected $with = ['address'];
 
     
     public $incrementing = false;

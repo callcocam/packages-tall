@@ -13,12 +13,12 @@ class CreateGaleriaInfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('galeria_infos', function (Blueprint $table) {
+        Schema::create('gallery_infos', function (Blueprint $table) {
             $table->uuid('id')->primary();        
             $table->string('name', 255)->nullable();   
             $table->string('slug', 255)->nullable();   
             $table->string('type', 255)->nullable()->default('name');   
-            $table->foreignUuid('galeria_item_id')->nullable()->constrained('galeria_items')->cascadeOnDelete();
+            $table->foreignUuid('gallery_item_id')->nullable()->constrained('gallery_items')->cascadeOnDelete();
             $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignUuid('status_id')->nullable()->constrained('statuses')->cascadeOnDelete();
             $table->timestamps();
@@ -33,6 +33,6 @@ class CreateGaleriaInfosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('galeria_infos');
+        Schema::dropIfExists('gallery_infos');
     }
 }

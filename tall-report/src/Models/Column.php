@@ -16,7 +16,7 @@ class Column extends AbstractModel
     
     protected $guarded = ["id"];
     
-    protected $with = ['header','cell','filters'];
+    protected $with = ['header','cell','filters','relationships'];
     
     public function report()
     {
@@ -28,19 +28,19 @@ class Column extends AbstractModel
         return $this->hasMany(Filter::class);
     }
     
-    public function relationship()
+    public function relationships()
     {
         return $this->hasMany(Relationship::class)->orderBy('ordering');
     }
 
     public function header()
     {
-        return $this->morphOne(Cabecalho::class, 'headerable');
+        return $this->morphOne(Header::class, 'headerable');
     }
 
     public function cell()
     {
-        return $this->morphOne(Celula::class,'cellable');
+        return $this->morphOne(Cell::class,'cellable');
     }
     
 }

@@ -7,7 +7,7 @@
 namespace Tall\Tenant\Events;
 
 
-use App\Models\Tenant;
+use Tall\Tenant\Models\Tenant;
 
 class ForgettingCurrentTenantEvent
 {

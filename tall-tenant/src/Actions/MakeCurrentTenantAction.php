@@ -6,10 +6,10 @@
  */
 namespace Tall\Tenant\Actions;
 
-use App\Models\Tenant;
-use Tall\\Tenant\Events\MakingTenantCurrentEvent;
-use Tall\\Tenant\Tasks\Collections\TasksCollection;
-use Tall\\Tenant\Tasks\SwitchTenantTask;
+use Tall\Tenant\Models\Tenant;
+use Tall\Tenant\Events\MakingTenantCurrentEvent;
+use Tall\Tenant\Tasks\Collections\TasksCollection;
+use Tall\Tenant\Tasks\SwitchTenantTask;
 
 class MakeCurrentTenantAction
 {

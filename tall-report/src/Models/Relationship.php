@@ -17,8 +17,6 @@ class Relationship  extends AbstractModel
 
     protected $with = ['header','cell'];
 
-    protected $guarded = ["id"];
-
 
     public function header()
     {

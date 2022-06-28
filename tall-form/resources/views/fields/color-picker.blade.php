@@ -1,7 +1,4 @@
 <div>
-    @if ($field->label)
-        <x-label>{{ $field->label }}</x-label>
-    @endif
     @if ($field->wire_model == 'defer')
         <x-color-picker :colors="$field->colors" class="w-full" wire:model.defer="{{ $field->key }}"
             placeholder="{{ $field->placeholder }}" hint="{{ $field->hint }}" corner-hint="{{ $field->corner_hint }}"

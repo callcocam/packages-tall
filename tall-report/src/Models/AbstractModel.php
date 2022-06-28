@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Tall\Form\Sluggable\SlugOptions;
 use Tall\Form\Sluggable\HasSlug;
-use Tall\Form\Scopes\UuidGenerate;
+use Tall\Tenant\Scopes\UuidGenerate;
 
 abstract class AbstractModel extends Model
 {

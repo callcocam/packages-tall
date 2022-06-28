@@ -24,7 +24,8 @@ class ListComponent extends TableComponent
     
     public function mount()
     {
-        //$this->authorize(Route::currentRouteName());
+    
+       $this->authorize(Route::currentRouteName());
     }
 
      /*
@@ -47,7 +48,7 @@ class ListComponent extends TableComponent
     |
     */
     public function format_view(){
-        return "tall-report.admin.reports.create";
+        return "tall.report.admin.reports";
      }
      
     /*
@@ -59,7 +60,7 @@ class ListComponent extends TableComponent
     */
     public function getCreateProperty()
     {
-        return 'admin.reports.create';
+        return 'tall.report.admin.report.create';
     }
 
     /*
@@ -84,7 +85,7 @@ class ListComponent extends TableComponent
     protected function tableAttr(): array
     {
         return [
-           'tableTitle' => __('{{ modelLastName }}s'),
+           'tableTitle' => __('Relatorios'),
        ];
     }
     /*
@@ -97,7 +98,8 @@ class ListComponent extends TableComponent
     protected function actions(){
 
         return [
-            Link::make('Edit')->route('admin.reports.edit')->xs()->icon('pencil-alt')->primary(),
+            Link::make('Gerenciar')->route('tall.report.admin.report.generate')->xs()->icon('cog')->succsess(),
+            Link::make('Edit')->route('tall.report.admin.report.edit')->xs()->icon('pencil-alt')->primary(),
             Delete::make('Delete')->xs()->icon('trash')->negative(),
         ];
     }

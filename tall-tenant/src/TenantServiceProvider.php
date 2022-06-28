@@ -41,7 +41,7 @@ class TenantServiceProvider  extends ServiceProvider
         $this->loadConfigs();
         $this->publishMigrations();
         $this->loadMigrations();
-        
+      
          if (!$this->app->runningInConsole())
            $this->registerTenantFinder()->registerTasksCollection()->configureRequests();
     }
@@ -131,6 +131,10 @@ class TenantServiceProvider  extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations/' => database_path('migrations'),
         ], 'tenant-migrations');
+       
+        $this->publishes([
+            __DIR__.'/../database/factories/' => database_path('factories'),
+        ], 'tenant-factories');
     }
 
     /**
