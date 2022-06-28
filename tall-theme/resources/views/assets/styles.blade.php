@@ -8,7 +8,7 @@
 <script src="{{ config('tall-theme.plugins.universalsmoothscroll') }}">
 </script>
 <!-- Styles -->
-<link rel="stylesheet" href="{{ asset(config('tall-theme.plugins.app_css')) }}">
+<link rel="stylesheet" href="{{ mix(config('tall-theme.plugins.app_css')) }}">
 @livewireStyles
 @wireUiScripts
 <link rel="stylesheet" href="{{ config('tall-theme.plugins.flat_piker.css') }}">
@@ -17,7 +17,7 @@
         @if (\Str::contains($style, 'http'))
             <link href="{{ $style }}" rel="stylesheet">
         @else
-            <link href="{{ asset($style) }}" rel="stylesheet">
+            <link href="{{ mix($style) }}" rel="stylesheet">
         @endif
     @endforeach
 @endif
