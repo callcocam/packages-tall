@@ -6,9 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "laravel/jetstream": "^2.4",
-        "livewire/livewire": "^2.5",
-        "wireui/wireui": "^0.15.0|^1.0.0"
+        "laravel/jetstream": "^2.8",
+        "livewire/livewire": "^2.10",
+        "wireui/wireui": "^1.7"
     },
     "autoload": {
         "psr-4": {
