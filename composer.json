@@ -13,6 +13,10 @@
     "autoload": {
         "psr-4": {
             "Tall\\Theme\\": "tall-theme/src",
+            "Tall\\Tenant\\": "tall-tenant/src",
+            "Tall\\Acl\\": "tall-acl/src",
+            "Tall\\Report\\": "tall-report/src",
+            "Tall\\Schem\\": "tall-schema/src",
             "Tall\\Form\\": "tall-form/src",
             "Tall\\Table\\": "tall-table/src",            
             "Tall\\Database\\Factories\\": "tall-table/src/database/factories/",
@@ -23,7 +27,11 @@
     "extra": {
         "laravel": {
             "providers": [
+                "Tall\\Tenant\\TenantServiceProvider",
                 "Tall\\Theme\\ThemeServiceProvider",
+                "Tall\\Acl\\AclServiceProvider",
+                "Tall\\Report\\ReportServiceProvider",
+                "Tall\\Schema\\SchemaServiceProvider",
                 "Tall\\Form\\FormServiceProvider",
                 "Tall\\Table\\TallTableServiceProvider",
                 "Tall\\Form\\Cep\\Providers\\CepServiceProvider"
