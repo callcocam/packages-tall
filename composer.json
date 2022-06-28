@@ -27,7 +27,14 @@
     "extra": {
         "laravel": {
             "providers": [
-                
+                "Tall\\Tenant\\TenantServiceProvider",
+                "Tall\\Theme\\ThemeServiceProvider",
+                "Tall\\Acl\\AclServiceProvider",
+                "Tall\\Schema\\SchemaServiceProvider",
+                "Tall\\Report\\ReportServiceProvider",
+                "Tall\\Form\\FormServiceProvider",
+                "Tall\\Table\\TallTableServiceProvider",
+                "Tall\\Form\\Cep\\Providers\\CepServiceProvider"
             ]
         }
     },
