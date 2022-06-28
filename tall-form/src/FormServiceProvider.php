@@ -20,7 +20,9 @@ class FormServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        
+        if(!\Schema::hasTable('tenants')){
+            return;
+        }
         $this->publishConfig();
         $this->loadConfigs();
         $this->publishMigrations();
@@ -56,8 +58,11 @@ class FormServiceProvider extends ServiceProvider
 
     public function register()
     {
+        if(!\Schema::hasTable('tenants')){
+            return;
+        }
         if (class_exists(Livewire::class)) {
-            $this->load(__DIR__.'/Http/Livewire/Admin');
+            \Tall\Theme\ComponentParser::loadComponent(__DIR__.'/Http/Livewire', __DIR__, 'Tall\Form');
         }
         
     }
@@ -130,34 +135,6 @@ class FormServiceProvider extends ServiceProvider
     private function prefixComponents(): void
     {
        
-    }
-    private function load($paths)
-    {
-        $paths = array_unique(Arr::wrap($paths));
-
-        $paths = array_filter($paths, function ($path) {
-            return is_dir($path);
-        });
-        if (empty($paths)) {
-            return;
-        }
-
-        $namespace = 'Tall\Form';
-        foreach ((new Finder())->in($paths)->files() as $domain) {
-            $component = $namespace.str_replace(
-                ['/', '.php'],
-                ['\\', ''],
-                Str::after($domain->getRealPath(), __DIR__)
-            );
-            $componentName = Str::afterLast($component,'Livewire\\');
-            $componentName = Str::beforeLast($componentName,'Component');
-            $componentName = Str::replace("\\", ".", $componentName);
-            $componentName = Str::lower($componentName);           
-            $componentName = sprintf("tall-form::%s-component",$componentName);
-            if (is_subclass_of($component, LivewireComponent::class)) {
-                Livewire::component($componentName->value(), $component);
-            }
-        }
     }
 
 }

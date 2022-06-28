@@ -10,11 +10,41 @@ namespace Tall\Theme;
 
 use Livewire\Commands\ComponentParser as ComponentParserAlias;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 use Symfony\Component\Finder\Finder;
 
 class ComponentParser extends ComponentParserAlias
 {
+
+    public static function loadComponent($paths, $dir, $namespace = 'Tall\Theme')
+    {
+        $paths = array_unique(Arr::wrap($paths));
+
+        $paths = array_filter($paths, function ($path) {
+            return is_dir($path);
+        });
+        if (empty($paths)) {
+            return;
+        }
+
+        foreach ((new Finder())->in($paths)->files() as $domain) {
+            $component = $namespace.str_replace(
+                ['/', '.php'],
+                ['\\', ''],
+                Str::after($domain->getRealPath(), $dir)
+            );
+            $componentName = Str::afterLast($component,'Livewire\\');
+            $componentName = Str::beforeLast($componentName,'Component');
+            $componentName = Str::replace("\\", ".", $componentName);
+            $componentName = Str::lower($componentName);           
+            $componentName = sprintf("%s::%s-component",Str::replace("\\", "-", $namespace), $componentName);
+            $componentName = Str::lower($componentName);           
+            if (is_subclass_of($component, Livewire::class)) {
+                Livewire::component($componentName, $component);
+            }
+        }
+    }
 
     public static function generateRoute($path, $search="app", $ns = "\\App")
     {

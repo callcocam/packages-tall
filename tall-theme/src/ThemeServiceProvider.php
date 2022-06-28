@@ -18,6 +18,9 @@ class ThemeServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        if(!\Schema::hasTable('tenants')){
+            return;
+        }
         if ($this->app->runningInConsole()) {
             //$this->commands([\Tall\Theme\Commands\CreateCommand::class]);
         }
@@ -41,9 +44,12 @@ class ThemeServiceProvider extends ServiceProvider
 
     public function register(): void
     {
+        if(!\Schema::hasTable('tenants')){
+            return;
+        }
         $this->app->register(RouteServiceProvider::class);        
         if (class_exists(Livewire::class)) {
-            $this->load(__DIR__.'/Http/Livewire');
+            \Tall\Theme\ComponentParser::loadComponent(__DIR__.'/Http/Livewire', __DIR__);
         }
         $this->mergeConfigFrom(
             __DIR__ . '/../config/tall-theme.php','tall-theme'
@@ -98,32 +104,5 @@ class ThemeServiceProvider extends ServiceProvider
         });
     }
 
-    private function load($paths)
-    {
-        $paths = array_unique(Arr::wrap($paths));
-
-        $paths = array_filter($paths, function ($path) {
-            return is_dir($path);
-        });
-        if (empty($paths)) {
-            return;
-        }
-
-        $namespace = 'Tall\Theme';
-        foreach ((new Finder())->in($paths)->files() as $domain) {
-            $component = $namespace.str_replace(
-                ['/', '.php'],
-                ['\\', ''],
-                Str::after($domain->getRealPath(), __DIR__)
-            );
-            $componentName = Str::afterLast($component,'Livewire\\');
-            $componentName = Str::beforeLast($componentName,'Component');
-            $componentName = Str::replace("\\", ".", $componentName);
-            $componentName = Str::lower($componentName);           
-            $componentName = sprintf("tall-theme::%s-component",$componentName);
-            if (is_subclass_of($component, Livewire::class)) {
-                Livewire::component($componentName, $component);
-            }
-        }
-    }
+   
 }

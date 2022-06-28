@@ -23,9 +23,12 @@ class ReportServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        if(!\Schema::hasTable('tenants')){
+            return;
+        }
        $this->app->register(RouteServiceProvider::class);
         if (class_exists(Livewire::class)) {
-            $this->load(__DIR__.'/Http/Livewire/Admin');
+            \Tall\Theme\ComponentParser::loadComponent(__DIR__.'/Http/Livewire', __DIR__, 'Tall\Report');
         }
     }
 
@@ -36,6 +39,9 @@ class ReportServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if(!\Schema::hasTable('tenants')){
+            return;
+        }
         $this->publishConfig();
         $this->publishMigrations();
         $this->loadMigrations();
@@ -79,32 +85,4 @@ class ReportServiceProvider extends ServiceProvider
         }
     }
 
-    private function load($paths)
-    {
-        $paths = array_unique(Arr::wrap($paths));
-
-        $paths = array_filter($paths, function ($path) {
-            return is_dir($path);
-        });
-        if (empty($paths)) {
-            return;
-        }
-
-        $namespace = 'Tall\Report';
-        foreach ((new Finder())->in($paths)->files() as $domain) {
-            $component = $namespace.str_replace(
-                ['/', '.php'],
-                ['\\', ''],
-                Str::after($domain->getRealPath(), __DIR__)
-            );
-            $componentName = Str::afterLast($component,'Livewire\\');
-            $componentName = Str::beforeLast($componentName,'Component');
-            $componentName = Str::replace("\\", ".", $componentName);
-            $componentName = Str::lower($componentName);            
-            $componentName = sprintf("tall-report::%s-component",$componentName);
-            if (is_subclass_of($component, LivewireComponent::class)) {
-                Livewire::component($componentName, $component);
-            }
-        }
-    }
 }
