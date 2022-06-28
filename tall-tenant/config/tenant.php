@@ -107,4 +107,12 @@ return [
         ]
     ],
     'default-connection' => 'UsesTenantConnection',
+    'routes'=>[
+        'tenants'=>[
+            'list'=>'tall-acl.admin.tenants',
+            'create'=>'tall-acl.admin.tenant.create',
+            'edit'=>'tall-acl.admin.tenant.edit',
+            'show'=>'tall-acl.admin.tenant.show',
+        ]
+    ]
 ];

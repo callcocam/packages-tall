@@ -71,7 +71,7 @@ class GenerateComponent extends FormComponent
     public function getModelsProperty()
     {
         $builder = $this->query();
-        if($builder) return $builder->limit(5)->get();
+        if($builder) return $builder->limit(15)->get();
         return null;
     }
     protected function view()

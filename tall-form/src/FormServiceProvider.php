@@ -9,7 +9,12 @@ namespace Tall\Form;
 use  Tall\Form\Commands\CreateCommand;
 use  Tall\Form\Commands\EditCommand;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Livewire\Component as LivewireComponent;
 use Livewire\Livewire;
+use Symfony\Component\Finder\Finder;
 
 class FormServiceProvider extends ServiceProvider
 {
@@ -51,7 +56,9 @@ class FormServiceProvider extends ServiceProvider
 
     public function register()
     {
-        
+        if (class_exists(Livewire::class)) {
+            $this->load(__DIR__.'/Http/Livewire/Admin');
+        }
         
     }
 
@@ -124,6 +131,38 @@ class FormServiceProvider extends ServiceProvider
     {
        
     }
+    private function load($paths)
+    {
+        $paths = array_unique(Arr::wrap($paths));
 
+        $paths = array_filter($paths, function ($path) {
+            return is_dir($path);
+        });
+        if (empty($paths)) {
+            return;
+        }
+
+        $namespace = 'Tall\Form';
+        //$tests=[];
+        foreach ((new Finder())->in($paths)->files() as $domain) {
+            $component = $namespace.str_replace(
+                ['/', '.php'],
+                ['\\', ''],
+                Str::after($domain->getRealPath(), __DIR__)
+            );
+            $componentName = Str::afterLast($component,'Livewire\\');
+            $componentName = Str::beforeLast($componentName,'Component');
+            $componentName = Str::replace("\\", ".", $componentName);
+            $componentName = Str::lower($componentName);
+            $componentName = Str::of($componentName)->append('-component');
+            $componentName = Str::of($componentName)->prepend('tall-form::');
+           // dd($componentName);
+           // $tests[] = $componentName->value();
+            if (is_subclass_of($component, LivewireComponent::class)) {
+                Livewire::component($componentName->value(), $component);
+            }
+        }
+        //dd($tests);
+    }
 
 }

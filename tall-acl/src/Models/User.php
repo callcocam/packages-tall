@@ -24,10 +24,12 @@ class User extends AbstractModel implements
 {
     use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail,  HasRolesAndPermissions;
 
+    protected $appends = ['access'];
  
     public function getAccessAttribute()
     {
         $roles = $this->roles()->pluck("id", "id")->toArray();
+        
         return $roles;
     }
 

@@ -80,5 +80,25 @@ return [
     ],
     'roles'=>[
         'inscription'=>env("ACL_ROLE_INSCRIPTION",'fazer-inscricoes')
+    ],
+    'routes'=>[
+        'roles'=>[
+            'list'=>'tall-acl.admin.roles',
+            'create'=>'tall-acl.admin.role.create',
+            'edit'=>'tall-acl.admin.role.edit',
+            'show'=>'tall-acl.admin.role.show',
+        ],
+        'permissions'=>[
+            'list'=>'tall-acl.admin.permissions',
+            'create'=>'tall-acl.admin.permission.create',
+            'edit'=>'tall-acl.admin.permission.edit',
+            'show'=>'tall-acl.admin.permission.show',
+        ],
+        'users'=>[
+            'list'=>'tall-acl.admin.users',
+            'create'=>'tall-acl.admin.user.create',
+            'edit'=>'tall-acl.admin.user.edit',
+            'show'=>'tall-acl.admin.user.show',
+        ]
     ]
 ];

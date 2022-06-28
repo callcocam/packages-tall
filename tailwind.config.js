@@ -5,6 +5,9 @@ module.exports = {
         './tall-form/resources/views/**/*.blade.php',
         './tall-table/resources/views/**/*.blade.php',
         './tall-theme/resources/views/**/*.blade.php',
+        './tall-schema/resources/views/**/*.blade.php',
+        './tall-tenant/resources/views/**/*.blade.php',
+        './tall-report/resources/views/**/*.blade.php',
     ],
     theme: {
         extend: {},

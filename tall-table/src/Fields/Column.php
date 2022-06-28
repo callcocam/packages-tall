@@ -120,7 +120,7 @@ class Column extends Field
         }
         else{
             $this->options(Cache::remember($this->expiration, "statuses_", function() use( $type){
-                return \App\Models\Status::query()->where('type', $type)->pluck('name','id')->toArray();
+                return \Tall\Form\Models\Status::query()->where('type', $type)->pluck('name','id')->toArray();
             }));
         }
         if($mult){

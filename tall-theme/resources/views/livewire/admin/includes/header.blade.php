@@ -8,7 +8,7 @@
         <div class="flex h-full flex-1">
             <ul class="flex items-center h-full w-full lg:w-7/12 justify-between">
                 <li class="h-full w-full flex items-center px-4">
-                    <a class="h-full flex items-center border-t-4 transition-all ease-in-out duration-500 font-bold border-t-white hover:border-indigo-500 w-full justify-center"
+                    <a class="h-full flex items-center border-t-4 transition-all ease-in-out duration-500 font-bold border-t-white hover:border-indigo-500 w-full justify-start"
                         href="">{{ $tenant->name }}</a></li>
             </ul>
         </div>
@@ -27,16 +27,16 @@
                             @click.prevent="showDropdown = ! showDropdown">
                             <div class="flex items-center">
                                 <img class="flex w-12 h-12 rounded-full"
-                                    src="http://demo.lion-coders.com/html/sarchholm-real-estate-template/images/dashboard/agent_db_1.jpg"
+                                    src="{{ auth()->user()->profile_photo_url }}"
                                     alt="User" />
                             </div>
                         </a>
-                        <div class="overflow-hidden max-h-0 transition-all ease-in-out duration-200 absolute right-0 border-b-2 bg-white z-40"
+                        <div class="overflow-hidden max-h-0 transition-all ease-in-out duration-200 absolute right-0 border-b-2 bg-white z-40 w-full md:w-72"
                             x-ref="dropdownContainer"
                             x-bind:style="showDropdown ? 'max-height: ' + $refs.dropdownContainer.scrollHeight + 'px' : ''">
-                            @if (\Route::has('admin.users'))
-                                @can('admin.users')
-                                    <a href="{{ route('admin.roles') }}"
+                            @if (\Route::has(config('acl.routes.roles.list')))
+                                @can(config('acl.routes.roles.list'))
+                                    <a href="{{ route(config('acl.routes.roles.list')) }}"
                                         class="my-2 py-2 px-2 flex items-center rounded hover:bg-gray-800 hover:shadow hover:text-gray-200 transition-colors ease-in-out duration-500">
                                         <span class="mr-4">
                                             <svg class="fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg"
@@ -50,9 +50,9 @@
                                     </a>
                                 @endcan
                             @endif
-                            @if (\Route::has('admin.users'))
-                                @can('admin.users')
-                                    <a href="{{ route('admin.permissions') }}"
+                            @if (\Route::has(config('acl.routes.permissions.list')))
+                                @can(config('acl.routes.permissions.list'))
+                                    <a href="{{ route(config('acl.routes.permissions.list')) }}"
                                         class="my-2 py-2 px-2 flex items-center rounded hover:bg-gray-800 hover:shadow hover:text-gray-200 transition-colors ease-in-out duration-500">
                                         <span class="mr-4">
                                             <svg class="fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg"
@@ -65,9 +65,9 @@
                                     </a>
                                 @endcan
                             @endif
-                            @if (\Route::has('admin.users'))
-                                @can('admin.users')
-                                    <a href="{{ route('admin.users') }}"
+                            @if (\Route::has(config('acl.routes.users.list')))
+                                @can(config('acl.routes.users.list'))
+                                    <a href="{{ route(config('acl.routes.users.list')) }}"
                                         class="my-2 py-2 px-2 flex items-center rounded hover:bg-gray-800 hover:shadow hover:text-gray-200 transition-colors ease-in-out duration-500">
                                         <span class="mr-4">
                                             <svg class="fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg"

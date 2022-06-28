@@ -9,6 +9,10 @@ namespace Tall\Theme;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Symfony\Component\Finder\Finder;
 
 class ThemeServiceProvider extends ServiceProvider
 {
@@ -37,6 +41,10 @@ class ThemeServiceProvider extends ServiceProvider
 
     public function register(): void
     {
+        $this->app->register(RouteServiceProvider::class);        
+        if (class_exists(Livewire::class)) {
+            $this->load(__DIR__.'/Http/Livewire');
+        }
         $this->mergeConfigFrom(
             __DIR__ . '/../config/tall-theme.php','tall-theme'
         );
@@ -88,5 +96,39 @@ class ThemeServiceProvider extends ServiceProvider
         Blade::directive('tallLoader', function () {
             return "<?php echo view('tall-theme::assets.loader')->render(); ?>";
         });
+    }
+
+    private function load($paths)
+    {
+        $paths = array_unique(Arr::wrap($paths));
+
+        $paths = array_filter($paths, function ($path) {
+            return is_dir($path);
+        });
+        if (empty($paths)) {
+            return;
+        }
+
+        $namespace = 'Tall\Theme';
+        //$tests=[];
+        foreach ((new Finder())->in($paths)->files() as $domain) {
+            $component = $namespace.str_replace(
+                ['/', '.php'],
+                ['\\', ''],
+                Str::after($domain->getRealPath(), __DIR__)
+            );
+            $componentName = Str::afterLast($component,'Livewire\\');
+            $componentName = Str::beforeLast($componentName,'Component');
+            $componentName = Str::replace("\\", ".", $componentName);
+            $componentName = Str::lower($componentName);
+            $componentName = Str::of($componentName)->append('-component');
+            $componentName = Str::of($componentName)->prepend('tall-theme::');
+           // dd($componentName);
+           // $tests[] = $componentName->value();
+            if (is_subclass_of($component, Livewire::class)) {
+                Livewire::component($componentName->value(), $component);
+            }
+        }
+        //dd($tests);
     }
 }

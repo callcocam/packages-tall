@@ -8,13 +8,12 @@ namespace Tall\Form\Fields;
 
 use Tall\Form\Field;
 
-class Checkbox extends Field
+class Checkboxs extends Field
 {
-    protected $type = 'checkbox';
+    protected $type = 'checkboxs';
     protected $left_label  = false;
     protected $lg  = false;
     protected $md  = false;
-    protected $value  = 1;
 
     public function left_label(){
         $this->left_label = true;

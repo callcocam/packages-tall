@@ -16,41 +16,20 @@ use Symfony\Component\Finder\Finder;
 class ComponentParser extends ComponentParserAlias
 {
 
-
     public static function generateRoute($path, $search="app", $ns = "\\App")
     {
 
         if (!is_dir($path)) {
             return;
         }
-
+      
         foreach ((new Finder)->in($path) as $component) {
            
             $componentPath = $component->getRealPath();
             $namespace = Str::after($componentPath, $search);
             $namespace = Str::replace(['/', '.php'], ['\\', ''], $namespace);
             $component = $ns . $namespace;
-            if (class_exists($component)) {
-                if (method_exists($component, 'route')) {
-                    app($component)->route();
-                }
-            }
-        }
-    }
-
-    public static function generateRoute($path, $search="app", $ns = "\\App")
-    {
-
-        if (!is_dir($path)) {
-            return;
-        }
-
-        foreach ((new Finder)->in($path) as $component) {
-           
-            $componentPath = $component->getRealPath();
-            $namespace = Str::after($componentPath, $search);
-            $namespace = Str::replace(['/', '.php'], ['\\', ''], $namespace);
-            $component = $ns . $namespace;
+            
             if (class_exists($component)) {
                 if (method_exists($component, 'route')) {
                     app($component)->route();

@@ -10,6 +10,6 @@ namespace Tall\Report\Common\Exception;
 
 use Exception;
 
-abstract class Tall\ReportException extends Exception
+abstract class OpenSpoutException extends Exception
 {
 }

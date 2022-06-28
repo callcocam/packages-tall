@@ -6,12 +6,25 @@
         @endif
     </label>
     <div class="my-2">
-        <x-input id={{ $field->name }} wire:model.debounce.500ms="checkboxSearch.{{ $field->name }}"
+        <x-input id="{{ $field->name }}" wire:model.debounce.500ms="checkboxSearch.{{ $field->name }}"
             right-icon="search" placeholder="{{ __('Search...') }}" />
     </div>
-    @forelse  ($field->options as $key => $label)
-        @include('tall-forms::fields.checkbox', compact('key', 'label'))
-    @empty
-        @include('tall-forms::fields.checkbox', ['label' => $field->label, 'key' => 1])
-    @endforelse
+    @foreach  ($field->options as $key => $label)
+        @php
+            if ($key) {
+                $value = $key;
+                $key = sprintf('%s.%s', $field->key, $key);
+            } else {
+                $value = true;
+                $key = $field->key;
+            }
+        @endphp
+        @if ($field->left_label)
+            <x-checkbox :lg="$field->lg" :md="$field->md" left-label="{{ $label }}" value="{{ $value }}"
+                wire:model.defer="{{ $key }}" />
+        @else
+            <x-checkbox value="{{ $value }}" :lg="$field->lg" :md="$field->md" label="{{ $label }}"
+                wire:model.defer="{{ $key }}" />
+        @endif
+    @endforeach
 </div>

@@ -10,10 +10,13 @@ namespace Tall\Acl\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Tall\Tenant\Scopes\UuidGenerate;
+use Tall\Form\Models\Status;
+use Tall\Form\Sluggable\SlugOptions;
+use Tall\Form\Sluggable\HasSlug;
 
 abstract class AbstractModel extends Model
 {
-    use  SoftDeletes, UuidGenerate;
+    use  SoftDeletes, HasSlug, UuidGenerate;
     
     public $incrementing = false;
 
@@ -32,8 +35,28 @@ abstract class AbstractModel extends Model
         return $this->belongsTo(Status::class);
     }
 
+   
+    protected function slugTo()
+    {
+        return "slug";
+    }
+
+    protected function slugFrom()
+    {
+        return 'name';
+    }
+
     public function isUser()
     {
         return false;
+    }
+
+    public function getSlugOptions()
+    {
+        if (is_string($this->slugTo())) {
+            return SlugOptions::create()
+                ->generateSlugsFrom($this->slugFrom())
+                ->saveSlugsTo($this->slugTo());
+        }
     }
 }
