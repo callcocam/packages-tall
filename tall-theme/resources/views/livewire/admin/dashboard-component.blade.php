@@ -1,4 +1,5 @@
 <div>
     @includeIf('dashboard-content')
-    {{-- @dd(config('acl')) --}}
+   
+     {{-- {!! \Menu::get('sidebar') !!} --}}
 </div>
