@@ -16,7 +16,7 @@
             "Tall\\Tenant\\": "tall-tenant/src",
             "Tall\\Acl\\": "tall-acl/src",
             "Tall\\Report\\": "tall-report/src",
-            "Tall\\Schem\\": "tall-schema/src",
+            "Tall\\Schema\\": "tall-schema/src",
             "Tall\\Form\\": "tall-form/src",
             "Tall\\Table\\": "tall-table/src",            
             "Tall\\Database\\Factories\\": "tall-table/src/database/factories/",
