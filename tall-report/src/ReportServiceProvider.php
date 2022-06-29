@@ -23,8 +23,10 @@ class ReportServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if(!\Schema::hasTable('tenants')){
-            return;
+        if (!$this->app->runningInConsole()){
+            if(!\Schema::hasTable('tenants')){
+                return;
+            }
         }
        $this->app->register(RouteServiceProvider::class);
         if (class_exists(Livewire::class)) {
@@ -39,8 +41,10 @@ class ReportServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(!\Schema::hasTable('tenants')){
-            return;
+        if (!$this->app->runningInConsole()){
+            if(!\Schema::hasTable('tenants')){
+                return;
+            }
         }
         $this->publishConfig();
         $this->publishMigrations();

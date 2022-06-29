@@ -46,3 +46,13 @@ sail artisan vendor:publish --tag=tall-theme-config --force
 sail artisan vendor:publish --tag=tall-theme-views --force
 
 ```
+#ALTER MODE USER  AS VIEWS
+
+```
+use Illuminate\Foundation\Auth\User as Authenticatable;
+to
+use Tall\Acl\Models\User as Authenticatable;
+
+
+
+```

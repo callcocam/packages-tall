@@ -25,8 +25,10 @@ class AclServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if(!\Schema::hasTable('tenants')){
-            return;
+        if (!$this->app->runningInConsole()){
+            if(!\Schema::hasTable('tenants')){
+                return;
+            }
         }
         $this->app->register(RouteServiceProvider::class);
         if (class_exists(Livewire::class)) {
@@ -41,8 +43,10 @@ class AclServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(!\Schema::hasTable('tenants')){
-            return;
+        if (!$this->app->runningInConsole()){
+            if(!\Schema::hasTable('tenants')){
+                return;
+            }
         }
         $this->bootViews();
         $this->publishConfig();
@@ -113,9 +117,14 @@ class AclServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations/' => database_path('migrations'),
         ], 'acl-migrations');
+        
         $this->publishes([
             __DIR__.'/../database/factories/' => database_path('factories'),
         ], 'acl-factories');
+        
+        $this->publishes([
+            __DIR__.'/../database/factories/' => database_path('factories'),
+        ], 'tenant-factories');
     }
 
     /**

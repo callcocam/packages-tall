@@ -6,5 +6,7 @@
 */
 
 return [
-    //
+    "models"=>[
+        "parent"=>\Tall\Report\Models\Report::class
+    ]
 ];

@@ -20,8 +20,10 @@ class FormServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        if(!\Schema::hasTable('tenants')){
-            return;
+        if (!$this->app->runningInConsole()){
+            if(!\Schema::hasTable('tenants')){
+                return;
+            }
         }
         $this->publishConfig();
         $this->loadConfigs();
@@ -58,8 +60,10 @@ class FormServiceProvider extends ServiceProvider
 
     public function register()
     {
-        if(!\Schema::hasTable('tenants')){
-            return;
+        if (!$this->app->runningInConsole()){
+            if(!\Schema::hasTable('tenants')){
+                return;
+            }
         }
         if (class_exists(Livewire::class)) {
             \Tall\Theme\ComponentParser::loadComponent(__DIR__.'/Http/Livewire', __DIR__, 'Tall\Form');
@@ -113,6 +117,9 @@ class FormServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/factories/' => database_path('factories'),
         ], 'tall-forms-factories');
+        $this->publishes([
+            __DIR__.'/../database/factories/' => database_path('factories'),
+        ], 'tenant-factories');
     }
 
     /**

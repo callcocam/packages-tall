@@ -32,8 +32,10 @@ class TenantServiceProvider  extends ServiceProvider
      */
     public function register()
     {
-        if(!\Schema::hasTable('tenants')){
-            return;
+        if (!$this->app->runningInConsole()){
+            if(!\Schema::hasTable('tenants')){
+                return;
+            }
         }
         $this->app->register(RouteServiceProvider::class);
         if (class_exists(Livewire::class)) {
@@ -48,8 +50,10 @@ class TenantServiceProvider  extends ServiceProvider
      */
     public function boot()
     {
-        if(!\Schema::hasTable('tenants')){
-            return;
+        if (!$this->app->runningInConsole()){
+            if(!\Schema::hasTable('tenants')){
+                return;
+            }
         }
         $this->bootViews();
         $this->publishConfig();
@@ -153,6 +157,7 @@ class TenantServiceProvider  extends ServiceProvider
        
         $this->publishes([
             __DIR__.'/../database/factories/' => database_path('factories'),
+            __DIR__.'/../database/seeders/' => database_path('seeders'),
         ], 'tenant-factories');
     }
 

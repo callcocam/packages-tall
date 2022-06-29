@@ -11,6 +11,7 @@ namespace Tall\Theme;
 use Livewire\Commands\ComponentParser as ComponentParserAlias;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
+use Livewire\Livewire;
 
 use Symfony\Component\Finder\Finder;
 
