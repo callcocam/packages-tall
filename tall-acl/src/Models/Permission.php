@@ -35,5 +35,9 @@ class Permission extends AbstractModel implements \Tall\Acl\Contracts\Permission
     {
         return $this->belongsToMany(config('acl.models.role'))->withTimestamps();
     }
-
+    
+    protected function slugTo()
+    {
+        return false;
+    }
 }

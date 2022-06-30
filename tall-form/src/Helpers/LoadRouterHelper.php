@@ -65,6 +65,7 @@ class LoadRouterHelper
                     'name' => $name,
                     'slug' => $permission,
                     'group' => $last,
+                    'status_id' => data_get(published(), 'status_id'),
                     'description' => $name
                 ]);
             }
