@@ -25,8 +25,8 @@ class DatabaseSeeder extends Seeder
         \Tall\Tenant\Models\Tenant::factory()->create([
             'name'=> 'Base',
             'domain'=> $host,
-            'database'=>env("DB_DATABASE"),
-            'prefix'=>'landlord',
+            'database'=>env("DB_DATABASE","landlord"),
+            'prefix'=>'admin',
             'middleware'=>'landlord',
             'provider'=>'mysql',
         ]);

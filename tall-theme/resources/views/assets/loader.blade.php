@@ -14,6 +14,6 @@
          }))
      })
      document.addEventListener('load', () => {
-         console.console.log("Carregou...");
+        //  console.console.log("Carregou...");
      })
  </script>

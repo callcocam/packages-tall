@@ -18,11 +18,11 @@ class ThemeServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        if (!$this->app->runningInConsole()){
-            if(!\Schema::hasTable('tenants')){
-                return;
-            }
-        }
+        // if (!$this->app->runningInConsole()){
+        //     if(!\Schema::hasTable('tenants')){
+        //         return;
+        //     }
+        // }
         if ($this->app->runningInConsole()) {
             //$this->commands([\Tall\Theme\Commands\CreateCommand::class]);
         }
@@ -72,6 +72,21 @@ class ThemeServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../resources/js/assets' => public_path('js/assets'),
         ], 'tall-theme-js');
+
+        
+        $this->publishes([
+            __DIR__ . '/../public/img' => public_path('img'),
+        ], 'tall-theme-img');
+
+        
+        $this->publishes([
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/tall-theme'),
+            __DIR__ . '/../resources/js/assets' => public_path('js/assets'),
+            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/tall-theme' ),
+            __DIR__ . '/../config/tall-theme.php' => config_path('tall-theme.php'),
+            __DIR__ . '/../public/img' => public_path('img'),
+        ], 'tall-theme');
+
     }
 
     private function publishConfigs(): void

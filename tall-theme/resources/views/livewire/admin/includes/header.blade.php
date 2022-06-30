@@ -1,13 +1,12 @@
 <header class="flex w-full h-16 relative z-50 bg-white ">
     <div
         class="w-full md:w-60 z-30 flex bg-gray-800 justify-start px-4 items-center border-b-1 border-r-1 border-gray-300 fixed  h-16 shadow-lg">
-        <img class="flex w-48" src="{{ asset('img/webpaes.png') }}" alt="Logo" />
-
+        <img class="flex w-32 h-16 flex" src="{{ asset('img/logo.jpg') }}" alt="Logo" />
     </div>
     <div class="hidden ml-60 w-full md:flex justify-between border-l-2 shadow-lg ">
         <div class="flex h-full flex-1">
             <ul class="flex items-center h-full w-full lg:w-7/12 justify-between">
-                <li class="h-full w-full flex items-center px-4">
+                <li class="h-full w-full flex items-center">
                     <a class="h-full flex items-center border-t-4 transition-all ease-in-out duration-500 font-bold border-t-white hover:border-indigo-500 w-full justify-start"
                         href="">{{ $tenant->name }}</a>
                 </li>

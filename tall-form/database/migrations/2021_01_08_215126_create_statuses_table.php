@@ -14,6 +14,25 @@ class CreateStatusesTable extends Migration
     public function up()
     {
         if (!Schema::hasTable('statuses')) {
+
+            if (Schema::hasTable('users')) {
+                Schema::table('users', function (Blueprint $table) {
+                    $table->uuid('id')->change();
+                    $table->string('slug')->unique();
+                    $table->softDeletes();
+                });
+            }
+            if (Schema::hasTable('sessions')) {                
+                Schema::dropIfExists('sessions');
+                Schema::create('sessions', function (Blueprint $table) {
+                    $table->string('id')->primary();
+                    $table->foreignUuid('user_id')->nullable()->index();
+                    $table->string('ip_address', 45)->nullable();
+                    $table->text('user_agent')->nullable();
+                    $table->longText('payload');
+                    $table->integer('last_activity')->index();
+                });
+            }
             Schema::create('statuses', function (Blueprint $table) {
                 $table->uuid('id')->primary();
                 $table->string('name',191)->nullable();
