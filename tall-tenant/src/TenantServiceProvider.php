@@ -32,15 +32,12 @@ class TenantServiceProvider  extends ServiceProvider
      */
     public function register()
     {
-        // if (!$this->app->runningInConsole()){
-        //     if(!\Schema::hasTable('tenants')){
-        //         return;
-        //     }
-        // }
-        $this->app->register(RouteServiceProvider::class);
-        if (class_exists(Livewire::class)) {
-            \Tall\Theme\ComponentParser::loadComponent(__DIR__.'/Http/Livewire', __DIR__, 'Tall\Tenant');
+        if (!$this->app->runningInConsole()){
+            if(!\Schema::hasTable('tenants')){
+                return;
+            }
         }
+        $this->app->register(RouteServiceProvider::class);
     }
 
     /**
@@ -50,11 +47,15 @@ class TenantServiceProvider  extends ServiceProvider
      */
     public function boot()
     {
-        // if (!$this->app->runningInConsole()){
-        //     if(!\Schema::hasTable('tenants')){
-        //         return;
-        //     }
-        // }
+        if (!$this->app->runningInConsole()){
+            if(!\Schema::hasTable('tenants')){
+                return;
+            }
+        }
+        
+        if (class_exists(Livewire::class)) {
+            \Tall\Theme\ComponentParser::loadComponent(__DIR__.'/Http/Livewire', __DIR__, 'Tall\Tenant');
+        }
         $this->bootViews();
         $this->publishConfig();
         $this->loadConfigs();

@@ -29,9 +29,6 @@ class ReportServiceProvider extends ServiceProvider
             }
         }
        $this->app->register(RouteServiceProvider::class);
-        if (class_exists(Livewire::class)) {
-            \Tall\Theme\ComponentParser::loadComponent(__DIR__.'/Http/Livewire', __DIR__, 'Tall\Report');
-        }
     }
 
     /**
@@ -45,6 +42,10 @@ class ReportServiceProvider extends ServiceProvider
             if(!\Schema::hasTable('tenants')){
                 return;
             }
+        }
+        
+        if (class_exists(Livewire::class)) {
+            \Tall\Theme\ComponentParser::loadComponent(__DIR__.'/Http/Livewire', __DIR__, 'Tall\Report');
         }
         $this->publishConfig();
         $this->publishMigrations();

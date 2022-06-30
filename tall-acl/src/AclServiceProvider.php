@@ -31,9 +31,6 @@ class AclServiceProvider extends ServiceProvider
             }
         }
         $this->app->register(RouteServiceProvider::class);
-        if (class_exists(Livewire::class)) {
-            \Tall\Theme\ComponentParser::loadComponent(__DIR__.'/Http/Livewire', __DIR__, 'Tall\Acl');
-        }
     }
 
    /**
@@ -47,6 +44,10 @@ class AclServiceProvider extends ServiceProvider
             if(!\Schema::hasTable('tenants')){
                 return;
             }
+        }
+        
+        if (class_exists(Livewire::class)) {
+            \Tall\Theme\ComponentParser::loadComponent(__DIR__.'/Http/Livewire', __DIR__, 'Tall\Acl');
         }
         $this->bootViews();
         $this->publishConfig();

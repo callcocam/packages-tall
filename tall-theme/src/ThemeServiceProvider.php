@@ -39,9 +39,11 @@ class ThemeServiceProvider extends ServiceProvider
         $this->loadComponent('breadcrums');
         $this->loadComponent('date-picker');
         $this->createDirectives();
-
-        Livewire::component( 'tall-theme::admin.includes.sidebar', \Tall\Theme\Http\Livewire\Admin\Includes\Sidebar::class);
-        Livewire::component( 'tall-theme::admin.includes.header', \Tall\Theme\Http\Livewire\Admin\Includes\Header::class);
+        if (class_exists(Livewire::class)) {
+            \Tall\Theme\ComponentParser::loadComponent(__DIR__.'/Http/Livewire', __DIR__);
+            Livewire::component( 'tall-theme::admin.includes.sidebar', \Tall\Theme\Http\Livewire\Admin\Includes\Sidebar::class);
+            Livewire::component( 'tall-theme::admin.includes.header', \Tall\Theme\Http\Livewire\Admin\Includes\Header::class);
+        }
     }
 
     public function register(): void
@@ -52,9 +54,7 @@ class ThemeServiceProvider extends ServiceProvider
             }
         }
         $this->app->register(RouteServiceProvider::class);        
-        if (class_exists(Livewire::class)) {
-            \Tall\Theme\ComponentParser::loadComponent(__DIR__.'/Http/Livewire', __DIR__);
-        }
+     
         $this->mergeConfigFrom(
             __DIR__ . '/../config/tall-theme.php','tall-theme'
         );

@@ -47,9 +47,12 @@ class FormServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/../resources/lang' => resource_path('lang/vendor/tall-forms'),], 'tall-form-lang');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'tf');
 
-        Livewire::component('trix', \Tall\Form\Livewire\Trix::class);
-        Livewire::component('ckeditor', \Tall\Form\Livewire\CKEditor::class);
-        Livewire::component('tall-gallery', \Tall\Form\Livewire\Gallery::class);
+        if (class_exists(Livewire::class)) {
+            \Tall\Theme\ComponentParser::loadComponent(__DIR__.'/Http/Livewire', __DIR__, 'Tall\Form');
+            Livewire::component('trix', \Tall\Form\Livewire\Trix::class);
+            Livewire::component('ckeditor', \Tall\Form\Livewire\CKEditor::class);
+            Livewire::component('tall-gallery', \Tall\Form\Livewire\Gallery::class);
+        }
 
         $this->bootViews();
         $this->prefixComponents();
@@ -64,9 +67,6 @@ class FormServiceProvider extends ServiceProvider
             if(!\Schema::hasTable('tenants')){
                 return;
             }
-        }
-        if (class_exists(Livewire::class)) {
-            \Tall\Theme\ComponentParser::loadComponent(__DIR__.'/Http/Livewire', __DIR__, 'Tall\Form');
         }
         
     }
