@@ -44,15 +44,15 @@ abstract class TableComponent extends Component
         \Menu::create('tailwind', function($menu) {   
              if($parent =  $this->parent())  {
               if($current = $menu->has($parent)){
-                $current->route($this->format_view(),  $this->label(), [], $this->order(), ['icon'=>$this->icon()]);
+                $current->route($this->format_view(),  $this->label(), [], $this->ordering(), ['icon'=>$this->icon()]);
               }
               else{
                 $menu->dropdown($parent, function ($sub) {
                     // $sub->header('ACCOUNT');
-                    $sub->route($this->format_view(),  $this->label(), [], $this->order(), ['icon'=>$this->icon()]);
+                    $sub->route($this->format_view(),  $this->label(), [], $this->ordering(), ['icon'=>$this->icon()]);
                      //$sub->divider();
                      //$sub->url('logout', 'Logout');
-                 })->order($this->order());
+                 })->order($this->ordering());
               }
                 
                

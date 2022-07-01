@@ -105,7 +105,7 @@ trait WithMenus
     | Order visivel no me menu
     |
     */
-    public function order(){
+    public function ordering(){
         return 1;
      }
 

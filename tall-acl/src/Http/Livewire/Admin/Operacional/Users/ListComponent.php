@@ -38,7 +38,7 @@ final class ListComponent extends TableComponent
     }
     
     
-    public function order(){
+    public function ordering(){
         return 1;
     }
 
