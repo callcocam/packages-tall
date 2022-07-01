@@ -332,7 +332,9 @@ class MenuItem implements ArrayableContract
     public function getUrl()
     {
         if ($route = array_filter($this->route)) {
-            return route($this->route[0], $this->route[1]);
+            if (\Route::has($this->route[0])) {
+                return route($this->route[0], $this->route[1]);
+            }
         }
 
         if (empty($this->url)) {
