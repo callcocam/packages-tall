@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "laravelcollective/html": "^6.3",
         "laravel/jetstream": "^2.8",
         "livewire/livewire": "^2.5",
         "wireui/wireui": "^1.7"
