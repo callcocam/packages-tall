@@ -4,7 +4,7 @@
 * User: callcocam@gmail.com, contato@sigasmart.com.br
 * https://www.sigasmart.com.br
 */
-namespace Tall\Report\Http\Livewire\Admin\Reports;
+namespace Tall\Report\Http\Livewire\Admin\Operacional\Reports;
 
 use Tall\Table\TableComponent;
 
@@ -35,10 +35,9 @@ class ListComponent extends TableComponent
     | Rota principal do crud, lista todos os dados
     |
     */
-
-    // public function route(){
-    //     Route::get('/relatorioss', static::class)->name('tal.report.admin.reports');
-    // }
+    public function route(){
+        Route::get('/relatorioss', static::class)->name('tall.report.admin.reports');
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -87,6 +86,10 @@ class ListComponent extends TableComponent
         return [
            'tableTitle' => __('Relatorios'),
        ];
+    }
+
+    public function order(){
+        return 0;
     }
     /*
     |--------------------------------------------------------------------------

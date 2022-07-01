@@ -4,9 +4,9 @@
 * User: callcocam@gmail.com, contato@sigasmart.com.br
 * https://www.sigasmart.com.br
 */
-namespace Tall\Acl\Http\Livewire\Admin\Permissions;
+namespace Tall\Acl\Http\Livewire\Admin\Operacional\Users;
 
-use Tall\Acl\Models\Permission;
+use App\Models\User;
 use Tall\Table\TableComponent;
 use Tall\Table\Fields\Column;
 use Tall\Table\Fields\Action;
@@ -22,8 +22,7 @@ final class ListComponent extends TableComponent
     public function mount()
     {
         $this->authorize(Route::currentRouteName());
-    
-        \Tall\Form\Helpers\LoadRouterHelper::save();
+       
     }
      /*
     |--------------------------------------------------------------------------
@@ -32,9 +31,51 @@ final class ListComponent extends TableComponent
     | Rota principal do crud, lista todos os dados
     |
     */
+
     public function route(){
-        Route::get('/permissions', static::class)->name(config("acl.routes.permissions.list"));
+        Route::get('/users', static::class)->name(config("acl.routes.users.list"));
+      
     }
+    
+    
+    public function order(){
+        return 1;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Features format_view
+    |--------------------------------------------------------------------------
+    | Inicia as configurações basica do de nomes e rotas
+    |
+    */
+    public function format_view(){
+        return config("acl.routes.users.list");
+     }
+     
+    // /*
+    // |--------------------------------------------------------------------------
+    // |  Features label
+    // |--------------------------------------------------------------------------
+    // | Label visivel no me menu
+    // |
+    // */
+    // public function route_name($sufix=null){
+    //     return config("acl.routes.users.list");
+    //  }
+
+    //     /*
+    // |--------------------------------------------------------------------------
+    // |  Features label
+    // |--------------------------------------------------------------------------
+    // | Label visivel no me menu
+    // |
+    // */
+    public function label(){
+      
+        return "Usuários";
+     }
+
     /*
     |--------------------------------------------------------------------------
     |  Features route
@@ -44,18 +85,8 @@ final class ListComponent extends TableComponent
     */
     public function getCreateProperty()
     {
-        return config("acl.routes.permissions.create");
+        return config("acl.routes.users.create");
     }
-    /*
-    |--------------------------------------------------------------------------
-    |  Features format_view
-    |--------------------------------------------------------------------------
-    | Inicia as configurações basica do de nomes e rotas
-    |
-    */
-    public function format_view(){
-        returnconfig("acl.routes.permissions.list");
-     }
     /*
     |--------------------------------------------------------------------------
     |  Features query
@@ -64,10 +95,13 @@ final class ListComponent extends TableComponent
     |
     */
     protected function query(){
-        return Permission::query();
+        if (auth()->user()->hasRole('super-admin')) {
+            return User::query();
+        }
+        return User::query()->where('instituicao_id',auth()->user()->instituicao_id);
     }
-    
-    /*
+
+     /*
     |--------------------------------------------------------------------------
     |  Features tableAttr
     |--------------------------------------------------------------------------
@@ -77,9 +111,10 @@ final class ListComponent extends TableComponent
     protected function tableAttr(): array
     {
         return [
-           'tableTitle' => __('Permissions'),
+           'tableTitle' => __('Users'),
        ];
     }
+
     /*
     |--------------------------------------------------------------------------
     |  Features actions
@@ -90,7 +125,7 @@ final class ListComponent extends TableComponent
     protected function actions(){
 
         return [
-            Link::make('Edit')->route(config("acl.routes.permissions.edit"))->xs()->icon('pencil-alt')->primary(),
+            Link::make('Edit')->route(config("acl.routes.users.edit"))->xs()->icon('pencil-alt')->primary(),
             Delete::make('Delete')->xs()->icon('trash')->negative(),
         ];
     }

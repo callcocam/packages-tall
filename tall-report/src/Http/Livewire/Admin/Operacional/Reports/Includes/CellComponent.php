@@ -5,7 +5,7 @@
 * https://www.sigasmart.com.br
 */
 
-namespace Tall\Report\Http\Livewire\Admin\Reports\Includes;
+namespace Tall\Report\Http\Livewire\Admin\Operacional\Reports\Includes;
 
 use Tall\Report\Models\Report;
 use Tall\Form\FormComponent;

@@ -4,20 +4,26 @@
 * User: callcocam@gmail.com, contato@sigasmart.com.br
 * https://www.sigasmart.com.br
 */
-namespace Tall\Acl\Http\Livewire\Admin\Permissions;
+namespace Tall\Acl\Http\Livewire\Admin\Operacional\Users;
 
-use Tall\Acl\Models\Permission;
+use App\Models\User;
 use Tall\Form\FormComponent;
-use Illuminate\Support\Facades\Route;
 use Tall\Form\Fields\Input;
 use Tall\Form\Fields\Radio;
-
+use Tall\Form\Fields\Textarea;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use App\Actions\Fortify\PasswordValidationRules;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CreateComponent extends FormComponent
 {
 
     use AuthorizesRequests;
+    use PasswordValidationRules;
+    
+    public $basic = false;
 
     /*
     |--------------------------------------------------------------------------
@@ -27,7 +33,7 @@ class CreateComponent extends FormComponent
     |
     */
     public function route(){
-        Route::get('/permission/create', static::class)->name(config("acl.routes.permissions.create"));
+        Route::get('/user/create', static::class)->name(config("acl.routes.users.create"));
     }
     
     /*
@@ -37,8 +43,12 @@ class CreateComponent extends FormComponent
     | Inicia as configurações basica do de nomes e rotas
     |
     */
+    protected function view(){
+        return "tall-forms::profile";
+    }
+
     public function format_view(){
-        return config("acl.routes.permissions.create");
+        return config("acl.routes.users.create");
      }
    /*
     |--------------------------------------------------------------------------
@@ -47,13 +57,13 @@ class CreateComponent extends FormComponent
     | Inicia o formulario com um cadastro vasio
     |
     */
-    public function mount(?Permission $model)
+    public function mount(?User $model)
     {
-        $this->authorize(Route::currentRouteName());
-        $this->setFormProperties($model); // $permission from hereon, called $this->model
+        $this->authorize(Route::currentRouteName());   
+        $this->setFormProperties($model); // $user from hereon, called $this->model
     }
 
-    /*
+   /*
     |--------------------------------------------------------------------------
     |  Features formAttr
     |--------------------------------------------------------------------------
@@ -63,11 +73,17 @@ class CreateComponent extends FormComponent
     protected function formAttr(): array
     {
         return [
-           'formTitle' => __('Permission'),
+           'formTitle' => __('User'),
            'formAction' => __('Create'),
            'wrapWithView' => false,
            'showDelete' => false,
        ];
+    }
+
+    protected function success(){
+
+        $this->data['password'] =  Hash::make($this->data['password']);  
+        return parent::success();
     }
 
     /*
@@ -80,11 +96,17 @@ class CreateComponent extends FormComponent
     protected function fields(): array
     {
         return [
-            Input::make('Name')->rules('required'),
+            Input::make('Name')->rules('required')->placeholder('Your Name')->icon('user'),
+            Input::make('Email')->rules('required')->placeholder('Your best email')->icon('mail-open'),
+            Input::make('New Password', 'password')->rules($this->passwordRules())->placeholder('New Password')->icon('key'),
+            Input::make('Password Confirmation', 'password_confirmation')->rules('required')->placeholder('Password Confirmation')->icon('key'),
+            Textarea::make('Observations', 'description.preview')
+            ->hint('Brief description for your profile. URLs are hyperlinked.')
+            ->field('description_preview')->placeholder('Observations'),
             Radio::make('Status', 'status_id')->status()->lg()
         ];
     }
-    
+
     /*
     |--------------------------------------------------------------------------
     |  Features saveAndGoBackResponse
@@ -92,14 +114,11 @@ class CreateComponent extends FormComponent
     | Rota de redirecionamento apos a criação bem sucedida de um novo registro
     |
     */
-     /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function saveAndGoBackResponse()
     {
-          return redirect()->route(config("acl.routes.permissions.edit"), $this->model);
+        return redirect()->route(config("acl.routes.users.edit"),$this->model);
     }
-
+    
     /*
     |--------------------------------------------------------------------------
     |  Features goBack
@@ -109,6 +128,6 @@ class CreateComponent extends FormComponent
     */    
     public function goBack()
     {       
-        return route(config("acl.routes.permissions.list"));
+        return route(config("acl.routes.users.list"));
     }
 }

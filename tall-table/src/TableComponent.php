@@ -38,6 +38,30 @@ abstract class TableComponent extends Component
     protected $layout = "app";
 
     abstract protected function query();
+
+    public function menu(){
+       
+        \Menu::create('tailwind', function($menu) {   
+             if($parent =  $this->parent())  {
+              if($current = $menu->has($parent)){
+                $current->route($this->format_view(),  $this->label(), [], $this->order(), ['icon'=>$this->icon()]);
+              }
+              else{
+                $menu->dropdown($parent, function ($sub) {
+                    // $sub->header('ACCOUNT');
+                    $sub->route($this->format_view(),  $this->label(), [], $this->order(), ['icon'=>$this->icon()]);
+                     //$sub->divider();
+                     //$sub->url('logout', 'Logout');
+                 })->order($this->order());
+              }
+                
+               
+             }   
+             else{
+                $menu->route($this->format_view(),  $this->label());
+             }               
+        });      
+    }
  
     protected function view(){
         if(function_exists("tableView")){

@@ -26,6 +26,30 @@ trait WithMenus
         return \Str::title($label);
      }
  
+      
+     /*
+    |--------------------------------------------------------------------------
+    |  Features label
+    |--------------------------------------------------------------------------
+    | Label visivel no me menu
+    |
+    */
+    public function parent(){
+      
+        $path = \Str::lower(get_class($this));
+        $path = \Str::replace("\\", "-",$path);
+        $is_path = \Str::afterLast($path, "admin-");
+        $is_path = \Str::beforeLast($is_path, "-list");
+        $path = \Str::afterLast($path, "admin-");
+        $path = \Str::afterLast($path, "paginas-");
+        $path = \Str::beforeLast($path, "-list");
+        $path = \Str::beforeLast($path, "-");  
+        if($is_path  === $path)   {
+            return null;
+        } 
+        return $path;
+     }
+
      /*
     |--------------------------------------------------------------------------
     |  Features label
@@ -71,7 +95,18 @@ trait WithMenus
     |
     */
     public function icon(){
-        return null;
+        return 'chevron-right';
+     }
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Features order
+    |--------------------------------------------------------------------------
+    | Order visivel no me menu
+    |
+    */
+    public function order(){
+        return 1;
      }
 
     /*

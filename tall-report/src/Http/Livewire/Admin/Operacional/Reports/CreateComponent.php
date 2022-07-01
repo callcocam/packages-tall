@@ -4,71 +4,48 @@
 * User: callcocam@gmail.com, contato@sigasmart.com.br
 * https://www.sigasmart.com.br
 */
-namespace Tall\Acl\Http\Livewire\Admin\Roles;
+namespace Tall\Report\Http\Livewire\Admin\Operacional\Reports;
 
-use Tall\Acl\Models\Role;
 use Tall\Form\FormComponent;
+//Http\Livewire\Traits\LivewireInfo.php
+use Tall\Report\Http\Livewire\Traits\LivewireInfo;
+use Tall\Report\Traits\Exportable;
+use Tall\Report\Models\Report;
 use Illuminate\Support\Facades\Route;
-use Tall\Form\Fields\Input;
-use Tall\Form\Fields\Radio;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+use Tall\Form\Fields\Input;
+use Tall\Form\Fields\Select;
+use Tall\Form\Fields\Radio;
+use Tall\Form\Fields\NativeSelect;
 
 class CreateComponent extends FormComponent
 {
+    use LivewireInfo, AuthorizesRequests, Exportable;
 
-    use AuthorizesRequests;
-
-    /*
-    |--------------------------------------------------------------------------
-    |  Features route
-    |--------------------------------------------------------------------------
-    | Rota de criação de um novo cadastro
-    |
-    */
-    public function route(){
-        Route::get('/role/create', static::class)->name(config("acl.routes.roles.create"));
-    }
-    
-    /*
-    |--------------------------------------------------------------------------
-    |  Features format_view
-    |--------------------------------------------------------------------------
-    | Inicia as configurações basica do de nomes e rotas
-    |
-    */
-    public function format_view(){
-        return config("acl.routes.roles.create");
-     }
-   /*
+     /*
     |--------------------------------------------------------------------------
     |  Features mount
     |--------------------------------------------------------------------------
     | Inicia o formulario com um cadastro vasio
     |
     */
-    public function mount(?Role $model)
+    public function mount(?Report $model)
     {
         $this->authorize(Route::currentRouteName());
-        $this->setFormProperties($model); // $role from hereon, called $this->model
+        
+        $this->setFormProperties($model); // $relatorio from hereon, called $this->model
     }
-
-    /*
+     /*
     |--------------------------------------------------------------------------
-    |  Features formAttr
+    |  Features route
     |--------------------------------------------------------------------------
-    | Inicia as configurações basica do formulario
+    | Rota principal do crud, lista todos os dados
     |
     */
-    protected function formAttr(): array
-    {
-        return [
-           'formTitle' => __('Role'),
-           'formAction' => __('Create'),
-           'wrapWithView' => false,
-           'showDelete' => false,
-       ];
+    public function route(){
+        Route::get('/relatorioss', static::class)->name('tall.report.admin.report.create');
     }
-
     /*
     |--------------------------------------------------------------------------
     |  Features fields
@@ -79,11 +56,23 @@ class CreateComponent extends FormComponent
     protected function fields(): array
     {
         return [
-            Input::make('Name')->rules('required'),
+            Input::make('Nome do relatório', 'name')->span(3)->rules('required'),
+            NativeSelect::make('Modelo referente a uma tabela do banco de dados','model')
+            ->span(3)->options($this->tables())
+            ->hint("O modelo se refere a uma tabela do banco de dados")
+            ->rules('required'),
+            Input::make('Congelar Coluna','freeze_column')
+            ->hint("ex: D Colunas A até C será fixada")
+            ->placeholder("D")
+            ->span(2),
+            Input::make('Congelar Linha','freeze_row')->span(2)
+            ->hint("ex: 2 A primeira linha será fixada")
+            ->placeholder("1"),
+            Input::make('Zoom Scala','zoom_scale') ->placeholder("150")->span(2),
             Radio::make('Status', 'status_id')->status()->lg()
         ];
     }
-    
+
     /*
     |--------------------------------------------------------------------------
     |  Features saveAndGoBackResponse
@@ -96,7 +85,7 @@ class CreateComponent extends FormComponent
      */
     public function saveAndGoBackResponse()
     {
-          return redirect()->route(config("acl.routes.roles.edit"), $this->model);
+          return redirect()->route("tall.report.admin.report.edit", $this->model);
     }
 
     /*
@@ -108,6 +97,6 @@ class CreateComponent extends FormComponent
     */    
     public function goBack()
     {       
-        return route("tall-acl.admin.roles");
+        return route("tall.report.admin.reports");
     }
 }

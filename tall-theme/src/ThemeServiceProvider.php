@@ -43,6 +43,8 @@ class ThemeServiceProvider extends ServiceProvider
             \Tall\Theme\ComponentParser::loadComponent(__DIR__.'/Http/Livewire', __DIR__);
             Livewire::component( 'tall-theme::admin.includes.sidebar', \Tall\Theme\Http\Livewire\Admin\Includes\Sidebar::class);
             Livewire::component( 'tall-theme::admin.includes.header', \Tall\Theme\Http\Livewire\Admin\Includes\Header::class);
+       
+            $this->app->register(RouteServiceProvider::class);     
         }
     }
 
@@ -51,9 +53,8 @@ class ThemeServiceProvider extends ServiceProvider
         if (!$this->app->runningInConsole()){
             if(!\Schema::hasTable('tenants')){
                 return;
-            }
+            }   
         }
-        $this->app->register(RouteServiceProvider::class);        
      
         $this->mergeConfigFrom(
             __DIR__ . '/../config/tall-theme.php','tall-theme'

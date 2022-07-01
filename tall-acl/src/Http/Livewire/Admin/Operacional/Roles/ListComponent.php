@@ -4,7 +4,7 @@
 * User: callcocam@gmail.com, contato@sigasmart.com.br
 * https://www.sigasmart.com.br
 */
-namespace Tall\Acl\Http\Livewire\Admin\Roles;
+namespace Tall\Acl\Http\Livewire\Admin\Operacional\Roles;
 
 use Tall\Acl\Models\Role;
 use Tall\Table\TableComponent;
@@ -32,7 +32,7 @@ final class ListComponent extends TableComponent
     */
 
     public function route(){
-        Route::get('/roles', static::class)->name(config("acl.routes.roles.list"));
+        Route::get('/roles', static::class)->name(config("acl.routes.roles.list"));  
     }
     
     /*
@@ -82,6 +82,9 @@ final class ListComponent extends TableComponent
        ];
     }
 
+    public function order(){
+        return 4;
+    }
     /*
     |--------------------------------------------------------------------------
     |  Features actions

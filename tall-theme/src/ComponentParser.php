@@ -71,7 +71,11 @@ class ComponentParser extends ComponentParserAlias
             
             if (class_exists($component)) {
                 if (method_exists($component, 'route')) {
-                    app($component)->route();
+                    $comp =  app($component);
+                    $comp ->route();
+                    if (method_exists($component, 'menu')) {
+                        $comp->menu();
+                    }
                 }
             }
         }

@@ -12,7 +12,7 @@
     <div class="w-60 transition-all ease-in-out duration-500 absolute " x-ref="boxElement">
         <div class="relative w-full">
             <nav x-ref="navElement"
-                class="md:ml-0 pb-8 w-60 bg-slate-100 h-screen flex z-10 fixed  overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-300 scrollbar-track-gray-100 top-16">
+                class=" md:ml-0 pb-8 w-60 bg-slate-100 h-screen flex flex-col z-10 fixed  overflow-y-auto scrollbar-thin scrollbar-thumb-indigo-300 scrollbar-track-gray-100 top-16">
                 <ul class="w-full">
                     @if (\Route::has('admin'))
                         @can('dashboard')
@@ -29,6 +29,7 @@
                             </x-tall-nav-link>
                         @endcan
                     @endif
+                    {!! Menu::get('tailwind') !!}
                     @if ($menus)
                         @foreach ($menus as $menu)
                             @if ($submenus = \Arr::get($menu, 'submenus'))

@@ -6,7 +6,7 @@
         @if ($icon)
         <x-icon name="{{ $icon }}" class="w-6 h-6" /> 
        @endif
-        <span class="flex">{{ __($label) }}</span>
+        <span class="flex uppercase">{{ __($label) }}</span>
         <span class="transition-all duration-500 ease-in-out transform absolute right-2" :class="{ 'rotate-180': open }">
             <svg class="fill-current w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path

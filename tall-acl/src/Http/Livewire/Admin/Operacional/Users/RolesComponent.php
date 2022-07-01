@@ -4,7 +4,7 @@
 * User: callcocam@gmail.com, contato@sigasmart.com.br
 * https://www.sigasmart.com.br
 */
-namespace Tall\Acl\Http\Livewire\Admin\Users;
+namespace Tall\Acl\Http\Livewire\Admin\Operacional\Users;
 
 use App\Models\User;
 use Tall\Form\FormComponent;

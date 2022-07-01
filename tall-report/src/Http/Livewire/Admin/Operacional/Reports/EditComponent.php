@@ -4,46 +4,51 @@
 * User: callcocam@gmail.com, contato@sigasmart.com.br
 * https://www.sigasmart.com.br
 */
-namespace Tall\Acl\Http\Livewire\Admin\Roles;
 
-use Tall\Acl\Models\Role;
+namespace Tall\Report\Http\Livewire\Admin\Operacional\Reports;
+
 use Tall\Form\FormComponent;
+use Tall\Report\Models\Report;
+use Tall\Report\Traits\Exportable;
 use Illuminate\Support\Facades\Route;
-use Tall\Form\Fields\Input;
-use Tall\Form\Fields\Checkboxs;
-use Tall\Form\Fields\Radio;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+use Tall\Report\Http\Livewire\Traits\LivewireInfo;
+
+use Tall\Form\Fields\Input;
+use Tall\Form\Fields\Select;
+use Tall\Form\Fields\Radio;
+use Tall\Form\Fields\NativeSelect;
 
 class EditComponent extends FormComponent
 {
- 
-    use AuthorizesRequests;
-
-    /*
-    |--------------------------------------------------------------------------
-    |  Features route
-    |--------------------------------------------------------------------------
-    | Rota de edição de um cadastro
-    |
-    */
-    public function route(){
-        Route::get('/role/{model}/edit', static::class)->name(config("acl.routes.roles.edit"));
-    }
+    use LivewireInfo, AuthorizesRequests, Exportable;
     
-    /*
+     /*
     |--------------------------------------------------------------------------
     |  Features mount
     |--------------------------------------------------------------------------
-    | Inicia o formulario com um cadastro selecionado
+    | Inicia o formulario com um cadastro vasio
     |
     */
-    public function mount(?Role $model)
+    public function mount(?Report $model)
     {
         $this->authorize(Route::currentRouteName());
-        $this->setFormProperties($model); // $role from hereon, called $this->model
+        
+        $this->setFormProperties($model); // $relatorio from hereon, called $this->model
     }
-
-   /*
+    
+     /*
+    |--------------------------------------------------------------------------
+    |  Features route
+    |--------------------------------------------------------------------------
+    | Rota principal do crud, lista todos os dados
+    |
+    */
+    public function route(){
+        Route::get('/relatorioss', static::class)->name('tall.report.admin.report.edit');
+    }
+     /*
     |--------------------------------------------------------------------------
     |  Features formAttr
     |--------------------------------------------------------------------------
@@ -53,15 +58,13 @@ class EditComponent extends FormComponent
     protected function formAttr(): array
     {
         return [
-           'formTitle' => __('Role'),
+           'formTitle' => __('Relatorio'),
            'formAction' => __('Edit'),
            'wrapWithView' => false,
            'showDelete' => false,
        ];
     }
-    // protected function success(){
-    //     dd($this->data);
-    // }
+
     /*
     |--------------------------------------------------------------------------
     |  Features fields
@@ -71,16 +74,19 @@ class EditComponent extends FormComponent
     */
     protected function fields(): array
     {
-
-        $query = \Tall\Acl\Models\Permission::query();
-        if($checkboxSearch = \Arr::get($this->checkboxSearch, 'permissions')){
-            $query->where("name", "LIKE", "%{$checkboxSearch}%");
-        }
         return [
-            Input::make('Name')->rules('required'),
-            Input::make('Slug'),
-            Checkboxs::make('Permissions')->options($query->pluck("name",'id')->toArray())->rules('required'),
-            Radio::make('Special')->options_combine(['no-access','all-access','no-defined'])->rules('required'),
+            Input::make('Nome do relatório', 'name')->span(3)->rules('required'),
+            NativeSelect::make('Modelo referente a uma tabela do banco de dados','model')->span(3)->options($this->tables())
+            ->hint("O modelo se refere a uma tabela do banco de dados")
+            ->rules('required'),
+            Input::make('Congelar Coluna','freeze_column')
+            ->hint("ex: D Colunas A até C será fixada")
+            ->placeholder("D")
+            ->span(2),
+            Input::make('Congelar Linha','freeze_row')->span(2)
+            ->hint("ex: 2 A primeira linha será fixada")
+            ->placeholder("1"),
+            Input::make('Zoom Scala','zoom_scale') ->placeholder("150")->span(2),
             Radio::make('Status', 'status_id')->status()->lg()
         ];
     }
@@ -97,7 +103,7 @@ class EditComponent extends FormComponent
      */
     public function saveAndGoBackResponse()
     {
-          return redirect()->route(config("acl.routes.roles.list"));
+          return redirect()->route("tall.report.admin.reports");
     }
     
     /*
@@ -105,11 +111,11 @@ class EditComponent extends FormComponent
     |  Features goBack
     |--------------------------------------------------------------------------
     | Rota de retorno para a lista de dados
-    |*/
+    |
+    */
     public function goBack()
     {       
-        return route(config("acl.routes.roles.list"));
+        return route("tall.report.admin.reports");
     }
-
-   
+    
 }

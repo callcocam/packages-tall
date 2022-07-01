@@ -4,7 +4,7 @@
 * User: callcocam@gmail.com, contato@sigasmart.com.br
 * https://www.sigasmart.com.br
 */
-namespace Tall\Report\Http\Livewire\Admin\Reports;
+namespace Tall\Report\Http\Livewire\Admin\Operacional\Reports;
 
 use Tall\Form\FormComponent;
 use Tall\Report\Models\Report;
@@ -18,6 +18,7 @@ class GenerateComponent extends FormComponent
 {
     use LivewireInfo, AuthorizesRequests, Exportable;
     
+
     public $checkboxValues = [];
      /*
     |--------------------------------------------------------------------------
@@ -49,6 +50,21 @@ class GenerateComponent extends FormComponent
         }
     }
     
+    public function menu(){}
+
+     /*
+    |--------------------------------------------------------------------------
+    |  Features route
+    |--------------------------------------------------------------------------
+    | Rota principal do crud, lista todos os dados
+    |
+    */
+
+    public function route(){
+        Route::get('/relatorio/{model}/gerenciar', static::class)->name('tall.report.admin.report.generate');
+    }
+
+
       /*
     |--------------------------------------------------------------------------
     |  Features query
