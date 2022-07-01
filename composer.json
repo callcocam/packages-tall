@@ -12,6 +12,7 @@
     },
     "autoload": {
         "psr-4": {
+            "Tall\\Menus\\": "tall-menu/src",
             "Tall\\Theme\\": "tall-theme/src",
             "Tall\\Tenant\\": "tall-tenant/src",
             "Tall\\Acl\\": "tall-acl/src",
@@ -29,6 +30,7 @@
             "providers": [
                 "Tall\\Tenant\\TenantServiceProvider",
                 "Tall\\Theme\\ThemeServiceProvider",
+                "Tall\\Menus\\MenusServiceProvider",
                 "Tall\\Acl\\AclServiceProvider",
                 "Tall\\Schema\\SchemaServiceProvider",
                 "Tall\\Report\\ReportServiceProvider",
