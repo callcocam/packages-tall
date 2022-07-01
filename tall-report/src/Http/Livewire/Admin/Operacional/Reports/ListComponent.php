@@ -36,7 +36,7 @@ class ListComponent extends TableComponent
     |
     */
     public function route(){
-        Route::get('/relatorioss', static::class)->name('tall.report.admin.reports');
+        Route::get('/relatorios', static::class)->name('tall.report.admin.reports');
     }
 
     /*

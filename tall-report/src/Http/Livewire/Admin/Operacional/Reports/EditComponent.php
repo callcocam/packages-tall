@@ -46,7 +46,7 @@ class EditComponent extends FormComponent
     |
     */
     public function route(){
-        Route::get('/relatorioss', static::class)->name('tall.report.admin.report.edit');
+        Route::get('/relatorio/{model}/editar', static::class)->name('tall.report.admin.report.edit');
     }
      /*
     |--------------------------------------------------------------------------

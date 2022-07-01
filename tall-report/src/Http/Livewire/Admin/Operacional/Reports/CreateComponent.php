@@ -44,7 +44,7 @@ class CreateComponent extends FormComponent
     |
     */
     public function route(){
-        Route::get('/relatorioss', static::class)->name('tall.report.admin.report.create');
+        Route::get('/relatorio/cadastrar', static::class)->name('tall.report.admin.report.create');
     }
     /*
     |--------------------------------------------------------------------------
