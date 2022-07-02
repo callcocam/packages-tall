@@ -247,19 +247,30 @@ abstract class FormComponent extends Component
 
     }
 
-    /**
+    /*
+    |--------------------------------------------------------------------------
+    |  Features saveAndGoBackResponse
+    |--------------------------------------------------------------------------
+    | Rota de redirecionamento apos a criação bem sucedida de um novo registro
+    |
+    */
+     /**
      * @return \Illuminate\Http\RedirectResponse
      */
     public function saveAndGoBackResponse()
     {
-         return true;
-
+        if($route = \Str::replace("create","edit",$this->route_name())){
+            return redirect()->route($route, $this->model);
+        }
     }
 
     public function goBack()
     {
-       
-        return false;
+        
+        $route = \Str::beforeLast($this->route_name(),".");       
+        if(\Route::has($route)){
+            return route($route, ['up'=>$this->model]);
+        }
     }
 
     protected function clearIsNull($field, $default = null)

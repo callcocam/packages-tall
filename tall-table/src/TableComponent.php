@@ -19,6 +19,8 @@ use Illuminate\Support\{Collection as BaseCollection, Str};
 use WireUi\Traits\Actions;
 use Tall\Form\Traits\Message;
 use Tall\Theme\Traits\WithMenus;
+use Tall\Table\Fields\Link;
+use Tall\Table\Fields\Delete;
 
 use Illuminate\Support\Facades\Cache;
 
@@ -40,27 +42,8 @@ abstract class TableComponent extends Component
     abstract protected function query();
 
     public function menu(){
-       
-        \Menu::create('tailwind', function($menu) {   
-             if($parent =  $this->parent())  {
-              if($current = $menu->has($parent)){
-                $current->route($this->format_view(),  $this->label(), [], $this->ordering(), ['icon'=>$this->icon()]);
-              }
-              else{
-                $menu->dropdown($parent, function ($sub) {
-                    // $sub->header('ACCOUNT');
-                    $sub->route($this->format_view(),  $this->label(), [], $this->ordering(), ['icon'=>$this->icon()]);
-                     //$sub->divider();
-                     //$sub->url('logout', 'Logout');
-                 })->order($this->ordering());
-              }
-                
-               
-             }   
-             else{
-                $menu->route($this->format_view(),  $this->label());
-             }               
-        });      
+       $this->parent();
+           
     }
  
     protected function view(){
@@ -181,11 +164,20 @@ abstract class TableComponent extends Component
         return [];
     }
     
+     /*
+    |--------------------------------------------------------------------------
+    |  Features actions
+    |--------------------------------------------------------------------------
+    | Realacionado as ações de cada registro, como editar deletar e visualizar
+    |
+    */
     protected function actions(){
-
-        return [];
+        return [
+            Link::make('Edit')->route($this->route_name("edit"))->xs()->icon('pencil-alt')->primary(),
+            Delete::make('Delete')->xs()->icon('trash')->negative(),
+        ];
     }
-    
+
     protected function headers(){
 
         return [];
@@ -208,11 +200,11 @@ abstract class TableComponent extends Component
         }
     }
     
+    
+
     public function getCreateProperty()
     {
-        $route = \Route::currentRouteName();
-
-        return null;
+        return  $this->route_name('create');
     }
 
     /*

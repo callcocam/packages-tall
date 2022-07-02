@@ -5,6 +5,7 @@
 * https://www.sigasmart.com.br
 */
 namespace Tall\Theme\Traits;
+use Symfony\Component\Finder\Finder;
 
 trait WithMenus
 {
@@ -17,12 +18,9 @@ trait WithMenus
     |
     */
     public function label(){
-        $label = \Str::replace("-", " ",$this->format_name());
-        $label = \Str::replace("paginas.", "",$label);
-        $label = \Str::replace("admin.", "",$label);
-        $class_name =\Str::afterLast(get_class($this),"\\");
-        //$label = \Str::lower($class_name);
-        $label =\Str::afterLast( $label,".");
+        $label = get_class($this);
+        $label =\Str::beforeLast($label,"\\");
+        $label =\Str::afterLast($label,"\\");
         return \Str::title($label);
      }
  
@@ -34,22 +32,39 @@ trait WithMenus
     | Label visivel no me menu
     |
     */
-    public function parent(){
-      
-        $path = \Str::lower(get_class($this));
-        $path = \Str::replace("\\", "-",$path);
-        $is_path = \Str::afterLast($path, "admin-");
-        $is_path = \Str::beforeLast($is_path, "-list");
-        $path = \Str::afterLast($path, "admin-");
-        $path = \Str::afterLast($path, "paginas-");
-        $path = \Str::beforeLast($path, "-list");
-        $path = \Str::beforeLast($path, "-");  
-        if($is_path  === $path)   {
-            return null;
-        } 
-        return $path;
+    public function parent(){      
+        $paths = [];
+        $reflection = new \ReflectionClass($this);
+        $path_base = $reflection->getFilename();
+        $namespaceName = $reflection->getNamespaceName();
+        \Menu::create('tailwind', function($menu) use($path_base, $namespaceName,$paths){              
+            $path_base = \Str::beforeLast($path_base, "/");
+            $directories = new Finder();
+            $directories->directories()->in($path_base);           
+            if($directories->hasResults()){
+                $menu->dropdown($this->label(), function ($sub) use($directories, $namespaceName,$paths) {
+                    foreach ($directories as $dir) {
+                        $files = new Finder();
+                        $files->files()->in($dir->getRealPath());
+                        foreach ($files as $file) {
+                            $component = sprintf("%s\\%s\\%s",$namespaceName,$dir->getFileName(), $file->getFileName());
+                            $component = \Str::beforeLast($component, ".php");
+                            $comp = \Tall\Theme\ComponentParser::isComponent($component);
+                            if ($comp) {
+                                if (method_exists($comp, 'child')) {   
+                                    $sub->route($comp->format_view(),  $comp->label(), [], $comp->ordering(), ['icon'=>$comp->icon()]);
+                                }
+                            }  
+                        }                       
+                   }
+                })->order($this->ordering());
+               
+            }
+            else{
+                $menu->route($this->format_view(),  $this->label());
+            }    
+       }); 
      }
-
      /*
     |--------------------------------------------------------------------------
     |  Features label
@@ -78,14 +93,34 @@ trait WithMenus
     */
     public function route_name($sufix=null){
        
-        $name = \Str::replace("paginas.", "", $this->format_name());
+        $name =  $this->format_name();
         if($sufix){
             $name = \Str::of($name)->append('.');
-            $name = \Str::of($name)->append($sufix);
+            $name = \Str::of($name)->append($sufix)->value;
         }
         return $name;
      }
    
+     /*
+    |--------------------------------------------------------------------------
+    |  Features label
+    |--------------------------------------------------------------------------
+    | Label visivel no me menu
+    |
+    */
+    public function format_name(){
+        $name = \Str::afterLast($this->format_view(),"livewire.");
+        return \Str::beforeLast($name,"-component");
+     }
+
+     public function format_view(){
+        $path = \Str::lower(get_class($this));
+        $path = \Str::replace("\\", ".",$path);
+        $path = \Str::afterLast($path,"livewire.");
+        $path = \Str::beforeLast($path,"component");
+        $path = \Str::replace('.list','', $path);
+        return $path;
+     }
 
     /*
     |--------------------------------------------------------------------------
@@ -151,20 +186,5 @@ trait WithMenus
     */
     public function restrito(){
         return true;
-     }
-     /*
-    |--------------------------------------------------------------------------
-    |  Features label
-    |--------------------------------------------------------------------------
-    | Label visivel no me menu
-    |
-    */
-    public function format_name(){
-        $name = \Str::afterLast($this->format_view(),"livewire.");
-        return \Str::beforeLast($name,"-component");
-     }
-
-     public function format_view(){
-        return $this->view();
      }
 }

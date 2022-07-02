@@ -18,6 +18,24 @@ use Symfony\Component\Finder\Finder;
 class ComponentParser extends ComponentParserAlias
 {
 
+
+    public static function isComponent($component )
+    {
+        $comp = null;
+        switch ($component) {
+            case is_subclass_of($component, \Livewire\Livewire::class):
+                $comp = app($component);
+                break;   
+            case is_subclass_of($component, \Tall\Form\FormComponent::class):
+                $comp = app($component);
+                break;  
+            case is_subclass_of($component, \Tall\Table\TableComponent::class):
+                 $comp = app($component);
+                break;
+        }   
+        return $comp; 
+    }
+
     public static function loadComponent($paths, $dir, $namespace = 'Tall\Theme')
     {
         $paths = array_unique(Arr::wrap($paths));
@@ -41,16 +59,8 @@ class ComponentParser extends ComponentParserAlias
             $componentName = Str::lower($componentName);           
             $componentName = sprintf("%s::%s-component",Str::replace("\\", "-", $namespace), $componentName);
             $componentName = Str::lower($componentName);  
-            switch ($component) {
-                case is_subclass_of($component, Livewire::class):
-                    Livewire::component($componentName, $component);
-                    break;   
-                case is_subclass_of($component, \Tall\Form\FormComponent::class):
-                    Livewire::component($componentName, $component);
-                    break;  
-                case is_subclass_of($component, \Tall\Table\TableComponent::class):
-                    Livewire::component($componentName, $component);
-                    break;
+            if ($component = self::isComponent($component)) {
+                Livewire::component($componentName, $component);
             }         
         }
     }
@@ -73,7 +83,7 @@ class ComponentParser extends ComponentParserAlias
                 if (method_exists($component, 'route')) {
                     $comp =  app($component);
                     $comp ->route();
-                    if (method_exists($component, 'menu')) {
+                    if (method_exists($component, 'gerar')) {
                         $comp->menu();
                     }
                 }
