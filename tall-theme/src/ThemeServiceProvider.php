@@ -71,7 +71,7 @@ class ThemeServiceProvider extends ServiceProvider
         ], 'tall-theme-views');
         
         $this->publishes([
-            __DIR__ . '/../resources/js/assets' => public_path('js/assets'),
+           // __DIR__ . '/../resources/js/assets' => public_path('js/assets'),
             __DIR__ . '/../public' => public_path(),
         ], 'tall-theme-js');
 
