@@ -4,8 +4,8 @@
 >
     <a {{ $attributes->class('w-full flex space-x-2 items-center transition-colors ease-in-out duration-500 h-full px-4 py-3 focus:outline-none transition') }}>
         @if ($icon)
-         <x-icon name="{{ $icon }}" class="w-6 h-6" /> 
+         <x-icon name="{{ $icon }}" class="w-5 h-5" /> 
         @endif
-        <span class="flex">{{ $slot }}</span>
+        <span class="flex uppercase">{{ $slot }}</span>
     </a>
 </li>
