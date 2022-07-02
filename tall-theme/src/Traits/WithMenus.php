@@ -40,9 +40,11 @@ trait WithMenus
         \Menu::create('tailwind', function($menu) use($path_base, $namespaceName,$paths){              
             $path_base = \Str::beforeLast($path_base, "/");
             $directories = new Finder();
-            $directories->directories()->in($path_base);           
+            $directories->directories()->in($path_base);     
             if($directories->hasResults()){
-                $menu->dropdown($this->label(), function ($sub) use($directories, $namespaceName,$paths) {
+                $menu->dropdown($this->label(), 
+                function ($sub) use($directories, $namespaceName,$paths) {
+                    $sub->route($this->route_name(),  $this->label(), [], $this->gerar(), ['icon'=>$this->icon()]);
                     foreach ($directories as $dir) {
                         $files = new Finder();
                         $files->files()->in($dir->getRealPath());
@@ -52,16 +54,15 @@ trait WithMenus
                             $comp = \Tall\Theme\ComponentParser::isComponent($component);
                             if ($comp) {
                                 if (method_exists($comp, 'child')) {   
-                                    $sub->route($comp->format_view(),  $comp->label(), [], $comp->ordering(), ['icon'=>$comp->icon()]);
+                                    $sub->route($comp->route_name(),  $comp->label(), [], $comp->child(), ['icon'=>$comp->icon()]);
                                 }
                             }  
                         }                       
                    }
-                })->order($this->ordering());
-               
+                },$this->ordering(),['icon'=>$this->icon()])->order($this->ordering());               
             }
             else{
-                $menu->route($this->format_view(),  $this->label());
+                $menu->route($this->route_name(),  $this->label(), [], $this->gerar(), ['icon'=>$this->icon()]);
             }    
        }); 
      }
