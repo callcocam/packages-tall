@@ -159,19 +159,12 @@ class MenuItem implements ArrayableContract
      *
      * @return $this
      */
-    public function dropdown($title, \Closure $callback, $order = 0, array $attributes = array())
+    public function dropdown($title, \Closure $callback, array $attributes = array())
     {
+        $order = \Array::get($attributes, 'order');
+
         $properties = compact('title', 'order', 'attributes');
-       
-        if (func_num_args() === 3) {
-            $arguments = func_get_args();
-
-            $title = Arr::get($arguments, 0);
-            $attributes = Arr::get($arguments, 2);
-
-            $properties = compact('title', 'attributes');
-        }
-
+        
         $child = static::make($properties);
 
         call_user_func($callback, $child);
@@ -191,18 +184,9 @@ class MenuItem implements ArrayableContract
      *
      * @return MenuItem
      */
-    public function route($route, $title, $parameters = array(), $order = 0, $attributes = array())
+    public function route($route, $title, $parameters = array(), $attributes = array())
     {
-      
-        if (func_num_args() === 4) {
-            $arguments = func_get_args();
-            return $this->add([
-                'route' => [Arr::get($arguments, 0), Arr::get($arguments, 2)],
-                'title' => Arr::get($arguments, 1),
-                'attributes' => Arr::get($arguments, 4),
-                'order' => Arr::get($arguments, 3),
-            ]);
-        }
+        $order = \Arr::get($attributes, 'order');
 
         $route = array($route, $parameters);
 
@@ -218,18 +202,10 @@ class MenuItem implements ArrayableContract
      *
      * @return MenuItem
      */
-    public function url($url, $title, $order = 0, $attributes = array())
+    public function url($url, $title, $attributes = array())
     {
-        if (func_num_args() === 3) {
-            $arguments = func_get_args();
-
-            return $this->add([
-                'url' => Arr::get($arguments, 0),
-                'title' => Arr::get($arguments, 1),
-                'attributes' => Arr::get($arguments, 2),
-            ]);
-        }
-
+        $order = \Arr::get($attributes, 'order', 0);
+ 
         return $this->add(compact('url', 'title', 'order', 'attributes'));
     }
 
@@ -316,7 +292,7 @@ class MenuItem implements ArrayableContract
     public function getChilds()
     {
         if (config('menus.ordering')) {
-            return collect($this->childs)->sortBy(function ($item) {
+            return collect($this->childs)->sortByDesc(function ($item) {
                 return $item->order;
             })->all();
         }

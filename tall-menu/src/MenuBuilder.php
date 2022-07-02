@@ -285,18 +285,21 @@ class MenuBuilder implements Countable
      *
      * @return $this
      */
-    public function dropdown($title, \Closure $callback, $order = null, array $attributes = array())
+    public function dropdown($title, \Closure $callback, array $attributes = array())
     {
+        $order = \Arr::get($attributes, 'order');
+
         $properties = compact('title', 'order', 'attributes');
 
-        if (func_num_args() == 3) {
-            $arguments = func_get_args();
+        // if (func_num_args() == 3) {
+        //     $arguments = func_get_args();
 
-            $title = Arr::get($arguments, 0);
-            $attributes = Arr::get($arguments, 2);
+        //     $title = Arr::get($arguments, 0);
 
-            $properties = compact('title', 'attributes');
-        }
+        //     $attributes = Arr::get($arguments, 2);
+
+        //     $properties = compact('title', 'attributes');
+        // }
 
         $item = MenuItem::make($properties);
 
@@ -317,15 +320,17 @@ class MenuBuilder implements Countable
      *
      * @return static
      */
-    public function route($route, $title, $parameters = array(), $order = null, $attributes = array())
+    public function route($route, $title, $parameters = array(),  $attributes = array())
     {
+        $order = \Arr::get($attributes, 'order');
+
         if (func_num_args() == 4) {
             $arguments = func_get_args();
             return $this->add([
                 'route' => [Arr::get($arguments, 0), Arr::get($arguments, 2)],
                 'title' => Arr::get($arguments, 1),
-                'attributes' => Arr::get($arguments, 4),
-                'order' => Arr::get($arguments, 3),
+                'attributes' => Arr::get($arguments, 3),
+                'order' =>  $order,
             ]);
         }
         $route = array($route, $parameters);
@@ -360,17 +365,19 @@ class MenuBuilder implements Countable
      *
      * @return static
      */
-    public function url($url, $title, $order = 0, $attributes = array())
+    public function url($url, $title, $attributes = array())
     {
-        if (func_num_args() == 3) {
-            $arguments = func_get_args();
+        $order = \Arr::get($attributes, 'order');
 
-            return $this->add([
-                'url' => $this->formatUrl(Arr::get($arguments, 0)),
-                'title' => Arr::get($arguments, 1),
-                'attributes' => Arr::get($arguments, 2),
-            ]);
-        }
+        // if (func_num_args() == 3) {
+        //     $arguments = func_get_args();
+
+        //     return $this->add([
+        //         'url' => $this->formatUrl(Arr::get($arguments, 0)),
+        //         'title' => Arr::get($arguments, 1),
+        //         'attributes' => Arr::get($arguments, 2),
+        //     ]);
+        // }
 
         $url = $this->formatUrl($url);
 

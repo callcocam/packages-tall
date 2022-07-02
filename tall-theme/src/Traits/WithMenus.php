@@ -42,29 +42,38 @@ trait WithMenus
             $directories = new Finder();
             $directories->directories()->in($path_base);     
             if($directories->hasResults()){
+                $attributes = $this->gerar();
                 $menu->dropdown($this->label(), 
-                function ($sub) use($directories, $namespaceName,$paths) {
-                    $sub->route($this->route_name(),  $this->label(), [], $this->gerar(), ['icon'=>$this->icon()]);
-                    foreach ($directories as $dir) {
-                        $files = new Finder();
-                        $files->files()->in($dir->getRealPath());
-                        foreach ($files as $file) {
-                            $component = sprintf("%s\\%s\\%s",$namespaceName,$dir->getFileName(), $file->getFileName());
-                            $component = \Str::beforeLast($component, ".php");
-                            $comp = \Tall\Theme\ComponentParser::isComponent($component);
-                            if ($comp) {
-                                if (method_exists($comp, 'child')) {   
-                                    $sub->route($comp->route_name(),  $comp->label(), [], $comp->child(), ['icon'=>$comp->icon()]);
-                                }
-                            }  
-                        }                       
-                   }
-                },$this->ordering(),['icon'=>$this->icon()])->order($this->ordering());               
+                function ($sub) use($directories, $namespaceName,$paths, $attributes) {                  
+                    $sub->route($this->route_name(),  $this->label(),\Arr::get($attributes, 'params',[]), $attributes);
+                    $this->sub($sub, $directories, $namespaceName,$paths);
+                },$attributes)
+                ->order($this->ordering());   
+
             }
-            else{
-                $menu->route($this->route_name(),  $this->label(), [], $this->gerar(), ['icon'=>$this->icon()]);
+            else{                
+                $attributes = $this->gerar();
+                $menu->route($this->route_name(),  $this->label(), \Arr::get($attributes, 'params',[]), $attributes);
             }    
        }); 
+     }
+
+     private function sub(&$sub, $directories, $namespaceName,$paths){
+        foreach ($directories as $dir) {
+            $files = new Finder();
+            $files->files()->in($dir->getRealPath());
+            foreach ($files as $file) {
+                $component = sprintf("%s\\%s\\%s",$namespaceName,$dir->getFileName(), $file->getFileName());
+                $component = \Str::beforeLast($component, ".php");
+                $comp = \Tall\Theme\ComponentParser::isComponent($component);
+                if ($comp) {
+                    if (method_exists($comp, 'child')) {   
+                        $attributes = $comp->child();
+                        $sub->route($comp->route_name(),  $comp->label(), \Arr::get($attributes, 'params',[]), $attributes);
+                    }
+                }  
+            }                       
+       }
      }
      /*
     |--------------------------------------------------------------------------
