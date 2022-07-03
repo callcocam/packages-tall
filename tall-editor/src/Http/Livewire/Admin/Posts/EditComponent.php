@@ -30,7 +30,8 @@ class EditComponent extends FormComponent
     {
         $this->authorize(Route::currentRouteName());
         
-        $this->setFormProperties($model); // $editor from hereon, called $this->model
+        $this->setFormProperties($model); 
+        
     }
 
 
@@ -48,6 +49,7 @@ class EditComponent extends FormComponent
            'formAction' => __('Edit'),
            'wrapWithView' => false,
            'showDelete' => false,
+           'preview' => 'editor.editors.show',
        ];
     }
 

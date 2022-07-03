@@ -29,6 +29,12 @@
                             {{ \Arr::get($formAttr, 'formAction', __('Form')) }}
                         </li>
                     </x-tall-breadcrums>
+                    @if ($preview = \Arr::get($formAttr, 'preview', false))
+                        @if (\Route::has($preview))
+                            <x-button href="{{ route($preview, $model) }}" target="_blank"
+                                label="{{ __('Visualizar') }}" teal />
+                        @endif
+                    @endif
                     <!-- END: breadcrums v1 -->
                 </section>
             </div>

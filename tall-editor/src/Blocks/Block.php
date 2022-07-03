@@ -51,8 +51,8 @@ class Block
         $this->innerHTML = $innerHTML;
         $this->innerContent = $innerContent;
 
-        $this->registry = app('laraberg.registry');
-        $this->embedService = app('laraberg.embed');
+        $this->registry = app('editor.registry');
+        $this->embedService = app('editor.embed');
     }
 
     public function render(): string

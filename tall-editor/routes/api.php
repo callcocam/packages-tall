@@ -25,4 +25,4 @@ Route::post('/upload', function (Request $request) {
         "url"=> \Storage::url($path)
     ];
     return $data;
-});
+})->name(config('editor.routes.editors.api.uploads.images', 'tall-editor.api.uploads.images'));

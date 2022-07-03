@@ -14,10 +14,11 @@ use Tall\Form\Models\Status;
 use Tall\Form\Sluggable\SlugOptions;
 use Tall\Form\Sluggable\HasSlug;
 use App\Models\User;
+use Tall\Editor\Traits\RendersContent;
 
 class Post extends Model
 {
-    use  SoftDeletes, HasSlug, UuidGenerate;
+    use  SoftDeletes, HasSlug, UuidGenerate, RendersContent;
     
     public $incrementing = false;
 

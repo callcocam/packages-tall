@@ -38,7 +38,7 @@ class TallEditorServiceProvider extends ServiceProvider
             }
         }
 
-        //require_once __DIR__ . '/Blocks/WPBlockParserBlock.php';
+        require_once __DIR__ . '/Blocks/WPBlockParserBlock.php';
     }
     /**
      * Register the application services.
