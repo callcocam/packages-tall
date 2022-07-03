@@ -10,7 +10,7 @@
     @error('{{ $field->name }}')
         <div class="validation--error">{{ $message }}</div>
     @enderror
-    <input value="{{ data_get($data, $field->name) }}" name="{{ $field->name }}" id="{{ $field->name }}"
+    <input value="{{ data_get($data, $field->name) }}" name="{{ $field->name }}" id="{{ $field->id }}"
         type="text" />
     @push('scripts')
         <script>
