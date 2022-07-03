@@ -1,6 +1,6 @@
 <div wire:ignore class="form-group" x-data="{
     setUp() {
-        let el = document.getElementById('{{ $field->name }}')
+        let el = document.getElementById('{{ $field->id }}')
         el.addEventListener('change', (e) => {
             @this.set('{{ $field->key }}', e.target.value)
         })
@@ -14,7 +14,7 @@
         type="text" />
     @push('scripts')
         <script>
-            LarabergInit('{{ $field->name }}', '{{ $field->route }}', @json($field->options))
+            LarabergInit('{{ $field->id }}', '{{ $field->route }}', @json($field->options))
         </script>
     @endpush
 
