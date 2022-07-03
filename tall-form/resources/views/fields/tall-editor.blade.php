@@ -1,7 +1,15 @@
-<div class="form-group">
-    <label for="content">Content</label>
-    @error('content')
+<div wire:ignore class="form-group"  x-data="{
+    setUp() {
+      let el = document.getElementById('{{ $field->name }}')
+      el.addEventListener('change',(e)=>{
+        @this.set('{{ $field->key }}', e.target.value)
+      })
+    }
+}"
+x-init="setUp">
+    <label for="content">{{ $field->label }}</label>
+    @error('{{ $field->name }}')
         <div class="validation--error">{{$message}}</div>
     @enderror
-    <input name="content" id="content" type="text"/>
+    <input value="{{ data_get($data, $field->name ) }}" name="{{ $field->name }}" id="{{ $field->name }}" type="text"/>
 </div>

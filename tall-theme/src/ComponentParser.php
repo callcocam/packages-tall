@@ -59,9 +59,17 @@ class ComponentParser extends ComponentParserAlias
             $componentName = Str::lower($componentName);           
             $componentName = sprintf("%s::%s-component",Str::replace("\\", "-", $namespace), $componentName);
             $componentName = Str::lower($componentName);  
-            if ($component = self::isComponent($component)) {
-                Livewire::component($componentName, $component);
-            }         
+            switch ($component) {
+                case is_subclass_of($component, \Livewire\Livewire::class):
+                    Livewire::component($componentName, $component);
+                    break;   
+                case is_subclass_of($component, \Tall\Form\FormComponent::class):
+                    Livewire::component($componentName, $component);
+                    break;  
+                case is_subclass_of($component, \Tall\Table\TableComponent::class):
+                    Livewire::component($componentName, $component);
+                    break;
+            }        
         }
     }
 

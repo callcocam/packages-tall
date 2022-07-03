@@ -10,6 +10,7 @@ use Tall\Editor\Models\Post;
 use Tall\Form\FormComponent;
 use Illuminate\Support\Facades\Route;
 use Tall\Form\Fields\Input;
+use Tall\Form\Fields\TallEditor;
 use Tall\Form\Fields\Radio;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -61,7 +62,7 @@ class EditComponent extends FormComponent
     {
         return [
             Input::make('Name')->rules('required'),
-            Input::make('Content')->rules('required'),
+            TallEditor::make('Content')->rules('required'),
             Radio::make('Status', 'status_id')->status()->lg()
         ];
     }

@@ -21,6 +21,8 @@ class Post extends Model
     
     public $incrementing = false;
 
+    protected $guarded = ["id"];
+
     protected $keyType = "string";
 
     public function user()
