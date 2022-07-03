@@ -17,7 +17,7 @@
         @if (\Str::contains($style, 'http'))
             <link href="{{ $style }}" rel="stylesheet">
         @else
-            <link href="{{ mix($style) }}" rel="stylesheet">
+            <link href="{{ asset($style) }}" rel="stylesheet">
         @endif
     @endforeach
 @endif

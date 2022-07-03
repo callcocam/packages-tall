@@ -20,10 +20,16 @@ return [
                 'https://cdn.linearicons.com/free/1.0.0/icon-font.min.css',
                 '/css/fontawesome/css/all.css'
              ],
-             'styles'=>[],
+             'styles'=>[
+                'vendor/tall-editor/css/editor.css'
+             ],
              'scripts'=>[
                  'https://raw.githack.com/CristianDavideConte/universalSmoothScroll/master/js/universalsmoothscroll-min.js',
-                 '/js/assets/scroll.js'
+                 '/js/assets/scroll.js',
+                 //'https://unpkg.com/react@17/umd/react.development.js',
+                 //'https://unpkg.com/react-dom@17/umd/react-dom.development.js',
+                //  'vendor/tall-editor/js/editor.js',
+                //  'vendor/tall-editor/js/app.js',
              ],
             /*
             * https://flatpickr.js.org
