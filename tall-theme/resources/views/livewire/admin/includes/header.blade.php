@@ -1,7 +1,7 @@
 <header class="flex w-full h-16 relative z-50 bg-white ">
     <div
         class="w-full md:w-60 z-30 flex bg-gray-800 justify-start px-4 items-center border-b-1 border-r-1 border-gray-300 fixed  h-16 shadow-lg">
-        <img class="flex w-32 h-16 flex" src="{{ asset('img/logo.jpg') }}" alt="Logo" />
+        <img class="flex w-32 h-16" src="{{ asset('img/logo.jpg') }}" alt="Logo" />
     </div>
     <div class="hidden ml-60 w-full md:flex justify-between border-l-2 shadow-lg ">
         <div class="flex h-full flex-1">
@@ -91,6 +91,51 @@
                                             </svg>
                                         </span>
                                         <span class="flex">{{ __('Users') }}</span>
+                                    </a>
+                                @endcan
+                            @endif
+
+                            @if (\Route::has('tall.report.admin.reports'))
+                                @can('tall.report.admin.reports')
+                                    <a href="{{ route('tall.report.admin.reports') }}"
+                                        class="my-2 py-2 px-2 flex items-center rounded hover:bg-gray-800 hover:shadow hover:text-gray-200 transition-colors ease-in-out duration-500">
+                                        <span class="mr-4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                        </span>
+                                        <span class="flex">{{ __('Relatorios') }}</span>
+                                    </a>
+                                @endcan
+                            @endif
+
+                            @if (\Route::has('admin.routes'))
+                                @can('admin.routes')
+                                    <a href="{{ route('admin.routes') }}"
+                                        class="my-2 py-2 px-2 flex items-center rounded hover:bg-gray-800 hover:shadow hover:text-gray-200 transition-colors ease-in-out duration-500">
+                                        <span class="mr-4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                                            </svg>
+                                        </span>
+                                        <span class="flex">{{ __('Routes') }}</span>
+                                    </a>
+                                @endcan
+                            @endif
+                            @if (\Route::has('admin.livewire'))
+                                @can('admin.livewire')
+                                    <a href="{{ route('admin.livewire') }}"
+                                        class="my-2 py-2 px-2 flex items-center rounded hover:bg-gray-800 hover:shadow hover:text-gray-200 transition-colors ease-in-out duration-500">
+                                        <span class="mr-4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                              </svg>
+                                        </span>
+                                        <span class="flex">{{ __('Components') }}</span>
                                     </a>
                                 @endcan
                             @endif
