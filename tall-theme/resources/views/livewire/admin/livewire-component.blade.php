@@ -12,7 +12,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($components = \Tall\Theme\ComponentParser::listComponents('packages-tall', __DIR__, '/Http/Livewire'))
+                            @if ($components = $this->components)
                                 @foreach ($components as $component)
                                     <tr class="border-b">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">

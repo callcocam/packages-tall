@@ -74,26 +74,42 @@ class ComponentParser extends ComponentParserAlias
     }
 
     
-    public static function listComponents($paths)
+    public static function listComponents($paths, $subpaths, $namespace, $after)
     {
-        $path = base_path($paths);
+        if(is_string($subpaths)){
+            $path = base_path(sprintf("%s/%s",$paths, $subpaths));
+        }else{
+            $path = base_path($paths);
+        }
         $components = [];
-     
-        foreach ((new Finder())->in($path)->directories() as $domain) {
-            if(\Str::contains( $domain->getRealPath(), "Http/Livewire")){
-                foreach ((new Finder())->in($domain->getRealPath())->files() as $file) {
-                    $namespace =  Str::beforeLast($file->getRealPath(),'/src');
-                    $namespace =  Str::afterLast($namespace,'/');
-                    $componentName =  Str::afterLast($file->getRealPath(),'Livewire/');
-                    $componentName =  Str::beforeLast($componentName,'Component');
-                    $componentName = Str::replace("/", ".", $componentName);
-                    $componentName = Str::lower($componentName);    
-                    $componentName = sprintf("%s::%s-component",$namespace, $componentName);       
-                    $components[] = $componentName;
-                  
+        if (is_dir($path)) {
+           
+            foreach ((new Finder())->in($path)->directories() as $domain) {
+                if(\Str::contains( $domain->getRealPath(), "Http/Livewire")){                    
+                    foreach ((new Finder())->in($domain->getRealPath())->files() as $file) {
+                       
+                        $component = $namespace.str_replace(
+                            ['/', '.php'],
+                            ['\\', ''],
+                            Str::after($file->getRealPath(), $after)
+                        );
+                        switch ($component) {
+                            case is_subclass_of($component, \Livewire\Component::class):
+                                $components[$component::getName()]  = $component::getName();
+                                break;   
+                            case is_subclass_of($component, \Tall\Form\FormComponent::class):
+                                $components[$component::getName()]  = $component::getName();
+                                break;  
+                            case is_subclass_of($component, \Tall\Table\TableComponent::class):
+                                $components[$component::getName()]  = $component::getName();
+                                break;
+                        }        
+                    
+                    }
+                   
                 }
             }
-          }
+        }
         return  $components;
     }
 

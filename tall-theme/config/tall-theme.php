@@ -47,6 +47,40 @@ return [
                     ],
                 ],
             ],
+        ],
+        'components'=>[
+            'app'=>[
+                'after'=>'app',
+                'namespace'=>[
+                    'App'
+                ],
+            ],
+            'vendor/callcocam/packages-tall'=>[
+                'after'=>'src',
+                'namespace'=>[
+                    'tall-theme'=>'Tall\\Theme',
+                    'tall-tenant'=>'Tall\\Tenant',
+                    'tall-acl'=>'Tall\\Acl',
+                    'tall-form'=>'Tall\\Form',
+                    'tall-table'=>'Tall\\Table',
+                    'tall-report'=>'Tall\\Report',
+                    'tall-editor'=>'Tall\\Editor',
+                    'tall-schema'=>'Tall\\Schema'
+                ],
+            ],
+            'packages-tall'=>[
+                'after'=>'src',
+                'namespace'=>[
+                    'tall-theme'=>'Tall\\Theme',
+                    'tall-tenant'=>'Tall\\Tenant',
+                    'tall-acl'=>'Tall\\Acl',
+                    'tall-form'=>'Tall\\Form',
+                    'tall-table'=>'Tall\\Table',
+                    'tall-report'=>'Tall\\Report',
+                    'tall-editor'=>'Tall\\Editor',
+                    'tall-schema'=>'Tall\\Schema'
+                ],
+            ]
         ]
 
 ];
