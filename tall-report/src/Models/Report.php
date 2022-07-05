@@ -16,6 +16,10 @@ class Report  extends AbstractModel
     protected $guarded = ["id"];
     
     protected $with = ['attribute', 'columns'];
+    
+    protected $casts = [
+      'foreigns_table' => 'array'
+  ];
 
      /**
      * Get the parent descriptionable model (user or tenant).

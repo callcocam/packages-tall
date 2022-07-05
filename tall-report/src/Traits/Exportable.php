@@ -180,6 +180,16 @@ trait Exportable
        
     }
 
+    public function tablesNames(){
+        $tables = \Tall\Schema\Schema::make()->getTableNames()->toArray();
+        $options = [];
+        foreach($tables as $table){
+            if(!in_array($table, $this->getIgnoreTables())){
+                $options[$table] = $table;
+            }
+        }
+        return $options;
+    }
     
     public function tables(){
 

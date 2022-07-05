@@ -13,21 +13,23 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('slug');
-            $table->text('content');
-            $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();            
-            if (Schema::hasTable('statuses')) {           
-                $table->foreignUuid('status_id')->nullable()->constrained('statuses')->cascadeOnDelete();
-            }
-            else{
-                $table->enum('status_id',['draft','published'])->nullable()->comment("Situação")->default('published');
-            }
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        if(!Schema::hasTable('posts')){
+            Schema::create('posts', function (Blueprint $table) {
+                $table->uuid('id')->primary();
+                $table->string('name');
+                $table->string('slug');
+                $table->text('content');
+                $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();            
+                if (Schema::hasTable('statuses')) {           
+                    $table->foreignUuid('status_id')->nullable()->constrained('statuses')->cascadeOnDelete();
+                }
+                else{
+                    $table->enum('status_id',['draft','published'])->nullable()->comment("Situação")->default('published');
+                }
+                $table->timestamps();
+                $table->softDeletes();
+            });
+        }
     }
 
     /**

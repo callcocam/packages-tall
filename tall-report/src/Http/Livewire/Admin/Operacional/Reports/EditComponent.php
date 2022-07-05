@@ -76,17 +76,22 @@ class EditComponent extends FormComponent
     {
         return [
             Input::make('Nome do relatório', 'name')->span(3)->rules('required'),
-            NativeSelect::make('Modelo referente a uma tabela do banco de dados','model')->span(3)->options($this->tables())
+            NativeSelect::make('Modelo','model')
+            ->span(2)->options($this->tables())
+            ->hint("O modelo se refere a uma tabela do banco de dados")
+            ->rules('required'),
+             Select::make('Modelos relacionados','foreigns_table')
+            ->span(7)->multiselect()->value_options($this->tablesNames())
             ->hint("O modelo se refere a uma tabela do banco de dados")
             ->rules('required'),
             Input::make('Congelar Coluna','freeze_column')
             ->hint("ex: D Colunas A até C será fixada")
             ->placeholder("D")
-            ->span(2),
-            Input::make('Congelar Linha','freeze_row')->span(2)
+            ->span(4),
+            Input::make('Congelar Linha','freeze_row')->span(4)
             ->hint("ex: 2 A primeira linha será fixada")
             ->placeholder("1"),
-            Input::make('Zoom Scala','zoom_scale') ->placeholder("150")->span(2),
+            Input::make('Zoom Scala','zoom_scale') ->placeholder("150")->span(4),
             Radio::make('Status', 'status_id')->status()->lg()
         ];
     }

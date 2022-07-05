@@ -24,7 +24,7 @@ class ExportToXLS extends Export implements ExportInterface
     public function download(Exportable|array $exportOptions): BinaryFileResponse
     {
         $deleteFileAfterSend = boolval(data_get($exportOptions, 'deleteFileAfterSend', true));
-        $this->striped       = strval(data_get($exportOptions, 'striped', true));
+        $this->striped       = strval(data_get($exportOptions, 'striped', false));
 
         /** @var array $columnWidth */
         $columnWidth         = data_get($exportOptions, 'columnWidth', []);
@@ -55,8 +55,8 @@ class ExportToXLS extends Export implements ExportInterface
             ->setFontName('Arial')
             ->setFontSize(12)
             ->setFontColor(Color::BLACK)
-            ->setShouldWrapText(false)
-            ->setBackgroundColor('d0d3d8');
+            ->setShouldWrapText(false);
+            //->setBackgroundColor('d0d3d8');
 
         $row = Row::fromValues(data_get($data, 'headers'), $style);
 
@@ -79,7 +79,7 @@ class ExportToXLS extends Export implements ExportInterface
         $gray = (new Style())
             ->setFontName('Arial')
             ->setFontSize(12)
-            ->setBackgroundColor($this->striped);
+            ->setBackgroundColor(Color::WHITE);
 
         /** @var array<string> $row */
         foreach (data_get($data,'rows') as $key => $row) {

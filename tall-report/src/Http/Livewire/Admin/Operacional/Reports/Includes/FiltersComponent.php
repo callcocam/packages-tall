@@ -9,21 +9,24 @@ namespace Tall\Report\Http\Livewire\Admin\Operacional\Reports\Includes;
 
 use Tall\Report\Models\Report;
 use Tall\Form\FormComponent;
+use Tall\Form\Fields\Input;
+use Tall\Form\Fields\Radio;
+use Tall\Form\Fields\Divider;
+use Tall\Form\Fields\ColorPicker;
+use Tall\Form\Fields\NativeSelect;
+use Tall\Form\Fields\Toggle;
+use Tall\Report\Traits\ColumnsTrait;
 use Tall\Report\Traits\Exportable;
 
-class ColumnsComponent extends FormComponent
+class FiltersComponent extends FormComponent
 {
-    use Exportable;
+    use ColumnsTrait,Exportable;
     
     public $cardModal;
-    public $updated = false;
     private $schema;
-    private $remover;
-
-    public $checkboxValues = [];
-    public $ignoreColumns = ["two_factor_recovery_codes",'two_factor_secret','remember_token','email_verified_at'];
-
-      /*
+    public $updated = false;
+    
+     /*
     |--------------------------------------------------------------------------
     |  Features mount
     |--------------------------------------------------------------------------
@@ -32,37 +35,10 @@ class ColumnsComponent extends FormComponent
     */
     public function mount(?Report $model)
     {
-        
-        $this->setFormProperties($model); 
-        if($columns = $model->columns){
-            if($columns->count()){
-                foreach($columns as $name => $column){
-                   if($column->relationships->count()){                        
-                        if($relationships = $column->relationships){                        
-                            foreach($relationships as $relationship){
-                                data_set($this->checkboxValues,sprintf("%s.%s", $column->name, $relacionamento->name),$relacionamento->name);
-                            }
-                        }
-                   }
-                   else{
-                    data_set($this->checkboxValues, $column->name,$column->name);
-                   }
-                }
-            }
-        }
-    }
-   
-      /*
-    |--------------------------------------------------------------------------
-    |  Features order
-    |--------------------------------------------------------------------------
-    | Order visivel no me menu
-    |
-    */
-    public function openModal(){
-        $this->cardModal = true;            
-     }
+       $this->setFormProperties($model); 
+    } 
 
+     
       /*
     |--------------------------------------------------------------------------
     |  Features columns
@@ -93,6 +69,7 @@ class ColumnsComponent extends FormComponent
         return $columns;
     }
 
+    
     /**
      * Generates foreign key migrations.
      *
@@ -125,18 +102,30 @@ class ColumnsComponent extends FormComponent
     {
         $this->schema = \Tall\Schema\Schema::make();
     }
+  /*
+    |--------------------------------------------------------------------------
+    |  Features fields
+    |--------------------------------------------------------------------------
+    | Inicia a configuração do campos disponiveis no formulario
+    |
+    */
+    protected function fields(): array
+    {
+        return [
+           
+        ];
+    }
 
-
-    public function updatedCheckboxValues($value){
-        $this->createColumns($this->remover);
-        $this->updated = true;
-      }
-
-    public function updatingCheckboxValues($value, $key){
-        if(\Str::of($key)->contains('.')){
-            $this->remover = \Str::beforeLast($key, '.');
-        }
-      }
+      /*
+    |--------------------------------------------------------------------------
+    |  Features order
+    |--------------------------------------------------------------------------
+    | Order visivel no me menu
+    |
+    */
+    public function openModal(){
+        $this->cardModal = true;            
+     }
 
       /*
     |--------------------------------------------------------------------------
@@ -152,6 +141,6 @@ class ColumnsComponent extends FormComponent
 
     public function view()
     {
-        return 'tall-report::includes.columns-component';
+        return 'tall-report::includes.filters-component';
     }
 }
