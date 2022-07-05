@@ -19,7 +19,7 @@ trait RendersContent
     {
         $column = $column ?: $this->contentColumn;
         $renderer = app(ContentRenderer::class);
-        $content = $this->$column;
+        $content = data_get($this->description,$column);
         return $renderer->render(is_string($content) ? $content : '');
     }
 }

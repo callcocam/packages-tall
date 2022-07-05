@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="mt-5 flex lg:mt-0 lg:ml-4">
-        @livewire('tall-report::admin.reports.includes.columns-component', compact('model'), key(sprintf('columns-%s', $model->id)))
+        @livewire('tall-report::admin.operacional.reports.includes.columns-component', compact('model'), key(sprintf('columns-%s', $model->id)))
         @if (array_filter($checkboxValues))
             @include('tall-report::partials.action-buttuns')
         @endif

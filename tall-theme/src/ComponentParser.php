@@ -73,6 +73,30 @@ class ComponentParser extends ComponentParserAlias
         }
     }
 
+    
+    public static function listComponents($paths)
+    {
+        $path = base_path($paths);
+        $components = [];
+     
+        foreach ((new Finder())->in($path)->directories() as $domain) {
+            if(\Str::contains( $domain->getRealPath(), "Http/Livewire")){
+                foreach ((new Finder())->in($domain->getRealPath())->files() as $file) {
+                    $namespace =  Str::beforeLast($file->getRealPath(),'/src');
+                    $namespace =  Str::afterLast($namespace,'/');
+                    $componentName =  Str::afterLast($file->getRealPath(),'Livewire/');
+                    $componentName =  Str::beforeLast($componentName,'Component');
+                    $componentName = Str::replace("/", ".", $componentName);
+                    $componentName = Str::lower($componentName);    
+                    $componentName = sprintf("%s::%s-component",$namespace, $componentName);       
+                    $components[] = $componentName;
+                  
+                }
+            }
+          }
+        return  $components;
+    }
+
     public static function generateRoute($path, $search="app", $ns = "\\App")
     {
 

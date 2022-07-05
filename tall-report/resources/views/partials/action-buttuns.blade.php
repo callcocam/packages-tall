@@ -10,7 +10,7 @@
                 {{ __('Filtros') }}
             </button>
         </span>
-        @livewire('tall-report::admin.reports.includes.ordering-component', compact('model'), key(sprintf("ordering-%s",$model->id)))
+        @livewire('tall-report::admin.operacional.reports.includes.ordering-component', compact('model'), key(sprintf("ordering-%s",$model->id)))
         <span class="hidden sm:block ml-3">
             <button type="button" wire:click="exportToXLS"
                 class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

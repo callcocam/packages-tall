@@ -18,4 +18,6 @@ Route::middleware([
     'verified'
 ])->prefix('admin')->group(function () {
     Route::get('/',\Tall\Theme\Http\Livewire\Admin\DashBoardComponent::class)->name('admin');    
+    Route::get('/routes',\Tall\Theme\Http\Livewire\Admin\RouteComponent::class)->name('admin.routes');    
+    Route::get('/livewire',\Tall\Theme\Http\Livewire\Admin\LivewireComponent::class)->name('admin.livewire');    
 });

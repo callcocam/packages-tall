@@ -6,19 +6,14 @@
 */
 namespace Tall\Theme\Http\Livewire\Admin;
 
-use Livewire\Component;
+use Tall\Theme\Http\Livewire\AbstractPaginaComponent;
 
-class DashboardComponent extends Component
+class DashboardComponent extends AbstractPaginaComponent
 {
     
     protected $layout = "app";
 
-    public function mount(){
-      
-        \Menu::create('tailwind', function($menu) {
-            $menu->url('/', 'Home');
-        });
-    }
+    
     
     protected function layout(){
         if(function_exists("theme_layout")){
@@ -27,9 +22,8 @@ class DashboardComponent extends Component
         return config('tall-forms.layout');
     }
 
-    public function render()
+    protected function view()
     {
-        return view('tall-theme::livewire.admin.dashboard-component')
-        ->with('tenant', app('currentTenant'))->layout($this->layout());
+        return 'tall-theme::livewire.admin.dashboard-component';
     }
 }

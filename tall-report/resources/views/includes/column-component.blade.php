@@ -2,10 +2,10 @@
     <x-modal.card hide-close blur wire:model.defer="cardModal">
         <div class="flex flex-col space-y-2">
             <div>
-                @livewire('tall-report::admin.reports.includes.header-component', compact('column', 'name', 'model'), key(sprintf('header-%s', $model->id)))
+                @livewire('tall-report::admin.operacional.reports.includes.header-component', compact('column', 'name', 'model'), key(sprintf('header-%s', $model->id)))
             </div>
             <div>
-                @livewire('tall-report::admin.reports.includes.cell-component', compact('column', 'name', 'model'), key(sprintf('cell-%s', $model->id)))
+                @livewire('tall-report::admin.operacional.reports.includes.cell-component', compact('column', 'name', 'model'), key(sprintf('cell-%s', $model->id)))
             </div>
         </div>
     </x-modal.card>

@@ -105,6 +105,18 @@ class LoadRouterHelper
         return $options;
     }
 
+    
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public static  function datalhes()
+    {
+       
+        return \Route::getRoutes();
+    }
+
     private function getIgnore($value)
     {
 

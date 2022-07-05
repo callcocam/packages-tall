@@ -276,7 +276,7 @@
                         </div>
                     </div>
                     <div class="mt-5 md:mt-0 md:col-span-2">
-                        @livewire('tall-acl::admin.users.address-component', ['model' => $model], key($model->id))
+                        @livewire('tall-acl::admin.operacional.users.address-component', ['model' => $model], key($model->id))
                     </div>
                 </div>
             </div>
@@ -301,7 +301,7 @@
                         </div>
                     </div>
                     <div class="mt-5 md:mt-0 md:col-span-2">
-                        @livewire('tall-acl::admin.users.roles-component', ['model' => $model], key(sprintf('roles-%s', $model->id)))
+                        @livewire('tall-acl::admin.operacional.users.roles-component', ['model' => $model], key(sprintf('roles-%s', $model->id)))
                     </div>
                 </div>
             </div>
