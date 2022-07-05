@@ -4,7 +4,7 @@
         <div class="flex flex-col space-y-2">
             <div class="flex justify-center w-full overflow-hidden">
                 <ul class="bg-white rounded-lg w-96 text-gray-900 space-y-2  overflow-hidden" wire:sortable="updateColunaOrder"
-                    wire:sortable-group="updateRelacionamentoOrder">
+                    wire:sortable-group="updaterelationshipOrder">
                     @if ($colunas = $this->colunas)
                         @foreach ($colunas as $coluna)
                             <li class="px-6 py-2 bg-gray-200 w-full rounded cursor-pointer "
@@ -17,12 +17,12 @@
                                     </svg>
                                     <span>{{ $coluna->name }}</span>
                                 </div>
-                                @if ($relacionamentos = $coluna->relacionamentos)
+                                @if ($relationships = $coluna->relationships)
                                     <ul wire:sortable-group.item-group="{{ $coluna->id }}">
-                                        @foreach ($relacionamentos as $relacionamento)
+                                        @foreach ($relationships as $relationship)
                                             <li class="px-6 py-2 bg-gray-200 w-full rounded cursor-pointer"
-                                                wire:key="task-{{ $relacionamento->id }}"
-                                                wire:sortable-group.item="{{ $relacionamento->id }}">
+                                                wire:key="task-{{ $relationship->id }}"
+                                                wire:sortable-group.item="{{ $relationship->id }}">
                                                 <div class="flex justify-between items-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -30,7 +30,7 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                                                     </svg>
-                                                    <span>{{ $coluna->name }} - {{ $relacionamento->name }}</span>
+                                                    <span>{{ $coluna->name }} - {{ $relationship->name }}</span>
                                                 </div>
                                             </li>
                                         @endforeach

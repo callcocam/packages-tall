@@ -22,7 +22,7 @@
                                     <div class="pt-6" id="filter-section-mobile-0" x-show="item">
                                         <div class="space-y-2">
                                             @foreach ($parent as $item)
-                                                @include('tall-report::admin.reports.partials.selecteds-mobile-item')
+                                                @include('tall-report::partials.selecteds-mobile-item')
                                             @endforeach
                                         </div>
                                     </div>

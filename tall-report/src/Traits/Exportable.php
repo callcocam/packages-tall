@@ -102,8 +102,8 @@ trait Exportable
                 foreach($column as $key => $item) { 
                     if($item === false) {        
                         if($coluna = $model->columns()->where('name', $name)->first()){
-                            $this->deleteColumn($key,$coluna->relacionamentos()); 
-                            if(!$coluna->relacionamentos->count()){                        
+                            $this->deleteColumn($key,$coluna->relationships()); 
+                            if(!$coluna->relationships->count()){                        
                                 $this->deleteColumn($name,$model->columns());  
                             }  
                         }else{
@@ -114,10 +114,10 @@ trait Exportable
                         $columnName = \Str::title($table);
                         if($coluna = $this->createColumn($table, $columnName,$model->columns())) {
                             $columnName = \Str::title($item);
-                            $relacionamento = $this->createColumn($item, $columnName,$coluna->relacionamentos());
-                            $header = $this->createHeader($relacionamento, $columnName);
+                            $relationship = $this->createColumn($item, $columnName,$coluna->relationships());
+                            $header = $this->createHeader($relationship, $columnName);
                             $this->createAttribute($header);
-                            $cell = $this->createCell($relacionamento);
+                            $cell = $this->createCell($relationship);
                             $this->createAttribute($cell);
                         }                        
                     }               

@@ -67,7 +67,7 @@ class OrderingComponent extends FormComponent
     | updateGroupOrder visivel no me menu
     |
     */
-    public function updateRelacionamentoOrder($data){
+    public function updaterelationshipOrder($data){
         if($data){
             foreach($data as $order){
                 if($coluna =  $this->model->columns()->where('id',data_get($order, 'value'))->first()){

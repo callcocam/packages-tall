@@ -58,10 +58,10 @@ class Export
            
             collect($columns)->each(function ($column) use ($row, $header, $item) {
                 if($relationships = data_get($column, 'relationships')){                  
-                    collect($relationships)->each(function ($relacionamento) use ($row, $header, $item, $column) {
-                        $columnName = \Str::title(data_get($relacionamento,'header.label'));
+                    collect($relationships)->each(function ($relationship) use ($row, $header, $item, $column) {
+                        $columnName = \Str::title(data_get($relationship,'header.label'));
                         $columnName = sprintf("%s %s",data_get($column, 'name'), $columnName);
-                        $name = sprintf("%s.%s",data_get($column, 'name'), data_get($relacionamento, 'name'));
+                        $name = sprintf("%s.%s",data_get($column, 'name'), data_get($relationship, 'name'));
                         $item->put($columnName , data_get($row,  $name));
                         if (!$header->contains($columnName )) {
                             $header->push($columnName);

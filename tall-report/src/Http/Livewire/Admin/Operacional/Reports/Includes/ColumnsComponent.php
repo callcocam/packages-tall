@@ -40,7 +40,7 @@ class ColumnsComponent extends FormComponent
                    if($column->relationships->count()){                        
                         if($relationships = $column->relationships){                        
                             foreach($relationships as $relationship){
-                                data_set($this->checkboxValues,sprintf("%s.%s", $column->name, $relacionamento->name),$relacionamento->name);
+                                data_set($this->checkboxValues,sprintf("%s.%s", $column->name, $relationship->name),$relationship->name);
                             }
                         }
                    }

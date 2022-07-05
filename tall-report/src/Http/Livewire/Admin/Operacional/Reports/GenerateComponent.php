@@ -64,7 +64,10 @@ class GenerateComponent extends FormComponent
         Route::get('/relatorio/{model}/gerenciar', static::class)->name('tall.report.admin.report.generate');
     }
 
-
+    public function removeColumn($name, $column=null)
+    {
+       
+    }
       /*
     |--------------------------------------------------------------------------
     |  Features query
