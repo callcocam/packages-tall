@@ -42,8 +42,8 @@ class GenerateComponent extends FormComponent
                             }
                         }
                    }
-                   else{
-                    data_set($this->checkboxValues, $column->name,$column->name);
+                   else{                    
+                       data_set($this->checkboxValues, $column->name,$column->name);
                    }
                 }
             }
@@ -65,8 +65,21 @@ class GenerateComponent extends FormComponent
     }
 
     public function removeColumn($name, $column=null)
-    {
-       
+    {       
+        if($coluna = $this->model->columns()->where('name', $name)->first()){
+            if($column){
+                $this->deleteColumn($column,$coluna->relationships()); 
+                if($coluna = $this->model->columns()->where('name', $name)->first()){
+                    if(!$coluna->relationships->count()){    
+                        $this->deleteColumn($name,$this->model->columns());  
+                    }  
+                }  
+            }
+            else{
+                $this->deleteColumn($name,$this->model->columns());   
+            }  
+            return redirect()->route('tall.report.admin.report.generate', $this->model);              
+        }
     }
       /*
     |--------------------------------------------------------------------------
