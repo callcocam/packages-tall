@@ -72,9 +72,9 @@
                                                     <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                                                         <div class="overflow-hidden">
                                                             @if (array_filter($selecteds))
-                                                                <table class="w-full text-left lg:h-[500px]">
+                                                                <table class="w-full text-left lg:max-h-[500px]">
                                                                     @include('tall-report::partials.table.thead')
-                                                                    <tbody class="h-96 w-full overflow-y-scroll">
+                                                                    <tbody class="w-full overflow-y-scroll">
                                                                         @foreach ($models as $model)
                                                                             <tr class="bg-white border-b w-full">
                                                                                 @foreach ($selecteds as $name => $items)
