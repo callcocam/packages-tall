@@ -12,7 +12,8 @@
             </div>
             @if ($values = $this->values)
                 <div class="col-span-1 sm:col-span-3">
-                    <x-native-select label="{{ $column }}" wire:model.defer="data.filter.operador">
+                    <x-native-select label="{{ $column }}" wire:model.defer="data.filter.value">
+                        <option value="">{{ __("Selecione") }}</option>
                         @foreach ($values as $key => $option)
                             <option value="{{ $key }}">{{ $option }}</option>
                         @endforeach

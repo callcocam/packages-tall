@@ -9,6 +9,7 @@ namespace Tall\Report\Traits;
 use Exception;
 use Illuminate\Bus\Batch;
 use Illuminate\Database\Eloquent as Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support as Support;
 use Tall\Report\Types\{ExportToCsv, ExportToXLS};
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -23,6 +24,8 @@ use Throwable;
  */
 trait Exportable
 {
+    use FilterTrait;
+    
     protected $medelReport;
 
     public array $exportOptions = [];
@@ -48,11 +51,29 @@ trait Exportable
      */
     public function prepareToExport(bool $selected = false): Eloquent\Collection|Support\Collection
     {
-        $model = $this->query();
+        $builder = $this->query();
         /** @phpstan-ignore-next-line */
-        $currentTable = $model->getModel()->getTable();
+        $currentTable = $builder->getModel()->getTable();
 
-        $results = $model
+        if($filters = $this->model->filters){
+            // dd($filters);
+            foreach ($filters as $key => $filter) {
+                if($filter->name == $currentTable){
+                    $this->filterInputText($builder, $filter->column, $filter->operador, $filter->value);
+                    if($filter->nulo){
+                       $builder->orWhereNull($filter->column);
+                    }
+                }
+                else{
+                    $builder->whereHas($filter->name, function (Builder $query) use ($filter) {
+                        $this->filterInputText($query, $filter->column, $filter->operador, $filter->value);
+                    });
+                }
+              
+            }
+        }
+      
+        $results = $builder
             // ->when($inClause, function ($query, $inClause) {
             //     return $query->whereIn($this->primaryKey, $inClause);
             // })
@@ -103,8 +124,10 @@ trait Exportable
                     if($item === false) {        
                         if($coluna = $model->columns()->where('name', $name)->first()){
                             $this->deleteColumn($key,$coluna->relationships()); 
-                            if(!$coluna->relationships->count()){                        
-                                $this->deleteColumn($name,$model->columns());  
+                            if($coluna = $model->columns()->where('name', $name)->first()){
+                                if(!$coluna->relationships->count()){    
+                                    $this->deleteColumn($name,$model->columns());  
+                                }  
                             }  
                         }else{
                             $this->deleteColumn($name,$model->columns());   

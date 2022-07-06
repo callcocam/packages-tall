@@ -124,7 +124,7 @@ class FilterComponent extends FormComponent
         $values = [];
         if($options = $this->options){
             if($table = data_get($options, 'table')){
-                $values = DB::table($table)->pluck('name', 'id');
+                $values = DB::table($table)->whereNull('deleted_at')->pluck('name', 'id');
             }
         }
         return $values;

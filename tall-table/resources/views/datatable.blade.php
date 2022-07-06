@@ -18,6 +18,11 @@
                         </li>
                     </x-tall-breadcrums>
                     <!-- END: breadcrums v1 -->
+                    <div class="mr-10 flex-1 items-end">
+                        @if ($reports->count())
+                            @livewire('tall-table::reports-component', ['models' => $reports], key(uniqId($reports->count())))
+                        @endif
+                    </div>
                 </section>
             </div>
         </div>

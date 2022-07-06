@@ -25,6 +25,8 @@ class TallTableServiceProvider extends ServiceProvider
         include_once __DIR__."/../helpers.php";
 
         Livewire::component( 'tall-table-edit-component', \Tall\Table\Livewire\EditColumn::class);
+        Livewire::component( 'tall-table::reports-component', \Tall\Table\Livewire\ReportsComponent::class);
+        Livewire::component( 'tall-table::report-component', \Tall\Table\Livewire\ReportComponent::class);
     }
 
     public function register(): void
