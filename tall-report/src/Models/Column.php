@@ -16,7 +16,7 @@ class Column extends AbstractModel
     
     protected $guarded = ["id"];
     
-    protected $with = ['header','cell','filters','relationships'];
+    protected $with = ['header','cell','relationships'];
     
     public function report()
     {
