@@ -10,6 +10,7 @@ use Tall\Form\FormComponent;
 use Tall\Report\Models\Report;
 use Tall\Report\Traits\Exportable;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use Tall\Report\Http\Livewire\Traits\LivewireInfo;
@@ -20,6 +21,7 @@ class GenerateComponent extends FormComponent
     
 
     public $checkboxValues = [];
+    public $perPage = 6;
      /*
     |--------------------------------------------------------------------------
     |  Features mount
@@ -94,7 +96,28 @@ class GenerateComponent extends FormComponent
             $class = \Str::replace('-', '\\', $this->model->model); 
             if(class_exists($class))    
             {
-                return app($class)->query();
+                $builder = app($class)->query();
+                 /** @phpstan-ignore-next-line */
+                    $currentTable = $builder->getModel()->getTable();
+
+                    if($filters = $this->model->filters){
+                        // dd($filters);
+                        foreach ($filters as $key => $filter) {
+                            if($filter->name == $currentTable){
+                                $this->filterInputText($builder, $filter->column, $filter->operador, $filter->value);
+                                if($filter->nulo){
+                                    $builder->orWhereNull($filter->column);
+                                }
+                            }
+                            else{
+                                $builder->whereHas($filter->name, function (Builder $query) use ($filter) {
+                                    $this->filterInputText($query, $filter->column, $filter->operador, $filter->value);
+                                });
+                            }
+                            
+                        }
+                    }
+                return $builder;
             }
         }
         return null;
@@ -103,7 +126,7 @@ class GenerateComponent extends FormComponent
     public function getModelsProperty()
     {
         $builder = $this->query();
-        if($builder) return $builder->limit(15)->get();
+        if($builder) return $builder->limit($this->perPage)->get();
         return null;
     }
     protected function view()

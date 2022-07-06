@@ -36,3 +36,14 @@
         {{ __('Salvar Relatório') }}
     </button>
 </span>
+<span class="sm:ml-3">
+    <x-native-select title="Não influencia no resultado final" wire:model="perPage">
+        <option value="6">06 por pagina</option>
+        <option value="12">12 por pagina</option>
+        <option value="25">25 por pagina</option>
+        <option value="50">50 por pagina</option>
+        <option value="75">75 por pagina</option>
+        <option value="100">100 por pagina</option>
+        <option value="200">200 por pagina</option>
+    </x-native-select>
+</span>
