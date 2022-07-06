@@ -95,7 +95,7 @@ abstract class TableComponent extends Component
         $class_name =get_class($this->query()->getModel());
        // dd($class_name);
         if(class_exists(config("report.models.parent", \Tall\Report\Models\Report::class))){
-           return app(config("report.models.parent", \Tall\Report\Models\Report::class))->where('model', $class_name)->get();
+           return app(config("report.models.parent", \Tall\Report\Models\Report::class))->where('model', sprintf("\\%s", $class_name))->get();
         }
         return null;
     }
