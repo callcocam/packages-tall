@@ -4,7 +4,7 @@
     <span class="font-medium text-gray-900">
         {{ __(\Str::title($name)) }} </span>
     <span class="ml-6 flex items-center">
-        @include('livewire.admin.relatorios.partials.plus')
-        @include('livewire.admin.relatorios.partials.minus')
+        @include('tall-report::partials.plus')
+        @include('tall-report::partials.minus')
     </span>
 </button>

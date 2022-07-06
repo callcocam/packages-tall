@@ -17,10 +17,13 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name',255)->nullable();
             $table->string('slug',255)->nullable();
+            $table->string('column',255)->nullable();
             $table->string('operador',255)->nullable();
             $table->string('type',255)->nullable();
+            $table->string('value',255)->nullable();
+            $table->boolean('nulo')->nullable();
             $table->integer('ordering')->nullable();
-            $table->foreignUuid('column_id')->nullable()->constrained('columns')->cascadeOnDelete();
+            $table->foreignUuid('report_id')->nullable()->constrained('reports')->cascadeOnDelete();
             $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();            
             if (Schema::hasTable('statuses')) {           
                 $table->foreignUuid('status_id')->nullable()->constrained('statuses')->cascadeOnDelete();

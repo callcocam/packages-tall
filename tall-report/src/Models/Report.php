@@ -36,4 +36,8 @@ class Report  extends AbstractModel
 
     }
   
+    public function filters()
+    {
+        return $this->hasMany(Filter::class);
+    }
 }

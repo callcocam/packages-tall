@@ -22,10 +22,18 @@ class FiltersComponent extends FormComponent
 {
     use ColumnsTrait,Exportable;
     
+    public $localColumns = [];
+    public $tableName;
     public $cardModal;
     private $schema;
     public $updated = false;
     
+    public $listeners = ['setUpdated'];
+
+    public function setUpdated()
+    {
+       $this->updated = true;
+    }
      /*
     |--------------------------------------------------------------------------
     |  Features mount
@@ -57,6 +65,7 @@ class FiltersComponent extends FormComponent
                 if(empty($this->schema)){
                     $this->makeSchema();
                 }
+                $this->tableName = $table;
                 //dd($this->schema->getTableNames());
                 $columns = \Schema::getColumnListing($table);
                 $columns["parent"] = $this->generateForeignKeys($table);
@@ -78,8 +87,22 @@ class FiltersComponent extends FormComponent
     protected function generateForeignKeys($table): array
     {
         $data=[];
-       // $foreignKeys = $this->schema->getTableForeignKeys($table);
-        $foreignKeys = $this->model->foreigns_table;;
+        $foreignKeys = $this->schema->getTableForeignKeys($table);
+        if ($foreignKeys) {
+            foreach($foreignKeys as $foreignKey){
+                if($localColumns = $foreignKey->getLocalColumns()){
+                    $data_loadcolumns=[];
+                    foreach($localColumns as $localColumn){
+                        $this->localColumns[$localColumn] = [
+                            "column"=>$localColumn,
+                            "table"=>$foreignKey->getForeignTableName()
+                        ];
+                    }
+                }
+            }
+        }
+      
+        $foreignKeys = $this->model->foreigns_table;
         // if ($foreignKeys->isNotEmpty()) {
         if ($foreignKeys) {
             // foreach($foreignKeys as $foreignKey){

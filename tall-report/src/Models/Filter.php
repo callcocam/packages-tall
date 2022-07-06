@@ -15,10 +15,9 @@ class Filter  extends AbstractModel
     
     protected $guarded = ["id"];
 
-    public function column(){
-
-        return $this->belongsTo(Column::class);
-        
+    public function report()
+    {
+        return $this->hasOne(Report::class);
     }
     
 }

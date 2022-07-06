@@ -22,11 +22,6 @@ class Column extends AbstractModel
     {
         return $this->hasOne(Report::class);
     }
-
-    public function filters()
-    {
-        return $this->hasMany(Filter::class);
-    }
     
     public function relationships()
     {
