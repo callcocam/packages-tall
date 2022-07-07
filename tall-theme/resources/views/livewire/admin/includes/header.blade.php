@@ -1,7 +1,7 @@
 <header class="flex w-full h-16 relative z-50 bg-white ">
     <div
         class="w-full md:w-60 z-30 flex bg-gray-800 justify-start px-4 items-center border-b-1 border-r-1 border-gray-300 fixed  h-16 shadow-lg">
-        <img class="flex w-32 h-16" src="{{ asset('img/logo.jpg') }}" alt="Logo" />
+        <img class="flex w-32 h-16" src="{{ asset(config('tall-theme.layouts.logo')) }}" alt="Logo" />
     </div>
     <div class="hidden ml-60 w-full md:flex justify-between border-l-2 shadow-lg ">
         <div class="flex h-full flex-1">

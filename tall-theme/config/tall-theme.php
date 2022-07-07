@@ -6,6 +6,7 @@
 */
 return [
     "layouts"=>[
+        "logo"=>env('TALL_LAYOUT_LOGO',"img/logo-black.png"), //logo-black.png  logo.png
         "app"=>env('TALL_LAYOUT_APP',"layouts.app"),
         "admin"=>env('TALL_LAYOUT_ADMIN',"tall-theme::layouts.app"),
     ],
