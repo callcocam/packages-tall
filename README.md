@@ -13,14 +13,8 @@ mix
         require('postcss-import'),
         require('tailwindcss'),
     ])
-    .copy('resources/js/scroll.js', 'public/js/asset/scroll.js')
+     .copy('vendor/callcocam/packages-tall/tall-theme/resources/js/scroll.js', 'public/js/asset/scroll.js')
     .react();
-
-if (mix.inProduction()) {
-    mix.js('packages/tall-theme/resources/js/app.js', 'packages/tall-theme/resources/js/assets/tall.js');
-    mix.version();
-}
-
 ```
 
 #INSTALL SORTABLE 
@@ -49,6 +43,46 @@ to
 use Tall\Acl\Models\User as Authenticatable;
 
 
+
+```
+
+#ADD PHPMYADMIN DOCKERCOMPOSER
+
+```
+pode ser abaixo  do serviço do mysql
+
+phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    links:
+        - mysql
+    ports:
+        - 8001:80
+    environment:
+        - PMA_ARBITRARY=1
+        - UPLOAD_LIMIT=100m
+    networks:
+        - sail
+
+```
+
+```
+
+#ALTERAR A TABLE SESSIONS
+
+```
+
+Schema::create('sessions', function (Blueprint $table) {
+    $table->string('id')->primary();
+   //$table->foreignId('user_id')->nullable()->index();
+    $table->foreignUuid('user_id')->nullable()->index();
+    $table->string('ip_address', 45)->nullable();
+    $table->text('user_agent')->nullable();
+    $table->longText('payload');
+    $table->integer('last_activity')->index();
+});
+
+tambem pode dar alguns comflitos com a tabela de users
+```
 
 ```
 
