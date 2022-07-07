@@ -35,13 +35,16 @@ https://github.com/livewire/sortable
 
 
 ```
-#ALTER MODE USER  AS VIEWS
+#ALTER MODE USER
 
 ```
 use Illuminate\Foundation\Auth\User as Authenticatable;
-to
+para
 use Tall\Acl\Models\User as Authenticatable;
 
+Registra a Factory Menu em config/app.php 'aliases'
+
+  'Menu' => Tall\Menus\Facades\Menu::class,
 
 
 ```
@@ -95,7 +98,7 @@ sail artisan vendor:publish --tag=tenant-factories --force
 
 ```
 
-#PUBLICAR AS FACTORIES E SEEDERS
+#PUBLICAR OS JS FILES PRINCIPALMENTE PARA O ADMIN
 
 ```
 ./vendor/bin/sail artisan vendor:publish --tag=tall-theme-js --force
@@ -108,7 +111,11 @@ sail artisan vendor:publish --tag=tall-theme-js --force
 Use a tag --seed para criar dados fakes
 ```
 banco novo --> ./vendor/bin/sail artisan migrate --seed
-reacriar banco --> ./vendor/bin/sail artisan migrate:fresh --seed
+recriar banco --> ./vendor/bin/sail artisan migrate:fresh --seed
+
+Será gerado um user:
+    email: test@example.com
+    password: password
 
 ```
 
@@ -116,7 +123,7 @@ reacriar banco --> ./vendor/bin/sail artisan migrate:fresh --seed
 
 ```
 
-sail artisan vendor:publish --tag=tall-theme-config --force
+./vendor/bin/sail  artisan vendor:publish --tag=tall-theme-config --force
 
 ```
 
