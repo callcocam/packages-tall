@@ -61,6 +61,15 @@ sail artisan vendor:publish --tag=tenant-factories --force
 
 ```
 
+#PUBLICAR AS FACTORIES E SEEDERS
+
+```
+./vendor/bin/sail artisan vendor:publish --tag=tall-theme-js --force
+ or 
+sail artisan vendor:publish --tag=tall-theme-js --force
+
+```
+
 #RODAR AS MIGRATIONS E SEEDERS
 Use a tag --seed para criar dados fakes
 ```
