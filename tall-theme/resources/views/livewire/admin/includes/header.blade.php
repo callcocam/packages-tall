@@ -1,7 +1,7 @@
 <header class="flex w-full h-16 relative z-50 bg-white ">
     <div
-        class="w-full md:w-60 z-30 flex bg-gray-800 justify-start px-4 items-center border-b-1 border-r-1 border-gray-300 fixed  h-16 shadow-lg">
-        <img class="flex w-32 h-16" src="{{ asset(config('tall-theme.layouts.logo')) }}" alt="Logo" />
+        class="w-full md:w-60 z-30 flex bg-[#141414] justify-start px-4 items-center border-b-1 border-r-1 border-gray-300 fixed  h-16 shadow-lg">
+        <img class="flex h-full" src="{{ asset(config('tall-theme.layouts.logo')) }}" alt="Logo" />
     </div>
     <div class="hidden ml-60 w-full md:flex justify-between border-l-2 shadow-lg ">
         <div class="flex h-full flex-1">
@@ -131,9 +131,11 @@
                                     <a href="{{ route('admin.livewire') }}"
                                         class="my-2 py-2 px-2 flex items-center rounded hover:bg-gray-800 hover:shadow hover:text-gray-200 transition-colors ease-in-out duration-500">
                                         <span class="mr-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                                              </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                            </svg>
                                         </span>
                                         <span class="flex">{{ __('Components') }}</span>
                                     </a>
