@@ -27,7 +27,7 @@ class Tenant extends AbstractModel
     
     protected $guarded = ['id'];
 
-    //protected $with = ['address'];
+    protected $with = ['address'];
 
     
     public $incrementing = false;
@@ -151,4 +151,19 @@ class Tenant extends AbstractModel
         });
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function address()
+    {
+        return $this->morphOne(\App\Models\Address::class, 'addressable')->orderByDesc('created_at');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function addresses()
+    {
+        return $this->morphOne(App\Models\Address::class, 'addressable')->orderByDesc('created_at');
+    }
 }
